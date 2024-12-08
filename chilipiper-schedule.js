@@ -1,3 +1,11 @@
+// Load ChiliPiper Script
+(function () {
+  var script = document.createElement("script");
+  script.src = "https://js.chilipiper.com/marketing.js";
+  script.async = true;
+  document.head.appendChild(script);
+})();
+
 var cpTenantDomain = "joinheard";
 var cpRouterName = "inbound-router";
 var lead;

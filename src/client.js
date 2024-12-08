@@ -1,8 +1,8 @@
 // Configuration
 const LANDING_PAGES = {
-  FREE_TRIAL: "../free-trial.html",
-  SCHEDULER: "../success-schedule.html",
-  NOT_QUALIFIED: "../denied.html",
+  FREE_TRIAL: "thanks/free-trial.html",
+  SCHEDULER: "thanks/success-schedule.html",
+  NOT_QUALIFIED: "thanks/denied.html",
 };
 
 // Initialize HubSpot form handler
@@ -36,7 +36,14 @@ function initializeForm() {
       const route = determineRoute(formDataObj);
       console.log("Determined route:", route);
 
-      localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
+      try {
+        localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
+        console.log("Successfully stored form data in localStorage");
+        console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
+      } catch (error) {
+        console.error("Error storing form data:", error);
+      }
+
       window.location.href = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
     },
   });
@@ -58,7 +65,7 @@ function determineRoute(formData) {
     state === "international" ||
     practiceSetup === "c corp" ||
     income === "none" ||
-    income === "less than $20k" ||
+    income === "less than $20,000" ||
     practiceRunning === "opening practice in 1+ month" ||
     profession === "dietician" ||
     profession === "nutritionist" ||
@@ -69,13 +76,13 @@ function determineRoute(formData) {
     return "NOT_QUALIFIED";
   }
 
-  // Check for qualified booking (income > $50k)
-  if (income === "more than $50k") {
+  // Check for qualified booking (income >= $50k)
+  if (income.includes("$50,000") || income.includes("$100,000") || income.includes("$150,000")) {
     return "SCHEDULER";
   }
 
   // Check for free trial ($20k-$50k)
-  if (income === "$20k-$50k") {
+  if (income.includes("$20,000")) {
     return "FREE_TRIAL";
   }
 

@@ -6,5 +6,13 @@
   </head>
   <body>
     <h1>Denied</h1>
+    <script>
+      // Check if form data exists in localStorage
+      const formData = localStorage.getItem("hubspot_form_data");
+      console.log("Form data in localStorage:", formData);
+      if (formData) {
+        console.log("Parsed form data:", JSON.parse(formData));
+      }
+    </script>
   </body>
 </html>
