@@ -1,0 +1,16 @@
+{
+  "name": "@heard/form-router",
+  "version": "1.0.0",
+  "description": "Shared form routing logic for Heard's qualification forms",
+  "main": "src/routing-logic.js",
+  "type": "module",
+  "files": [
+    "src/routing-logic.js"
+  ],
+  "scripts": {
+    "build": "esbuild src/routing-logic.js --bundle --minify --outfile=dist/routing-logic.min.js --format=esm"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0"
+  }
+}
