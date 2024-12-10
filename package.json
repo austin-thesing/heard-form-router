@@ -5,9 +5,15 @@
   "private": true,
   "main": "src/routing-logic.js",
   "type": "module",
+  "exports": {
+    ".": "./src/routing-logic.js",
+    "./form-router": "./src/form-router.js",
+    "./ms-form-router": "./src/ms-form-router.js",
+    "./dist/routing-logic.min": "./dist/routing-logic.min.js"
+  },
   "files": [
-    "src/routing-logic.js",
-    "dist/routing-logic.min.js"
+    "src/",
+    "dist/"
   ],
   "scripts": {
     "build": "esbuild src/routing-logic.js --bundle --minify --outfile=dist/routing-logic.min.js --format=esm",
