@@ -1,8 +1,8 @@
 // Configuration
 const LANDING_PAGES = {
-  FREE_TRIAL: "/thank-you/free-trial.html",
-  SCHEDULER: "/thank-you/success-schedule.html",
-  NOT_QUALIFIED: "/thank-you/denied.html",
+  FREE_TRIAL: "/thank-you/free-trial",
+  SCHEDULER: "/thank-you/success",
+  NOT_QUALIFIED: "/thank-you/no-meeting",
 };
 
 // Form routing logic

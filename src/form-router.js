@@ -1,8 +1,8 @@
 // Configuration
 const LANDING_PAGES = {
-  FREE_TRIAL: "thank-you/free-trial.html",
-  SCHEDULER: "thank-you/success-schedule.html",
-  NOT_QUALIFIED: "thank-you/denied.html",
+  FREE_TRIAL: "/thank-you/free-trial",
+  SCHEDULER: "/thank-you/success",
+  NOT_QUALIFIED: "/thank-you/no-meeting",
 };
 
 // Initialize HubSpot form handler
@@ -15,11 +15,14 @@ function initializeForm() {
     onFormReady: function ($form) {
       console.log("Form Ready");
 
-      // Add change listeners to all fields
-      $form.find("input, select, textarea").on("change", function () {
-        console.log("Field Changed:", {
-          name: this.name,
-          value: this.value,
+      // Use native JS selectors instead of jQuery
+      const formElements = $form.querySelectorAll("input, select, textarea");
+      formElements.forEach((element) => {
+        element.addEventListener("change", function () {
+          console.log("Field Changed:", {
+            name: this.name,
+            value: this.value,
+          });
         });
       });
     },
