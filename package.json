@@ -1,14 +1,22 @@
 {
-  "name": "@heard/form-router",
+  "name": "@austinthesing/form-router",
   "version": "1.0.0",
   "description": "Shared form routing logic for Heard's qualification forms",
+  "private": true,
   "main": "src/routing-logic.js",
   "type": "module",
   "files": [
-    "src/routing-logic.js"
+    "src/routing-logic.js",
+    "dist/routing-logic.min.js"
   ],
   "scripts": {
-    "build": "esbuild src/routing-logic.js --bundle --minify --outfile=dist/routing-logic.min.js --format=esm"
+    "build": "esbuild src/routing-logic.js --bundle --minify --outfile=dist/routing-logic.min.js --format=esm",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Austin Thesing/Design X Develop",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted"
   },
   "devDependencies": {
     "esbuild": "^0.20.0"
