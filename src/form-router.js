@@ -66,11 +66,11 @@ function determineRoute(formData) {
     practiceSetup === "c corp" ||
     income === "none" ||
     income === "less than $20,000" ||
-    practiceRunning === "opening practice in 1+ month" ||
     profession === "dietician" ||
     profession === "nutritionist" ||
     profession === "massage therapist" ||
-    profession === "physical therapist";
+    profession === "physical therapist" ||
+    practiceRunning === "opening practice in 1+ month";
 
   if (isDQ) {
     return "NOT_QUALIFIED";
