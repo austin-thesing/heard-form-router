@@ -53,8 +53,12 @@ let trackingInitialized = false;
 function addFieldTracking() {
   if (trackingInitialized) return;
 
+  // Wait for the form to be fully rendered
   const form = document.querySelector(".right_step_form form");
-  if (!form) return;
+  if (!form) {
+    setTimeout(addFieldTracking, 500);
+    return;
+  }
 
   // Track all input and select elements
   form.querySelectorAll("input, select").forEach((element) => {
@@ -77,6 +81,7 @@ function addFieldTracking() {
   });
 
   trackingInitialized = true;
+  console.log("Field tracking successfully initialized");
 }
 
 // Initialize form handling
@@ -122,15 +127,3 @@ window.addEventListener("message", function (event) {
     }
   }
 });
-
-// Check periodically for form existence and add tracking
-function checkFormAndAddTracking() {
-  if (document.querySelector(".right_step_form form")) {
-    addFieldTracking();
-  } else {
-    setTimeout(checkFormAndAddTracking, 1000);
-  }
-}
-
-// Start checking for form
-checkFormAndAddTracking();
