@@ -27,12 +27,12 @@ function initializeForm() {
       });
     },
     onFormSubmit: function ($form) {
-      // Get form data using HubSpot's API
-      const formData = $form.serializeArray();
-      const formDataObj = formData.reduce((obj, item) => {
-        obj[item.name] = item.value;
-        return obj;
-      }, {});
+      // Get form data using native FormData API instead of jQuery's serializeArray
+      const formData = new FormData($form);
+      const formDataObj = {};
+      formData.forEach((value, key) => {
+        formDataObj[key] = value;
+      });
 
       console.log("Form submitted with data:", formDataObj);
 
@@ -47,13 +47,25 @@ function initializeForm() {
         console.error("Error storing form data:", error);
       }
 
-      window.location.href = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
+      const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
+      console.log("Redirecting to:", finalUrl);
+      window.location.href = finalUrl;
     },
   });
 }
 
 // Form routing logic
 function determineRoute(formData) {
+  // Add detailed logging
+  console.log("Routing with form data:", {
+    multiOwner: formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_,
+    state: formData.state,
+    practiceSetup: formData.how_is_your_business_setup__v2,
+    income: formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_,
+    practiceRunning: formData.how_long_have_you_been_running_your_private_practice_,
+    profession: formData.what_best_describes_your_practice_,
+  });
+
   // Extract relevant fields
   const multiOwner = formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_.toLowerCase();
   const state = formData.state.toLowerCase();
@@ -81,6 +93,11 @@ function determineRoute(formData) {
 
   // Check for qualified booking (income >= $50k)
   if (income.includes("$50,000") || income.includes("$100,000") || income.includes("$150,000")) {
+    // Add logging before return
+    console.log("Income check:", {
+      income,
+      isHighIncome: true,
+    });
     return "SCHEDULER";
   }
 
