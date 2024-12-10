@@ -1,8 +1,8 @@
 // Configuration
 const LANDING_PAGES = {
-  FREE_TRIAL: "thanks/free-trial.html",
-  SCHEDULER: "thanks/success-schedule.html",
-  NOT_QUALIFIED: "thanks/denied.html",
+  FREE_TRIAL: "thank-you/free-trial.html",
+  SCHEDULER: "thank-you/success-schedule.html",
+  NOT_QUALIFIED: "thank-you/denied.html",
 };
 
 // Initialize HubSpot form handler

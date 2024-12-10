@@ -16,11 +16,13 @@ function getLeadData() {
     const storedData = localStorage.getItem("hubspot_form_data");
     if (!storedData) {
       console.warn("No lead data found in localStorage");
+      window.location.href = "https://www.joinheard.com/welcome-form";
       return null;
     }
     return JSON.parse(storedData);
   } catch (error) {
     console.error("Error parsing lead data:", error);
+    window.location.href = "https://www.joinheard.com/welcome-form";
     return null;
   }
 }
