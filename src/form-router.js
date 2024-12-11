@@ -74,14 +74,6 @@ function determineRoute(formData) {
   const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
   const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
 
-  // In both form-router.js and ms-form-router.js:
-
-  // Check for DQ conditions first
-  console.log("Practice Running Check:", {
-    actual: practiceRunning,
-    matches: practiceRunning === "opening in 1+ months",
-  });
-
   const isDQ =
     multiOwner === "yes" ||
     state === "international" ||
