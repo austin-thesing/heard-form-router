@@ -20,12 +20,12 @@ function determineRoute(formData) {
     multiOwner === "yes" ||
     state === "international" ||
     practiceSetup === "c corp" ||
+    practiceRunning === "opening practice in 1+ months" ||
     income === "none" ||
     income === "less than $20,000" ||
     profession === "dietician or nutritionist" ||
     profession === "massage therapist" ||
-    profession === "physical therapist" ||
-    practiceRunning === "opening practice in 1+ months";
+    profession === "physical therapist";
 
   if (isDQ) {
     return "NOT_QUALIFIED";

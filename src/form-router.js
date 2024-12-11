@@ -74,12 +74,14 @@ function determineRoute(formData) {
   const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
   const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
 
+  // In both form-router.js and ms-form-router.js:
+
   // Check for DQ conditions first
   const isDQ =
     multiOwner === "yes" ||
     state === "international" ||
     practiceSetup === "c corp" ||
-    practiceRunning === "opening practice in 1+ months" ||
+    practiceRunning === "opening practice in 1+ months" || // Moved this up with other DQ conditions
     income === "none" ||
     income === "less than $20,000" ||
     profession === "dietician or nutritionist" ||
@@ -93,10 +95,10 @@ function determineRoute(formData) {
   // Check for qualified booking (income >= $50k)
   if (income.includes("$50,000 - $99,999") || income === "more than $100,000") {
     // Add logging before return
-    console.log("Income check:", {
-      income,
-      isHighIncome: true,
-    });
+    // console.log("Income check:", {
+    //   income,
+    //   isHighIncome: true,
+    // });
     return "SCHEDULER";
   }
 
