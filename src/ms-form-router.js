@@ -20,7 +20,7 @@ function determineRoute(formData) {
     multiOwner === "yes" ||
     state === "international" ||
     practiceSetup === "c corp" ||
-    practiceRunning === "opening practice in 1+ months" ||
+    practiceRunning === "opening in 1+ months" ||
     income === "none" ||
     income === "less than $20,000" ||
     profession === "dietician or nutritionist" ||

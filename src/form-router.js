@@ -77,11 +77,16 @@ function determineRoute(formData) {
   // In both form-router.js and ms-form-router.js:
 
   // Check for DQ conditions first
+  console.log("Practice Running Check:", {
+    actual: practiceRunning,
+    matches: practiceRunning === "opening in 1+ months",
+  });
+
   const isDQ =
     multiOwner === "yes" ||
     state === "international" ||
     practiceSetup === "c corp" ||
-    practiceRunning === "opening practice in 1+ months" || // Moved this up with other DQ conditions
+    practiceRunning === "opening in 1+ months" ||
     income === "none" ||
     income === "less than $20,000" ||
     profession === "dietician or nutritionist" ||
