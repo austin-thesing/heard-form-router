@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { LANDING_PAGES, determineRoute } from "./form-config.js";
-=======
 // Configuration
 const LANDING_PAGES = {
   FREE_TRIAL: "/thank-you/free-trial",
@@ -48,7 +45,6 @@ function determineRoute(formData) {
   // Default fallback
   return "NOT_QUALIFIED";
 }
->>>>>>> pre-fixes-backup
 
 // Track if we've already added the field tracking
 let trackingInitialized = false;

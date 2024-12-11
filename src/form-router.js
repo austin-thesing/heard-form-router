@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-import { LANDING_PAGES, determineRoute } from "./form-config.js";
-=======
 // Configuration
 const LANDING_PAGES = {
   FREE_TRIAL: "/thank-you/free-trial",
   SCHEDULER: "/thank-you/schedule",
   NOT_QUALIFIED: "/thank-you/success",
 };
->>>>>>> pre-fixes-backup
 
 // Initialize HubSpot form handler
 function initializeForm() {
@@ -58,8 +54,6 @@ function initializeForm() {
   });
 }
 
-<<<<<<< HEAD
-=======
 // Form routing logic
 function determineRoute(formData) {
   // Add detailed logging
@@ -116,7 +110,6 @@ function determineRoute(formData) {
   return "NOT_QUALIFIED";
 }
 
->>>>>>> pre-fixes-backup
 // Initialize when HubSpot script is loaded
 if (window.hbspt) {
   initializeForm();
