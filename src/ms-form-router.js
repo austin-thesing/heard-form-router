@@ -38,7 +38,7 @@ function determineRoute(formData) {
   }
 
   // Check for free trial ($20k-$50k)
-  if (income === "$20,000 - $49,999" && practiceRunning !== "opening practice in 1+ months") {
+  if (income === "$20,000 - $49,999") {
     return "FREE_TRIAL";
   }
 
