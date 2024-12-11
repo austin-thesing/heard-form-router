@@ -85,7 +85,7 @@ function determineRoute(formData) {
     profession === "nutritionist" ||
     profession === "massage therapist" ||
     profession === "physical therapist" ||
-    practiceRunning === "opening practice in 1+ month";
+    practiceRunning === "opening practice in 1+ months";
 
   if (isDQ) {
     return "NOT_QUALIFIED";
