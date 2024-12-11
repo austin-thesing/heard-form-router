@@ -26,12 +26,7 @@ function determineRoute(formData) {
     profession === "dietician or nutritionist" ||
     profession === "dietetics or nutrition counseling" ||
     profession === "massage therapist" ||
-<<<<<<< HEAD
-    profession === "physical therapist" ||
-    practiceRunning === "opening practice in 1+ months";
-=======
     profession === "physical therapist";
->>>>>>> pre-fixes-backup
 
   if (isDQ) {
     return "NOT_QUALIFIED";
