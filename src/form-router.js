@@ -66,13 +66,13 @@ function determineRoute(formData) {
     profession: formData.what_best_describes_your_practice_,
   });
 
-  // Extract relevant fields
-  const multiOwner = formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_.toLowerCase();
-  const state = formData.state.toLowerCase();
-  const practiceSetup = formData.how_is_your_business_setup__v2.toLowerCase();
-  const income = formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_.toLowerCase();
-  const practiceRunning = formData.how_long_have_you_been_running_your_private_practice_.toLowerCase();
-  const profession = formData.what_best_describes_your_practice_.toLowerCase();
+  // Extract relevant fields (with null checks)
+  const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
+  const state = (formData.state || "").toLowerCase();
+  const practiceSetup = (formData.how_is_your_business_setup__v2 || "").toLowerCase();
+  const income = (formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_ || "").toLowerCase();
+  const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
+  const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
 
   // Check for DQ conditions first
   const isDQ =
@@ -81,8 +81,7 @@ function determineRoute(formData) {
     practiceSetup === "c corp" ||
     income === "none" ||
     income === "less than $20,000" ||
-    profession === "dietician" ||
-    profession === "nutritionist" ||
+    profession === "dietician or nutritionist" ||
     profession === "massage therapist" ||
     profession === "physical therapist" ||
     practiceRunning === "opening practice in 1+ months";

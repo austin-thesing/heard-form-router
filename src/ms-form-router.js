@@ -7,7 +7,7 @@ const LANDING_PAGES = {
 
 // Form routing logic
 function determineRoute(formData) {
-  // Extract relevant fields (converting to lowercase and handling potential undefined values)
+  // Extract relevant fields (with null checks)
   const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
   const state = (formData.state || "").toLowerCase();
   const practiceSetup = (formData.how_is_your_business_setup__v2 || "").toLowerCase();
@@ -22,8 +22,7 @@ function determineRoute(formData) {
     practiceSetup === "c corp" ||
     income === "none" ||
     income === "less than $20,000" ||
-    profession === "dietician" ||
-    profession === "nutritionist" ||
+    profession === "dietician or nutritionist" ||
     profession === "massage therapist" ||
     profession === "physical therapist" ||
     practiceRunning === "opening practice in 1+ months";
