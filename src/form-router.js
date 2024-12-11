@@ -13,42 +13,40 @@ function initializeForm() {
     formId: "0d9c387a-9c8b-40c4-8d46-3135f754f077",
     target: "#hubspot-form-container",
     onFormReady: function ($form) {
-      console.log("Form Ready");
+      // console.log("Form Ready");
 
-      // Use native JS selectors instead of jQuery
       const formElements = $form.querySelectorAll("input, select, textarea");
       formElements.forEach((element) => {
         element.addEventListener("change", function () {
-          console.log("Field Changed:", {
-            name: this.name,
-            value: this.value,
-          });
+          // console.log("Field Changed:", {
+          //   name: this.name,
+          //   value: this.value,
+          // });
         });
       });
     },
     onFormSubmit: function ($form) {
-      // Get form data using native FormData API instead of jQuery's serializeArray
       const formData = new FormData($form);
       const formDataObj = {};
       formData.forEach((value, key) => {
         formDataObj[key] = value;
       });
 
-      console.log("Form submitted with data:", formDataObj);
+      // console.log("Form submitted with data:", formDataObj);
 
       const route = determineRoute(formDataObj);
-      console.log("Determined route:", route);
+      // console.log("Determined route:", route);
 
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
-        console.log("Successfully stored form data in localStorage");
-        console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
+        // console.log("Successfully stored form data in localStorage");
+        // console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
       } catch (error) {
-        console.error("Error storing form data:", error);
+        // console.error("Error storing form data:", error);
       }
 
       const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
-      console.log("Redirecting to:", finalUrl);
+      // console.log("Redirecting to:", finalUrl);
       window.location.href = finalUrl;
     },
   });
@@ -56,15 +54,14 @@ function initializeForm() {
 
 // Form routing logic
 function determineRoute(formData) {
-  // Add detailed logging
-  console.log("Routing with form data:", {
-    multiOwner: formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_,
-    state: formData.state,
-    practiceSetup: formData.how_is_your_business_setup__v2,
-    income: formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_,
-    practiceRunning: formData.how_long_have_you_been_running_your_private_practice_,
-    profession: formData.what_best_describes_your_practice_,
-  });
+  // console.log("Routing with form data:", {
+  //   multiOwner: formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_,
+  //   state: formData.state,
+  //   practiceSetup: formData.how_is_your_business_setup__v2,
+  //   income: formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_,
+  //   practiceRunning: formData.how_long_have_you_been_running_your_private_practice_,
+  //   profession: formData.what_best_describes_your_practice_,
+  // });
 
   // Extract relevant fields (with null checks)
   const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
