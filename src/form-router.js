@@ -92,7 +92,7 @@ function determineRoute(formData) {
   }
 
   // Check for qualified booking (income >= $50k)
-  if (income.includes("$50,000") || income.includes("$100,000") || income.includes("$150,000")) {
+  if (income.includes("$50,000 - $99,999") || income === "more than $100,000") {
     // Add logging before return
     console.log("Income check:", {
       income,
@@ -102,7 +102,7 @@ function determineRoute(formData) {
   }
 
   // Check for free trial ($20k-$50k)
-  if (income.includes("$20,000") && practiceRunning !== "opening practice in 1+ month") {
+  if (income === "$20,000 - $49,999" && practiceRunning !== "opening practice in 1+ month") {
     return "FREE_TRIAL";
   }
 
