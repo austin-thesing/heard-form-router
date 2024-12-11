@@ -24,7 +24,7 @@ function determineRoute(formData) {
     income === "none" ||
     income === "less than $20,000" ||
     profession === "dietician or nutritionist" ||
-    profession === "Dietetics or nutrition counseling" ||
+    profession === "dietetics or nutrition counseling" ||
     profession === "massage therapist" ||
     profession === "physical therapist";
 
