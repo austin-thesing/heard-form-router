@@ -104,6 +104,8 @@ window.addEventListener("message", function (event) {
     if (event.data.eventName === "onFormSubmit") {
       // Check if we have a valid HubSpot submission
       const hsData = event.data.data;
+      const submissionTime = new Date().toISOString();
+
       if (!hsData || !Array.isArray(hsData) || hsData.length === 0) {
         Sentry.captureMessage("MS Form: HubSpot submission data missing", {
           level: "error",
@@ -113,7 +115,8 @@ window.addEventListener("message", function (event) {
           },
           extra: {
             eventData: event.data,
-            timestamp: new Date().toISOString(),
+            submissionTime: submissionTime,
+            formElement: document.querySelector(".right_step_form form")?.outerHTML,
           },
         });
       }

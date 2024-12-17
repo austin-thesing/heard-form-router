@@ -66,9 +66,9 @@ function initializeForm() {
       return true;
     },
     onFormSubmitted: function ($form) {
-      // Track if HubSpot submission was successful
-      const hsContext = $form.querySelector('input[name="hs_context"]');
-      if (!hsContext) {
+      // Get the form submission data from HubSpot's callback
+      const submissionValues = $form?.dataset?.submissionValues;
+      if (!submissionValues) {
         Sentry.captureMessage("HubSpot submission context missing", {
           level: "error",
           tags: {
@@ -76,27 +76,19 @@ function initializeForm() {
             form: "hubspot_contact",
           },
           extra: {
-            formElement: $form?.outerHTML,
+            formId: $form?.id,
+            formData: Object.fromEntries(new FormData($form)),
             timestamp: new Date().toISOString(),
           },
         });
       }
 
-      const contextValue = hsContext?.value;
-      if (!contextValue) {
-        console.warn("HubSpot context value is empty");
-        Sentry.captureMessage("HubSpot context value empty", {
-          level: "warning",
-          tags: {
-            type: "hubspot_submission",
-            form: "hubspot_contact",
-          },
-        });
-      }
-
       try {
-        const context = JSON.parse(contextValue || "{}");
-        if (!context.submissionValues) {
+        // Check if the form was actually submitted to HubSpot
+        const formEl = $form.querySelector("form");
+        const submittedToHubSpot = formEl?.getAttribute("data-hubspot-submitted") === "true";
+
+        if (!submittedToHubSpot) {
           Sentry.captureMessage("HubSpot submission values missing", {
             level: "error",
             tags: {
@@ -104,7 +96,8 @@ function initializeForm() {
               form: "hubspot_contact",
             },
             extra: {
-              context: contextValue,
+              formElement: $form?.outerHTML,
+              submissionTime: new Date().toISOString(),
               timestamp: new Date().toISOString(),
             },
           });
@@ -113,7 +106,7 @@ function initializeForm() {
         Sentry.captureException(error, {
           extra: {
             context: "HubSpot context parsing failed",
-            hsContext: contextValue,
+            formElement: $form?.outerHTML,
           },
           tags: {
             type: "hubspot_submission",
@@ -125,6 +118,18 @@ function initializeForm() {
       // Always proceed with redirect regardless of any errors
       handleRedirect();
       return false;
+    },
+    onFormSubmitError: function ($form, error) {
+      Sentry.captureException(error, {
+        extra: {
+          context: "HubSpot form submission error",
+          formData: Object.fromEntries(new FormData($form)),
+        },
+        tags: {
+          type: "hubspot_submission_error",
+          form: "hubspot_contact",
+        },
+      });
     },
   });
 }
