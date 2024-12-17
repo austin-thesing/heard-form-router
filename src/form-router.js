@@ -63,9 +63,6 @@ function initializeForm() {
       const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
       const route = determineRoute(formData);
       const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
-<<<<<<< HEAD
-      window.location.href = finalUrl;
-=======
       // console.log("Redirecting to:", finalUrl);
 
       // Handle redirect with a slight delay to ensure HubSpot processes the form
@@ -74,7 +71,6 @@ function initializeForm() {
       }, 500); // Increased delay to give HubSpot more time
 
       return false; // Let our code handle the submission
->>>>>>> pre-fixes-backup
     },
   });
 }

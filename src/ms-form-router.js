@@ -118,17 +118,10 @@ window.addEventListener("message", function (event) {
       // Determine route
       const route = determineRoute(formData);
 
-<<<<<<< HEAD
-      // Wait for HubSpot submission to complete before redirecting
-      event.data.data.onFormSubmitted = function () {
-        window.location.href = LANDING_PAGES[route];
-      };
-=======
       // Shorter delay that should still ensure HubSpot processing
       setTimeout(() => {
         window.location.href = LANDING_PAGES[route];
       }, 500);
->>>>>>> pre-fixes-backup
     }
   }
 });
