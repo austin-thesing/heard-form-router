@@ -1,11 +1,19 @@
-// Configuration
-const LANDING_PAGES = {
-  FREE_TRIAL: "/thank-you/free-trial",
-  SCHEDULER: "/thank-you/schedule",
-  NOT_QUALIFIED: "/thank-you/success",
+// Add these configurations directly in ms-form-router.js
+const DISQUALIFYING_CONDITIONS = {
+  multiOwner: ["yes"],
+  state: ["international"],
+  practiceSetup: ["c corp"],
+  income: ["none", "less than $20,000"],
+  profession: ["dietician", "nutritionist", "massage therapist", "physical therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
+  practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
 };
 
-// Form routing logic
+const INCOME_TIERS = {
+  HIGH_INCOME: ["$50,000 - $99,999", "more than $100,000"],
+  MID_INCOME: ["$20,000 - $49,999"],
+};
+
+// Update the determineRoute function
 function determineRoute(formData) {
   // Extract relevant fields (with null checks)
   const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
@@ -15,34 +23,29 @@ function determineRoute(formData) {
   const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
   const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
 
-  // Check for DQ conditions first
+  // Check DQ conditions
   const isDQ =
-    multiOwner === "yes" ||
-    state === "international" ||
-    practiceSetup === "c corp" ||
-    practiceRunning === "opening in 1+ months" ||
-    income === "none" ||
-    income === "less than $20,000" ||
-    profession === "dietician or nutritionist" ||
-    profession === "dietetics or nutrition counseling" ||
-    profession === "massage therapist" ||
-    profession === "physical therapist";
+    DISQUALIFYING_CONDITIONS.multiOwner.includes(multiOwner) ||
+    DISQUALIFYING_CONDITIONS.state.includes(state) ||
+    DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup) ||
+    DISQUALIFYING_CONDITIONS.income.includes(income) ||
+    DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
+    DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning);
 
   if (isDQ) {
     return "NOT_QUALIFIED";
   }
 
   // Check for qualified booking (income >= $50k)
-  if (income.includes("$50,000 - $99,999") || income === "more than $100,000") {
+  if (INCOME_TIERS.HIGH_INCOME.some((tier) => income.includes(tier))) {
     return "SCHEDULER";
   }
 
   // Check for free trial ($20k-$50k)
-  if (income === "$20,000 - $49,999") {
+  if (INCOME_TIERS.MID_INCOME.some((tier) => income.includes(tier))) {
     return "FREE_TRIAL";
   }
 
-  // Default fallback
   return "NOT_QUALIFIED";
 }
 
@@ -105,25 +108,20 @@ window.addEventListener("message", function (event) {
         formData[event.data.data[key].name] = event.data.data[key].value;
       }
 
-      // console.log("Form submitted with data:", formData);
-
       // Store form data
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
-        // console.log("Successfully stored form data in localStorage");
-        // console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
       } catch (error) {
-        // console.error("Error storing form data:", error);
+        console.error("Error storing form data:", error);
       }
 
       // Determine route
       const route = determineRoute(formData);
-      // console.log("Determined route:", route);
 
-      // Handle redirect
-      setTimeout(() => {
+      // Wait for HubSpot submission to complete before redirecting
+      event.data.data.onFormSubmitted = function () {
         window.location.href = LANDING_PAGES[route];
-      }, 50);
+      };
     }
   }
 });

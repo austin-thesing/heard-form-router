@@ -5,6 +5,21 @@ const LANDING_PAGES = {
   NOT_QUALIFIED: "/thank-you/success",
 };
 
+// Add these configurations directly in form-router.js
+const DISQUALIFYING_CONDITIONS = {
+  multiOwner: ["yes"],
+  state: ["international"],
+  practiceSetup: ["c corp"],
+  income: ["none", "less than $20,000"],
+  profession: ["dietician", "nutritionist", "massage therapist", "physical therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
+  practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
+};
+
+const INCOME_TIERS = {
+  HIGH_INCOME: ["$50,000 - $99,999", "more than $100,000"],
+  MID_INCOME: ["$20,000 - $49,999"],
+};
+
 // Initialize HubSpot form handler
 function initializeForm() {
   window.hbspt.forms.create({
@@ -32,21 +47,22 @@ function initializeForm() {
         formDataObj[key] = value;
       });
 
-      // console.log("Form submitted with data:", formDataObj);
-
-      const route = determineRoute(formDataObj);
-      // console.log("Determined route:", route);
-
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
-        // console.log("Successfully stored form data in localStorage");
-        // console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
       } catch (error) {
-        // console.error("Error storing form data:", error);
+        console.error("Error storing form data:", error);
       }
 
+      const route = determineRoute(formDataObj);
+
+      // Don't redirect immediately - let HubSpot handle the submission
+      return true; // This tells HubSpot to proceed with form submission
+    },
+    onFormSubmitted: function ($form) {
+      // Only redirect after HubSpot has processed the submission
+      const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+      const route = determineRoute(formData);
       const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
-      // console.log("Redirecting to:", finalUrl);
       window.location.href = finalUrl;
     },
   });
@@ -54,16 +70,6 @@ function initializeForm() {
 
 // Form routing logic
 function determineRoute(formData) {
-  // console.log("Routing with form data:", {
-  //   multiOwner: formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_,
-  //   state: formData.state,
-  //   practiceSetup: formData.how_is_your_business_setup__v2,
-  //   income: formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_,
-  //   practiceRunning: formData.how_long_have_you_been_running_your_private_practice_,
-  //   profession: formData.what_best_describes_your_practice_,
-  // });
-
-  // Extract relevant fields (with null checks)
   const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
   const state = (formData.state || "").toLowerCase();
   const practiceSetup = (formData.how_is_your_business_setup__v2 || "").toLowerCase();
@@ -71,38 +77,29 @@ function determineRoute(formData) {
   const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
   const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
 
+  // Check DQ conditions
   const isDQ =
-    multiOwner === "yes" ||
-    state === "international" ||
-    practiceSetup === "c corp" ||
-    practiceRunning === "opening in 1+ months" ||
-    income === "none" ||
-    income === "less than $20,000" ||
-    profession === "dietician or nutritionist" ||
-    profession === "dietetics or nutrition counseling" ||
-    profession === "massage therapist" ||
-    profession === "physical therapist";
+    DISQUALIFYING_CONDITIONS.multiOwner.includes(multiOwner) ||
+    DISQUALIFYING_CONDITIONS.state.includes(state) ||
+    DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup) ||
+    DISQUALIFYING_CONDITIONS.income.includes(income) ||
+    DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
+    DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning);
 
   if (isDQ) {
     return "NOT_QUALIFIED";
   }
 
   // Check for qualified booking (income >= $50k)
-  if (income.includes("$50,000 - $99,999") || income === "more than $100,000") {
-    // Add logging before return
-    // console.log("Income check:", {
-    //   income,
-    //   isHighIncome: true,
-    // });
+  if (INCOME_TIERS.HIGH_INCOME.some((tier) => income.includes(tier))) {
     return "SCHEDULER";
   }
 
   // Check for free trial ($20k-$50k)
-  if (income === "$20,000 - $49,999") {
+  if (INCOME_TIERS.MID_INCOME.some((tier) => income.includes(tier))) {
     return "FREE_TRIAL";
   }
 
-  // Default fallback
   return "NOT_QUALIFIED";
 }
 
