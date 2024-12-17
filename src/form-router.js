@@ -68,36 +68,40 @@ function initializeForm() {
     onFormSubmitted: function ($form) {
       // Track if HubSpot submission was successful
       const hsContext = $form.querySelector('input[name="hs_context"]');
-      if (!hsContext || !hsContext.value) {
+      if (!hsContext) {
         Sentry.captureMessage("HubSpot submission context missing", {
           level: "error",
           tags: {
             type: "hubspot_submission",
             form: "hubspot_contact",
           },
+          extra: {
+            formElement: $form?.outerHTML,
+            timestamp: new Date().toISOString(),
+          },
         });
+        handleRedirect();
+        return false;
       }
 
-      try {
-        const context = JSON.parse(hsContext.value);
-        if (!context.submissionValues) {
-          Sentry.captureMessage("HubSpot submission values missing", {
-            level: "error",
-            tags: {
-              type: "hubspot_submission",
-              form: "hubspot_contact",
-            },
-          });
-        }
-      } catch (error) {
-        Sentry.captureException(error, {
-          extra: {
-            context: "HubSpot context parsing failed",
-            hsContext: hsContext?.value,
-          },
+      const contextValue = hsContext.value;
+      if (!contextValue) {
+        console.warn("HubSpot context value is empty");
+        handleRedirect();
+        return false;
+      }
+
+      const context = JSON.parse(contextValue);
+      if (!context.submissionValues) {
+        Sentry.captureMessage("HubSpot submission values missing", {
+          level: "error",
           tags: {
             type: "hubspot_submission",
             form: "hubspot_contact",
+          },
+          extra: {
+            context: contextValue,
+            timestamp: new Date().toISOString(),
           },
         });
       }
@@ -175,4 +179,30 @@ if (window.hbspt) {
       initializeForm();
     }
   });
+}
+
+// Helper function to handle redirect logic
+function handleRedirect() {
+  try {
+    const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+    const route = determineRoute(formData);
+    const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
+
+    setTimeout(() => {
+      window.location.href = finalUrl;
+    }, 500);
+  } catch (error) {
+    Sentry.captureException(error, {
+      extra: {
+        context: "Post-submission redirect failed",
+      },
+      tags: {
+        type: "redirect",
+        form: "hubspot_contact",
+      },
+    });
+    console.error("Post-submission redirect failed:", error);
+    // Fallback to NOT_QUALIFIED if something goes wrong
+    window.location.href = LANDING_PAGES.NOT_QUALIFIED;
+  }
 }
