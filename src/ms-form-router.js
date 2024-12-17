@@ -111,6 +111,10 @@ window.addEventListener("message", function (event) {
             type: "hubspot_submission",
             form: "ms_hubspot_contact",
           },
+          extra: {
+            eventData: event.data,
+            timestamp: new Date().toISOString(),
+          },
         });
       }
 
@@ -137,10 +141,8 @@ window.addEventListener("message", function (event) {
         console.error("Error storing form data:", error);
       }
 
-      // Determine route
+      // Determine route and redirect (always proceed regardless of errors)
       const route = determineRoute(formData);
-
-      // Shorter delay that should still ensure HubSpot processing
       setTimeout(() => {
         try {
           window.location.href = LANDING_PAGES[route];

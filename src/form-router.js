@@ -80,55 +80,50 @@ function initializeForm() {
             timestamp: new Date().toISOString(),
           },
         });
-        handleRedirect();
-        return false;
       }
 
-      const contextValue = hsContext.value;
+      const contextValue = hsContext?.value;
       if (!contextValue) {
         console.warn("HubSpot context value is empty");
-        handleRedirect();
-        return false;
-      }
-
-      const context = JSON.parse(contextValue);
-      if (!context.submissionValues) {
-        Sentry.captureMessage("HubSpot submission values missing", {
-          level: "error",
+        Sentry.captureMessage("HubSpot context value empty", {
+          level: "warning",
           tags: {
             type: "hubspot_submission",
             form: "hubspot_contact",
-          },
-          extra: {
-            context: contextValue,
-            timestamp: new Date().toISOString(),
           },
         });
       }
 
       try {
-        const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
-        const route = determineRoute(formData);
-        const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
-
-        setTimeout(() => {
-          window.location.href = finalUrl;
-        }, 500);
+        const context = JSON.parse(contextValue || "{}");
+        if (!context.submissionValues) {
+          Sentry.captureMessage("HubSpot submission values missing", {
+            level: "error",
+            tags: {
+              type: "hubspot_submission",
+              form: "hubspot_contact",
+            },
+            extra: {
+              context: contextValue,
+              timestamp: new Date().toISOString(),
+            },
+          });
+        }
       } catch (error) {
         Sentry.captureException(error, {
           extra: {
-            context: "Post-submission redirect failed",
+            context: "HubSpot context parsing failed",
+            hsContext: contextValue,
           },
           tags: {
-            type: "redirect",
+            type: "hubspot_submission",
             form: "hubspot_contact",
           },
         });
-        console.error("Post-submission redirect failed:", error);
-        // Fallback to NOT_QUALIFIED if something goes wrong
-        window.location.href = LANDING_PAGES.NOT_QUALIFIED;
       }
 
+      // Always proceed with redirect regardless of any errors
+      handleRedirect();
       return false;
     },
   });
