@@ -1,3 +1,12 @@
+// Add Sentry initialization at the top
+import * as Sentry from "@sentry/browser";
+
+Sentry.init({
+  dsn: "YOUR_SENTRY_DSN", // You'll get this when you create a Sentry project
+  integrations: [new Sentry.BrowserTracing()],
+  tracesSampleRate: 1.0,
+});
+
 // Configuration
 const LANDING_PAGES = {
   FREE_TRIAL: "/thank-you/free-trial",
@@ -49,28 +58,53 @@ function initializeForm() {
 
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
+
+        // Send to backup API
+        fetch("https://your-worker.workers.dev/backup", {
+          method: "POST",
+          body: JSON.stringify(formDataObj),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).catch((error) => {
+          Sentry.captureException(error, {
+            extra: {
+              context: "Backup API submission failed",
+              formData: formDataObj,
+            },
+          });
+        });
       } catch (error) {
-        console.error("Error storing form data:", error);
+        Sentry.captureException(error, {
+          extra: {
+            context: "Form submission storage failed",
+            formData: formDataObj,
+          },
+        });
       }
 
-      const route = determineRoute(formDataObj);
-
-      // Don't redirect immediately - let HubSpot handle the submission
-      return true; // This tells HubSpot to proceed with form submission
+      return true;
     },
     onFormSubmitted: function ($form) {
-      // Only redirect after HubSpot has processed the submission
-      const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
-      const route = determineRoute(formData);
-      const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
-      // console.log("Redirecting to:", finalUrl);
+      try {
+        const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+        const route = determineRoute(formData);
+        const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
 
-      // Handle redirect with a slight delay to ensure HubSpot processes the form
-      setTimeout(() => {
-        window.location.href = finalUrl;
-      }, 500); // Increased delay to give HubSpot more time
+        setTimeout(() => {
+          window.location.href = finalUrl;
+        }, 500);
+      } catch (error) {
+        Sentry.captureException(error, {
+          extra: {
+            context: "Post-submission redirect failed",
+          },
+        });
+        // Fallback to NOT_QUALIFIED if something goes wrong
+        window.location.href = LANDING_PAGES.NOT_QUALIFIED;
+      }
 
-      return false; // Let our code handle the submission
+      return false;
     },
   });
 }
