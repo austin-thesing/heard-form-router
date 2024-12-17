@@ -102,6 +102,18 @@ window.addEventListener("message", function (event) {
 
     // Handle form submission
     if (event.data.eventName === "onFormSubmit") {
+      // Check if we have a valid HubSpot submission
+      const hsData = event.data.data;
+      if (!hsData || !Array.isArray(hsData) || hsData.length === 0) {
+        Sentry.captureMessage("MS Form: HubSpot submission data missing", {
+          level: "error",
+          tags: {
+            type: "hubspot_submission",
+            form: "ms_hubspot_contact",
+          },
+        });
+      }
+
       // Prepare form data
       const formData = {};
       for (const key in event.data.data) {
@@ -112,6 +124,16 @@ window.addEventListener("message", function (event) {
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
       } catch (error) {
+        Sentry.captureException(error, {
+          extra: {
+            context: "MS Form submission storage failed",
+            formData: formData,
+          },
+          tags: {
+            type: "local_storage",
+            form: "ms_hubspot_contact",
+          },
+        });
         console.error("Error storing form data:", error);
       }
 
@@ -120,7 +142,22 @@ window.addEventListener("message", function (event) {
 
       // Shorter delay that should still ensure HubSpot processing
       setTimeout(() => {
-        window.location.href = LANDING_PAGES[route];
+        try {
+          window.location.href = LANDING_PAGES[route];
+        } catch (error) {
+          Sentry.captureException(error, {
+            extra: {
+              context: "MS Form redirect failed",
+              route: route,
+            },
+            tags: {
+              type: "redirect",
+              form: "ms_hubspot_contact",
+            },
+          });
+          console.error("Redirect failed:", error);
+          window.location.href = LANDING_PAGES.NOT_QUALIFIED;
+        }
       }, 500);
     }
   }
