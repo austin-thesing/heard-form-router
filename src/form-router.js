@@ -51,7 +51,7 @@ function initializeForm() {
       // Handle redirect with a slight delay to ensure HubSpot processes the form
       setTimeout(() => {
         window.location.href = finalUrl;
-      }, 1000); // Increased delay to give HubSpot more time
+      }, 500); // Increased delay to give HubSpot more time
 
       return false; // Let our code handle the submission
     },

@@ -120,10 +120,10 @@ window.addEventListener("message", function (event) {
       const route = determineRoute(formData);
       // console.log("Determined route:", route);
 
-      // Handle redirect with a slight delay to ensure HubSpot processes the form
+      // Shorter delay that should still ensure HubSpot processing
       setTimeout(() => {
         window.location.href = LANDING_PAGES[route];
-      }, 1000); // Increased delay to give HubSpot more time
+      }, 500);
     }
   }
 });
