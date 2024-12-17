@@ -32,22 +32,21 @@ function initializeForm() {
         formDataObj[key] = value;
       });
 
-      try {
-        localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
-      } catch (error) {
-        console.error("Error storing form data:", error);
-      }
+      // console.log("Form submitted with data:", formDataObj);
 
       const route = determineRoute(formDataObj);
+      // console.log("Determined route:", route);
 
-      // Let HubSpot handle the submission first
-      return true;
-    },
-    onFormSubmitted: function ($form) {
-      // Only redirect after HubSpot has processed the submission
-      const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
-      const route = determineRoute(formData);
+      try {
+        localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
+        // console.log("Successfully stored form data in localStorage");
+        // console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
+      } catch (error) {
+        // console.error("Error storing form data:", error);
+      }
+
       const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
+      // console.log("Redirecting to:", finalUrl);
       window.location.href = finalUrl;
     },
   });

@@ -105,20 +105,25 @@ window.addEventListener("message", function (event) {
         formData[event.data.data[key].name] = event.data.data[key].value;
       }
 
+      // console.log("Form submitted with data:", formData);
+
       // Store form data
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
+        // console.log("Successfully stored form data in localStorage");
+        // console.log("Stored data:", localStorage.getItem("hubspot_form_data"));
       } catch (error) {
-        console.error("Error storing form data:", error);
+        // console.error("Error storing form data:", error);
       }
 
       // Determine route
       const route = determineRoute(formData);
+      // console.log("Determined route:", route);
 
-      // Wait for HubSpot to complete the submission before redirecting
-      event.data.data.onFormSubmitted = function () {
+      // Handle redirect
+      setTimeout(() => {
         window.location.href = LANDING_PAGES[route];
-      };
+      }, 50);
     }
   }
 });
