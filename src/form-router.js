@@ -47,7 +47,13 @@ function initializeForm() {
 
       const finalUrl = LANDING_PAGES[route] || LANDING_PAGES.NOT_QUALIFIED;
       // console.log("Redirecting to:", finalUrl);
-      window.location.href = finalUrl;
+
+      // Handle redirect with a slight delay to ensure HubSpot processes the form
+      setTimeout(() => {
+        window.location.href = finalUrl;
+      }, 1000); // Increased delay to give HubSpot more time
+
+      return false; // Let our code handle the submission
     },
   });
 }
