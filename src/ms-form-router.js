@@ -1,3 +1,10 @@
+// Configuration
+const LANDING_PAGES = {
+  FREE_TRIAL: "/thank-you/free-trial",
+  SCHEDULER: "/thank-you/schedule",
+  NOT_QUALIFIED: "/thank-you/success",
+};
+
 // Add these configurations directly in ms-form-router.js
 const DISQUALIFYING_CONDITIONS = {
   multiOwner: ["yes"],
