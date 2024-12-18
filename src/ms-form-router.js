@@ -163,7 +163,7 @@ window.addEventListener("message", function (event) {
           console.error("Redirect failed:", error);
           window.location.href = LANDING_PAGES.NOT_QUALIFIED;
         }
-      }, 500);
+      }, 700);
     }
   }
 });

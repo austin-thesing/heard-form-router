@@ -190,7 +190,7 @@ function handleRedirect() {
 
     setTimeout(() => {
       window.location.href = finalUrl;
-    }, 500);
+    }, 700);
   } catch (error) {
     Sentry.captureException(error, {
       extra: {
