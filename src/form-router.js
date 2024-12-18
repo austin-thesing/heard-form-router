@@ -1,5 +1,3 @@
-import { LANDING_PAGES, determineRoute } from "./form-config.js";
-
 // Initialize HubSpot form handler
 function initializeForm() {
   window.hbspt.forms.create({

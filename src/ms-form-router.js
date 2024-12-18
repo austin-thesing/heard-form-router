@@ -1,5 +1,3 @@
-import { LANDING_PAGES, determineRoute } from "./form-config.js";
-
 // Track if we've already added the field tracking
 let trackingInitialized = false;
 
