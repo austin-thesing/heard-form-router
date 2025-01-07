@@ -18,8 +18,7 @@
   };
 
   const INCOME_TIERS = {
-    HIGH_INCOME: ["$50,000 - $99,999", "more than $100,000"],
-    MID_INCOME: ["$20,000 - $49,999"],
+    QUALIFIED_INCOME: ["$20,000 - $49,999", "$50,000 - $99,999", "more than $100,000"],
   };
 
   // Form field mappings
@@ -55,14 +54,9 @@
       return "NOT_QUALIFIED";
     }
 
-    // Check for qualified booking (income >= $50k)
-    if (INCOME_TIERS.HIGH_INCOME.some((tier) => income.includes(tier))) {
+    // Check for qualified booking (income >= $20k)
+    if (INCOME_TIERS.QUALIFIED_INCOME.some((tier) => income.includes(tier))) {
       return "SCHEDULER";
-    }
-
-    // Check for free trial ($20k-$50k)
-    if (INCOME_TIERS.MID_INCOME.some((tier) => income.includes(tier))) {
-      return "FREE_TRIAL";
     }
 
     return "NOT_QUALIFIED";
