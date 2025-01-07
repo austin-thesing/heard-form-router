@@ -1,0 +1,1740 @@
+<!DOCTYPE html><!--  Last Published: Tue Jan 07 2025 03:04:58 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="65cac869c3b29b209349a8c1" data-wf-site="60f583385ec9fe9471bd1278" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How It Works | Heard</title>
+  <meta content="Learn how Heard helps therapist entrepreneurs save time and money on their bookkeeping and taxes." name="description">
+  <meta content="How It Works | Heard" property="og:title">
+  <meta content="Learn how Heard helps therapist entrepreneurs save time and money on their bookkeeping and taxes." property="og:description">
+  <meta content="https://uploads-ssl.webflow.com/60f583385ec9fe9471bd1278/62c59f09294922f6ca9038cf_OG%20Image.png" property="og:image">
+  <meta content="How It Works | Heard" property="twitter:title">
+  <meta content="Learn how Heard helps therapist entrepreneurs save time and money on their bookkeeping and taxes." property="twitter:description">
+  <meta content="https://uploads-ssl.webflow.com/60f583385ec9fe9471bd1278/62c59f09294922f6ca9038cf_OG%20Image.png" property="twitter:image">
+  <meta property="og:type" content="website">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/heard2.webflow.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <link href="https://www.joinheard.com/how-it-works" rel="canonical">
+  <script type="text/javascript">!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.agent='plwebflow';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '2254477771531870');fbq('track', 'PageView');</script><!-- <script src="https://app.optibase.io/script.js" public-api-key="cls3pkigy001t7vnhip2q4vfj"></script> -->
+  <!--  Finsweet Cookie Consent  -->
+  <script async="" src="https://cdn.jsdelivr.net/npm/@finsweet/cookie-consent@1/fs-cc.js" fs-cc-mode="informational"></script>
+  <!--  Google Tag Manager  -->
+  <script>
+  !(function (e, t, a, r, g) {
+    (e[r] = e[r] || []), e[r].push({ "gtm.start": new Date().getTime(), "event": "gtm.js" });
+    var n = t.getElementsByTagName(a)[0],
+      s = t.createElement(a);
+    (s.async = !0), (s.src = "https://www.googletagmanager.com/gtm.js?id=" + g + ("dataLayer" != r ? "&l=" + r : "")), n.parentNode.insertBefore(s, n);
+  })(window, document, "script", "dataLayer", "GTM-W2MS4FN");
+</script>
+  <!--  End Google Tag Manager  -->
+  <!--  Pricing Details DO NOT DELETE  -->
+  <script>
+// Pricing information
+const pricing = {
+  "Sole Proprietor": {
+    monthly: "199",
+    annually: "169",
+  },
+  "S Corporation": {
+    monthly: "199",
+    compare_monthly: "$299/mo",
+    annually: "169",
+    compare_annual: "$255/mo",
+  },
+  "Sole Proprietor or S Corporation": {
+    monthly: "299",
+    annually: "255",
+  },
+};
+// Billing details
+const billingDetails = {
+  monthly: "Billed monthly • Cancel anytime",
+  annually: {
+    "Sole Proprietor": "Billed $2,028 annually",
+    "S Corporation": "Limited time offer • Billed $2,028 annually",
+    "Sole Proprietor or S Corporation": "Billed $3,060 annually",
+  },
+};
+</script>
+  <!--  Amplitude  -->
+  <script async="" type="text/javascript">
+  const isProd = window.location.hostname.includes("joinheard.com"),
+    id = isProd ? "54639586d90b933de8d4a822e244b6d0" : "9cb8c77f091784a4d8da2a8bb7900623",
+    onInit = () => {
+      let e = document.querySelectorAll("a[href*='dashboard.joinheard.com']");
+      e.forEach((e) => {
+        let t = e.getAttribute("href");
+        isProd || (t = t.replace("dashboard.joinheard.com", "dashboard-staging.joinheard.com"));
+        let r = new URL(t);
+        r.searchParams.set("device-id", amplitude.getDeviceId()), e.setAttribute("href", r.href);
+      });
+      let t = new URLSearchParams(window.location.search),
+        r = t.get("event"),
+        n = t.get("source");
+      if (n && r) {
+        let o = { source: n };
+        amplitude.track(r, o),
+          t.delete("event"),
+          t.delete("source"),
+          [...t.keys()].length > 0 ? window.history.replaceState({}, document.title, window.location.pathname + "?" + t.toString()) : window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      let i = document.querySelectorAll(".play-button");
+      i.forEach((e) => {
+        (e.style.display = "none"),
+          e.addEventListener("click", () => {
+            let t = { url: window.location.href, location: "playBtnHero" === e.id ? "main section" : "footer section" };
+            amplitude.track("clicked view product demo button", t);
+          });
+      });
+    };
+  !(function (e, t) {
+    var r = e.amplitude || { _q: [], _iq: [] };
+    if (r.invoked) e.console && console.error && console.error("Amplitude snippet has been loaded.");
+    else {
+      var n = function (e, t) {
+          e.prototype[t] = function () {
+            return this._q.push({ name: t, args: Array.prototype.slice.call(arguments, 0) }), this;
+          };
+        },
+        o = function (e, t, r) {
+          e[t] = function () {
+            if (r) {
+              var n, o, i;
+              return {
+                promise: new Promise(
+                  ((n = e),
+                  (o = t),
+                  (i = Array.prototype.slice.call(arguments)),
+                  function (e) {
+                    n._q.push({ name: o, args: Array.prototype.slice.call(i, 0), resolve: e });
+                  })
+                ),
+              };
+            }
+          };
+        },
+        i = function (e) {
+          for (var t = 0; t < v.length; t++) o(e, v[t], !1);
+          for (var r = 0; r < f.length; r++) o(e, f[r], !0);
+        };
+      r.invoked = !0;
+      var a = t.createElement("script");
+      (a.type = "text/javascript"),
+        (a.integrity = "sha384-PPfHw98myKtJkA9OdPBMQ6n8yvUaYk0EyUQccFSIQGmB05K6aAMZwvv8z50a5hT2"),
+        (a.crossOrigin = "anonymous"),
+        (a.async = !0),
+        (a.src = "https://cdn.amplitude.com/libs/marketing-analytics-browser-0.3.2-min.js.gz"),
+        (a.onload = function () {
+          e.amplitude.runQueuedFunctions || console.log("[Amplitude] Error: could not load SDK");
+        });
+      var s = t.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(a, s);
+      for (
+        var c = function () {
+            return (this._q = []), this;
+          },
+          l = ["add", "append", "clearAll", "prepend", "set", "setOnce", "unset", "preInsert", "postInsert", "remove", "getUserProperties"],
+          d = 0;
+        d < l.length;
+        d++
+      )
+        n(c, l[d]);
+      r.Identify = c;
+      for (
+        var u = function () {
+            return (this._q = []), this;
+          },
+          p = ["getEventProperties", "setProductId", "setQuantity", "setPrice", "setRevenue", "setRevenueType", "setEventProperties"],
+          h = 0;
+        h < p.length;
+        h++
+      )
+        n(u, p[h]);
+      r.Revenue = u;
+      var v = ["getDeviceId", "setDeviceId", "getSessionId", "setSessionId", "getUserId", "setUserId", "setOptOut", "setTransport", "reset"],
+        f = ["init", "add", "remove", "track", "logEvent", "identify", "groupIdentify", "setGroup", "revenue", "flush"];
+      i(r),
+        (r.createInstance = function () {
+          var e = r._iq.push({ _q: [] }) - 1;
+          return i(r._iq[e]), r._iq[e];
+        }),
+        (e.amplitude = r);
+    }
+  })(window, document),
+    document.addEventListener("DOMContentLoaded", () => {
+      amplitude.init(id, null, { pageViewTracking: !0 }).promise.then(onInit);
+    });
+</script>
+  <!--  End Amplitude  -->
+  <script type="text/javascript">
+  (window.heap = window.heap || []),
+    (heap.load = function (e, t) {
+      (window.heap.appid = e), (window.heap.config = t = t || {});
+      var r = document.createElement("script");
+      (r.type = "text/javascript"), (r.async = !0), (r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js");
+      var a = document.getElementsByTagName("script")[0];
+      a.parentNode.insertBefore(r, a);
+      for (
+        var n = function (e) {
+            return function () {
+              heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+            };
+          },
+          p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"],
+          o = 0;
+        o < p.length;
+        o++
+      )
+        heap[p[o]] = n(p[o]);
+    });
+  heap.load("2299064803");
+</script>
+  <!-- 
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+<script defer src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+ -->
+  <style>
+  body {
+    overflow-x: hidden !important;
+  }
+  .acc-body {
+    display: none;
+  }
+  .acc-open {
+    display: flex;
+  }
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+</style>
+  <!--  Taboola Pixel Code  -->
+  <script type="text/javascript">
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view'});
+  !function (t, f, a, x) {
+    if (!document.getElementById(x)) {
+      t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+    }
+  }(document.createElement('script'),
+    document.getElementsByTagName('script')[0],
+    '//cdn.taboola.com/libtrc/unip/1731853/tfa.js',
+    'tb_tfa_script');
+</script>
+  <noscript>
+    <img src="https://trc.taboola.com/1731853/log/3/unip?en=page_view" width="0" height="0" style="display:none">
+  </noscript>
+  <!--  End of Taboola Pixel Code  --><!--  Closes Simple JQuery Accordion Bodies on Published Site  -->
+  <style>
+/* Hide Accordion Body */
+.acc-body {
+	display: none;
+}
+.acc-open {
+	display: flex;
+}
+</style>
+</head>
+<body class="body">
+  <div class="page-wrapper">
+    <div data-wf--global-navigation--variant="transparent" class="nav-w-banner">
+      <section role="banner" class="banner-section">
+        <div class="padding-horizontal padding-medium">
+          <div class="w-dyn-list">
+            <div role="list" class="w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="banner_component">
+                  <div class="text-size-small text-color-white banner w-dyn-bind-empty w-richtext"></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-dyn-empty">
+              <div>No items found.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="nav-section w-nav">
+        <div class="page-padding">
+          <div class="container-xlarge">
+            <div class="nav_component">
+              <div class="nav_left-column">
+                <a href="index.html" aria-label="home" class="nav_logo w-nav-brand">
+                  <div class="nav_logo-embed is-green w-embed"><svg width="92" height="26" viewbox="0 0 92 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.7126 0.710865V11.4382H4.34574V0.710865H0V24.9294H4.34574V13.848H15.7126V24.9294H20.0583V0.710865H15.7126Z" fill="currentColor"></path>
+                      <path d="M59.2442 20.7321C59.2442 20.7321 59.2442 14.302 59.2442 13.7338C59.2442 12.3204 58.9244 9.71356 55.8607 8.26023C52.797 6.80689 47.7603 6.03025 43.7229 10.4702L45.2762 11.7836C45.2762 11.7836 48.6397 8.54004 52.62 10.2304C53.8392 10.75 54.6986 12.1891 54.83 13.1199C54.9413 13.9194 54.83 15.387 54.83 15.387C53.6736 14.676 51.8976 13.9308 49.5163 13.9308C44.9593 13.9308 42.3324 16.3778 42.3324 19.7413C42.3324 23.1048 44.9593 25.312 49.5163 25.312C52.0346 25.312 53.8763 24.1156 55.0213 23.042C55.1155 23.6331 55.244 24.1898 55.4267 24.8151H59.7439C59.2785 23.5674 59.2471 21.2032 59.2442 20.7321ZM50.7669 23.0477C46.5468 23.0477 46.7866 19.7442 46.7866 19.7442C46.7866 19.7442 46.5468 16.2008 50.7669 16.2008C52.5286 16.2008 53.8991 16.8632 54.8271 17.4799L54.8242 20.7464C53.8934 21.937 52.5486 23.0477 50.7669 23.0477Z" fill="currentColor"></path>
+                      <path d="M31.9306 7.12383C25.038 7.42934 22.6681 12.4404 22.6681 16.0437C22.6681 22.5909 28.0617 25.3177 31.9306 25.3177C35.7995 25.3177 38.1894 24.324 40.1195 21.5373L38.5463 20.3838C38.5463 20.3838 36.993 22.7108 33.5524 22.7108C29.5322 22.7108 27.3622 19.707 27.3622 17.2572H41.0132C41.8127 12.3204 38.1494 6.84972 31.9306 7.12383ZM27.365 14.8474C27.365 14.8474 27.8418 9.57366 31.8021 9.41376C36.2192 9.41376 36.4991 14.8474 36.4991 14.8474H27.365Z" fill="currentColor"></path>
+                      <path d="M67.8101 8.84842C67.2761 9.40805 66.865 10.0448 66.4738 10.7129V7.53499L61.8368 7.54355C62.071 8.17171 62.1966 9.15964 62.2537 9.95055V24.818H66.6137L66.6194 15.5412C66.6223 15.0073 66.6708 14.4648 66.7707 13.9394C67.199 11.6923 68.8437 10.296 71.1393 10.2104L72.7697 10.2075V7.13239C70.9452 7.0039 69.0978 7.50072 67.8101 8.84842Z" fill="currentColor"></path>
+                      <path d="M92 24.9379C91.7659 24.3098 91.6402 23.3218 91.5831 22.5309V0.682312H87.1517V9.98767C85.8954 8.21454 83.9367 7.07814 81.2213 7.07814C77.0012 7.07814 73.0095 10.9528 73.0095 16.0923C73.0095 21.9199 77.0012 25.3063 81.2213 25.3063C84.0709 25.3063 86.0011 24.3669 87.2117 22.5395C87.226 22.6908 87.2488 22.9392 87.2774 23.1762C87.3716 23.7673 87.5001 24.324 87.6828 24.9493H92C92 24.9465 91.9972 24.9408 91.9972 24.9379H92ZM82.609 22.3482C79.985 22.3482 77.4638 20.0497 77.4638 16.1979C77.4638 12.6317 79.9821 10.3332 82.609 10.3332C84.4992 10.3332 86.2952 11.5695 87.1546 13.5996V19.1217C86.298 21.2004 84.4992 22.3482 82.609 22.3482Z" fill="currentColor"></path>
+                    </svg></div>
+                </a>
+                <nav role="navigation" class="nav_menu w-nav-menu">
+                  <div class="nav_menu-desktop hide-tablet">
+                    <div data-hover="true" data-delay="0" data-w-id="dd76654d-92ef-571f-8ddb-7983c181a3ae" class="nav_dropdown hide w-dropdown">
+                      <div class="nav_dropdown-toggle-mobile w-dropdown-toggle">
+                        <div class="nav-links_wrapper">
+                          <div class="nav_link">Who We Help</div>
+                          <div class="dropdown-arrow_icon"></div>
+                        </div>
+                        <div class="nav_dropdown-toggle-underline-constant"></div>
+                        <div class="nav_dropdown-toggle-underline"></div>
+                      </div>
+                      <nav class="nav_dropdown-links w-dropdown-list">
+                        <div class="nav_dropdown-links-container">
+                          <a href="bookkeeping.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Solo Practices</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Set up your business and launch your private practice.</p>
+                          </a>
+                          <a href="taxes.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Group Practices</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Hire other therapists and grow your group practice.</p>
+                          </a>
+                          <a href="payroll.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">1099 Contractors</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Start tracking your income and expenses as a 1099 contractor.</p>
+                          </a>
+                        </div>
+                      </nav>
+                    </div>
+                    <div data-hover="true" data-delay="0" class="nav_dropdown w-dropdown">
+                      <div class="nav_dropdown-toggle-mobile w-dropdown-toggle">
+                        <div class="nav-links_wrapper">
+                          <div class="nav_link">What We Do</div>
+                          <div class="dropdown-arrow_wrapper">
+                            <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="nav_dropdown-toggle-underline-constant"></div>
+                        <div class="nav_dropdown-toggle-underline"></div>
+                      </div>
+                      <nav class="nav_dropdown-links w-dropdown-list">
+                        <div class="nav_dropdown-links-container">
+                          <a href="bookkeeping.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Bookkeeping</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Get done-for-you monthly bookkeeping and easy-to-understand financial reports.</p>
+                          </a>
+                          <a href="taxes.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Taxes</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Save thousands of dollars on your personal and business income taxes.</p>
+                          </a>
+                          <a href="payroll.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Payroll</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Pay yourself, employees, and contractors in minutes.</p>
+                          </a>
+                          <a href="s-corp.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">S Corp</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Save money on taxes as an S Corporation.</p>
+                          </a>
+                          <a href="payroll.html" class="nav_dropdown-column hide w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Business Formation</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Form a business entity, open a business bank account, and set up a retirement plan.</p>
+                          </a>
+                        </div>
+                      </nav>
+                    </div>
+                    <div data-hover="true" data-delay="0" class="nav_dropdown w-dropdown">
+                      <div class="nav_dropdown-toggle-mobile hide w-dropdown-toggle">
+                        <div class="nav-links_wrapper">
+                          <div class="nav_link">How it Works</div>
+                          <div class="dropdown-arrow_wrapper">
+                            <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="nav_dropdown-toggle-underline-constant"></div>
+                        <div class="nav_dropdown-toggle-underline"></div>
+                      </div>
+                      <nav class="nav_dropdown-links w-dropdown-list">
+                        <div class="nav_dropdown-links-container">
+                          <a href="how-it-works.html" aria-current="page" class="nav_dropdown-column w-inline-block w--current">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">How Heard Works</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">See a breakdown of our software and services.</p>
+                          </a>
+                          <a href="pricing.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Pricing</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Review our transparent pricing and plans.</p>
+                          </a>
+                        </div>
+                      </nav>
+                    </div>
+                    <div class="nav_dropdown-toggle-mobile">
+                      <a href="how-it-works.html" aria-current="page" class="nav_link w-nav-link w--current">How It Works</a>
+                      <div class="nav_dropdown-toggle-underline-constant"></div>
+                      <div class="nav_dropdown-toggle-underline"></div>
+                    </div>
+                    <div class="nav_dropdown-toggle-mobile">
+                      <a href="pricing.html" class="nav_link w-nav-link">Pricing</a>
+                      <div class="nav_dropdown-toggle-underline-constant"></div>
+                      <div class="nav_dropdown-toggle-underline"></div>
+                    </div>
+                    <div data-hover="true" data-delay="0" class="nav_dropdown w-dropdown">
+                      <div class="nav_dropdown-toggle-mobile w-dropdown-toggle">
+                        <div class="nav-links_wrapper">
+                          <div class="nav_link">Resources</div>
+                          <div class="dropdown-arrow_wrapper">
+                            <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="nav_dropdown-toggle-underline-constant"></div>
+                        <div class="nav_dropdown-toggle-underline"></div>
+                      </div>
+                      <nav class="nav_dropdown-links w-dropdown-list">
+                        <div class="nav_dropdown-links-container">
+                          <a href="resources.html" class="nav_dropdown-column hide w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Articles</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Read high quality, fact-checked articles on private practice finances.</p>
+                          </a>
+                          <a href="https://support.joinheard.com/hc/en-us" class="nav_dropdown-column hide w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Support Center</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Find answers to your questions about the Heard product</p>
+                          </a>
+                          <a href="https://support.joinheard.com/hc/en-us" target="_blank" class="nav_dropdown-column hide w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Tools</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Estimate S Corp tax savings, home office deduction, and more.</p>
+                          </a>
+                          <a href="newsletter.html" class="nav_dropdown-column hide w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Guides</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Explore state guides for starting a private practice.</p>
+                          </a>
+                          <a href="resources.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Resource Hub</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Download free checklists and cheatsheets.</p>
+                          </a>
+                          <a href="tax-hub.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Tax Hub</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Navigate the 2024 tax season with confidence.</p>
+                          </a>
+                          <a href="podcast.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Podcast</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">A show for therapists building their own businesses.</p>
+                          </a>
+                          <a href="newsletter.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Newsletter</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Get the Ledger in your inbox every week.</p>
+                          </a>
+                          <a href="resources/events.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Events</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Sign up for an upcoming virtual event or watch a recording.</p>
+                          </a>
+                        </div>
+                      </nav>
+                    </div>
+                    <div data-hover="true" data-delay="0" class="nav_dropdown w-dropdown">
+                      <div class="nav_dropdown-toggle-mobile w-dropdown-toggle">
+                        <div class="nav-links_wrapper">
+                          <div class="nav_link">About</div>
+                          <div class="dropdown-arrow_wrapper">
+                            <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="nav_dropdown-toggle-underline-constant"></div>
+                        <div class="nav_dropdown-toggle-underline"></div>
+                      </div>
+                      <nav class="nav_dropdown-links w-dropdown-list">
+                        <div class="nav_dropdown-links-container">
+                          <a href="about.html" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">About Us</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Learn more about our mission and vision to help therapists.</p>
+                          </a>
+                          <a href="https://support.joinheard.com/hc/en-us" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Support</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">Find answers to your questions about the Heard platform.</p>
+                          </a>
+                          <a href="https://jobs.lever.co/heard" class="nav_dropdown-column w-inline-block">
+                            <div class="nav_dropdown-heading">
+                              <h5 class="heading-xsmall">Careers</h5>
+                              <div class="nav_dropdown-underline-white"></div>
+                              <div class="nav_dropdown-underline-green"></div>
+                            </div>
+                            <p class="text-size-regular opacity-70">View open positions and apply to join our team.</p>
+                          </a>
+                        </div>
+                      </nav>
+                    </div>
+                  </div>
+                  <div class="nav_menu-mobile show-tablet">
+                    <div class="page-padding">
+                      <div class="nav_menu-mobile-block">
+                        <div data-hover="false" data-delay="0" class="nav_dropdown-mobile hide w-dropdown">
+                          <div class="nav_dropdown-toggle-mobile with-arrow w-dropdown-toggle">
+                            <div class="text-size-regular">Who We Help</div>
+                            <div class="dropdown-arrow_icon dropdown-white"></div>
+                          </div>
+                          <nav class="nav_menu-mobile-links w-dropdown-list">
+                            <a href="bookkeeping.html" class="text-style-link text-color-white">Bookkeeping</a>
+                            <a href="taxes.html" class="text-style-link text-color-white">Taxes</a>
+                            <a href="payroll.html" class="text-style-link text-color-white">Payroll</a>
+                          </nav>
+                        </div>
+                        <div data-hover="false" data-delay="0" class="nav_dropdown-mobile w-dropdown">
+                          <div class="nav_dropdown-toggle-mobile with-arrow w-dropdown-toggle">
+                            <div class="text-size-regular text-color-forest">What We Do</div>
+                            <div class="dropdown-arrow_wrapper text-color-forest">
+                              <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                                </svg></div>
+                            </div>
+                          </div>
+                          <nav class="nav_menu-mobile-links w-dropdown-list">
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="bookkeeping.html" class="text-style-link text-color-forest">Bookkeeping</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Streamline your bookkeeping and spend more time with clients.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="taxes.html" class="text-style-link text-color-forest">Taxes</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Save thousands of dollars on your personal and business income taxes.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="payroll.html" class="text-style-link text-color-forest">Payroll</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Pay yourself, employees, and contractors in minutes.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="s-corp.html" class="text-style-link text-color-forest">S-Corp</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Save money on taxes as an S Corporation.</p>
+                            </div>
+                          </nav>
+                        </div>
+                        <a href="how-it-works.html" aria-current="page" class="text-size-regular text-color-forest w--current">How it Works</a>
+                        <a href="pricing.html" class="text-size-regular text-color-forest">Pricing</a>
+                        <div data-hover="false" data-delay="0" class="nav_dropdown-mobile w-dropdown">
+                          <div class="nav_dropdown-toggle-mobile with-arrow w-dropdown-toggle">
+                            <div class="text-size-regular text-color-forest">Resources</div>
+                            <div class="dropdown-arrow_wrapper text-color-forest">
+                              <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                                </svg></div>
+                            </div>
+                          </div>
+                          <nav class="nav_menu-mobile-links w-dropdown-list">
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="resources.html" class="text-style-link text-color-forest">Resource Hub</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Download free checklists and cheatsheets.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="tax-hub.html" class="text-style-link text-color-forest">Tax Hub</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Navigate the 2024 tax season with confidence.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="podcast.html" class="text-style-link text-color-forest">Podcast</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">A show for therapists building their own businesses.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="newsletter.html" class="text-style-link text-color-forest">Newsletter</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Get the Ledger in your inbox every week.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="resources/events.html" class="text-style-link text-color-forest">Events</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Sign up for an upcoming virtual event or watch a recording.</p>
+                            </div>
+                          </nav>
+                        </div>
+                        <div data-hover="false" data-delay="0" class="nav_dropdown-mobile w-dropdown">
+                          <div class="nav_dropdown-toggle-mobile with-arrow w-dropdown-toggle">
+                            <div class="text-size-regular text-color-forest">About Us</div>
+                            <div class="dropdown-arrow_wrapper text-color-forest">
+                              <div class="dropdown-arrow_icon w-embed"><svg width="16" height="8" viewbox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.125 0.6875C1.21875 0.5625 1.34375 0.5 1.5 0.5C1.59375 0.5 1.71875 0.53125 1.8125 0.625L7.96875 6.28125L14.1562 0.625C14.3438 0.4375 14.6562 0.4375 14.8438 0.65625C15.0312 0.84375 15.0312 1.15625 14.8125 1.34375L8.3125 7.34375C8.125 7.53125 7.84375 7.53125 7.65625 7.34375L1.15625 1.34375C0.9375 1.1875 0.9375 0.875 1.125 0.6875Z" fill="currentColor"></path>
+                                </svg></div>
+                            </div>
+                          </div>
+                          <nav class="nav_menu-mobile-links w-dropdown-list">
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="about.html" class="text-style-link text-color-forest">About Heard</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Learn more about our mission and vision to help therapists.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="https://support.joinheard.com/hc/en-us" target="_blank" class="text-style-link text-color-forest">Support</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">Find answers to your questions about the Heard platform.</p>
+                            </div>
+                            <div class="nav_dropdown-column is-mobile">
+                              <a href="https://jobs.lever.co/heard" class="text-style-link text-color-forest">Careers</a>
+                              <p class="text-size-regular text-color-forest is-opacity-70">View open positions and apply to join our team.</p>
+                            </div>
+                          </nav>
+                        </div>
+                      </div>
+                      <div class="margin-vertical margin-medium">
+                        <div class="nav_divider"></div>
+                      </div>
+                      <div class="nav-btns-mobile">
+                        <a data-amp-event-type="clicked sign in button" href="https://dashboard.joinheard.com/?event=clicked+sign+in+button&amp;source=topnav" class="button-secondary nav-bar w-button">Sign in</a>
+                        <a href="https://www.joinheard.com/welcome-form?event=clicked+free+consult+button&amp;source=topnav" class="button-primary nav-bar w-button">Book a free consult</a>
+                      </div>
+                      <div class="margin-vertical margin-medium">
+                        <div class="nav_divider"></div>
+                      </div>
+                      <div class="socials-wrapper">
+                        <a aria-label="twitter" href="https://twitter.com/joinheardinc?lang=en" target="_blank" class="social-link-wrapper text-color-forest w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M21.46 2C20.69 2.35 19.86 2.58 19 2.69C19.88 2.16 20.56 1.32 20.88 0.31C20.05 0.81 19.13 1.16 18.16 1.36C17.37 0.5 16.26 0 15 0C12.65 0 10.73 1.92 10.73 4.29C10.73 4.63 10.77 4.96 10.84 5.27C7.28004 5.09 4.11004 3.38 2.00004 0.79C1.63004 1.42 1.42004 2.16 1.42004 2.94C1.42004 4.43 2.17004 5.75 3.33004 6.5C2.62004 6.5 1.96004 6.3 1.38004 6V6.03C1.38004 8.11 2.86004 9.85 4.82004 10.24C4.19077 10.4122 3.53013 10.4362 2.89004 10.31C3.16165 11.1625 3.69358 11.9084 4.41106 12.4429C5.12854 12.9775 5.99549 13.2737 6.89004 13.29C5.37367 14.4904 3.49404 15.1393 1.56004 15.13C1.22004 15.13 0.880039 15.11 0.540039 15.07C2.44004 16.29 4.70004 17 7.12004 17C15 17 19.33 10.46 19.33 4.79C19.33 4.6 19.33 4.42 19.32 4.23C20.16 3.63 20.88 2.87 21.46 2Z" fill="currentColor"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="facebook" href="https://www.facebook.com/joinheardinc/" target="_blank" class="social-link-wrapper text-color-forest w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M10 0.0400391C4.5 0.0400391 0 4.53004 0 10.06C0 15.06 3.66 19.21 8.44 19.96V12.96H5.9V10.06H8.44V7.85004C8.44 5.34004 9.93 3.96004 12.22 3.96004C13.31 3.96004 14.45 4.15004 14.45 4.15004V6.62004H13.19C11.95 6.62004 11.56 7.39004 11.56 8.18004V10.06H14.34L13.89 12.96H11.56V19.96C13.9164 19.5879 16.0622 18.3856 17.6099 16.5701C19.1576 14.7546 20.0054 12.4457 20 10.06C20 4.53004 15.5 0.0400391 10 0.0400391Z" fill="currentColor"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="instagram" href="https://www.instagram.com/joinheardinc/?hl=en" target="_blank" class="social-link-wrapper text-color-forest w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6.66747 10C6.66747 8.15913 8.15946 6.6664 10.0004 6.6664C11.8414 6.6664 13.3341 8.15913 13.3341 10C13.3341 11.8409 11.8414 13.3336 10.0004 13.3336C8.15946 13.3336 6.66747 11.8409 6.66747 10ZM4.8653 10C4.8653 12.836 7.16426 15.1349 10.0004 15.1349C12.8365 15.1349 15.1355 12.836 15.1355 10C15.1355 7.16397 12.8365 4.8651 10.0004 4.8651C7.16426 4.8651 4.8653 7.16397 4.8653 10ZM14.1387 4.66155C14.1387 5.32391 14.6759 5.86187 15.3391 5.86187C16.0015 5.86187 16.5394 5.32391 16.5394 4.66155C16.5394 3.99919 16.0023 3.46204 15.3391 3.46204C14.6759 3.46204 14.1387 3.99919 14.1387 4.66155ZM5.95985 18.1397C4.98485 18.0953 4.45495 17.933 4.10275 17.7956C3.63585 17.6139 3.30304 17.3974 2.95246 17.0477C2.60269 16.6979 2.3854 16.3651 2.20445 15.8982C2.06713 15.546 1.90476 15.0162 1.86033 14.0412C1.81187 12.9871 1.80217 12.6704 1.80217 10C1.80217 7.32956 1.81267 7.01373 1.86033 5.9588C1.90476 4.98384 2.06793 4.45477 2.20445 4.10178C2.3862 3.63489 2.60269 3.3021 2.95246 2.95153C3.30223 2.60178 3.63504 2.38449 4.10275 2.20355C4.45495 2.06624 4.98485 1.90388 5.95985 1.85945C7.01402 1.81099 7.33067 1.80129 10.0004 1.80129C12.6709 1.80129 12.9868 1.81179 14.0418 1.85945C15.0168 1.90388 15.5459 2.06704 15.8989 2.20355C16.3658 2.38449 16.6986 2.60178 17.0492 2.95153C17.3989 3.30129 17.6154 3.63489 17.7972 4.10178C17.9345 4.45396 18.0969 4.98384 18.1413 5.9588C18.1898 7.01373 18.1994 7.32956 18.1994 10C18.1994 12.6696 18.1898 12.9863 18.1413 14.0412C18.0969 15.0162 17.9337 15.546 17.7972 15.8982C17.6154 16.3651 17.3989 16.6979 17.0492 17.0477C16.6994 17.3974 16.3658 17.6139 15.8989 17.7956C15.5467 17.933 15.0168 18.0953 14.0418 18.1397C12.9876 18.1882 12.6709 18.1979 10.0004 18.1979C7.33067 18.1979 7.01402 18.1882 5.95985 18.1397ZM5.87746 0.0605816C4.8128 0.109047 4.08579 0.277868 3.45006 0.52504C2.79252 0.780291 2.23515 1.12278 1.67858 1.67851C1.12282 2.23425 0.780322 2.7916 0.525062 3.44992C0.277879 4.08562 0.109051 4.8126 0.060584 5.87722C0.011309 6.94346 0 7.28433 0 10C0 12.7157 0.011309 13.0565 0.060584 14.1228C0.109051 15.1874 0.277879 15.9144 0.525062 16.5501C0.780322 17.2076 1.12202 17.7658 1.67858 18.3215C2.23434 18.8772 2.79171 19.2189 3.45006 19.475C4.0866 19.7221 4.8128 19.891 5.87746 19.9394C6.94455 19.9879 7.28462 20 10.0004 20C12.717 20 13.0571 19.9887 14.1234 19.9394C15.188 19.891 15.915 19.7221 16.5507 19.475C17.2083 19.2189 17.7657 18.8772 18.3222 18.3215C18.878 17.7658 19.2197 17.2076 19.4757 16.5501C19.7229 15.9144 19.8926 15.1874 19.9402 14.1228C19.9887 13.0557 20 12.7157 20 10C20 7.28433 19.9887 6.94346 19.9402 5.87722C19.8918 4.8126 19.7229 4.08562 19.4757 3.44992C19.2197 2.79241 18.878 2.23506 18.3222 1.67851C17.7665 1.12278 17.2083 0.780291 16.5516 0.52504C15.915 0.277868 15.188 0.108239 14.1242 0.0605816C13.0579 0.0121163 12.717 0 10.0012 0C7.28462 0 6.94455 0.0113086 5.87746 0.0605816Z" fill="currentColor"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="linkedin" href="https://www.linkedin.com/company/heardaccounting" target="_blank" class="social-link-wrapper text-color-forest w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3.004 4.99983H2.975C2.66795 5.01902 2.36024 4.97461 2.07114 4.86938C1.78204 4.76415 1.51778 4.60037 1.2949 4.38829C1.07203 4.17621 0.895337 3.9204 0.775896 3.63688C0.656455 3.35336 0.596834 3.04823 0.600769 2.7406C0.604703 2.43297 0.672107 2.12947 0.79876 1.84909C0.925413 1.56872 1.10859 1.31751 1.33681 1.1112C1.56504 0.904887 1.8334 0.747917 2.1251 0.650116C2.41679 0.552315 2.72554 0.51579 3.032 0.542827C3.33906 0.521377 3.64724 0.563584 3.93723 0.666803C4.22722 0.770022 4.49275 0.932028 4.7172 1.14267C4.94165 1.35331 5.12017 1.60804 5.24157 1.89089C5.36298 2.17375 5.42464 2.47863 5.42271 2.78643C5.42078 3.09424 5.35528 3.39832 5.23034 3.67963C5.10539 3.96094 4.92368 4.21341 4.69661 4.42121C4.46953 4.62901 4.20198 4.78767 3.91072 4.88723C3.61946 4.9868 3.31077 5.02513 3.004 4.99983Z" fill="currentColor"></path>
+                              <path d="M1.01807 8.00012H5.01807V20.0001H1.01807V8.00012Z" fill="currentColor"></path>
+                              <path d="M15.5182 8.00012C14.8442 8.00195 14.1793 8.15606 13.5732 8.45096C12.9672 8.74586 12.4356 9.17391 12.0182 9.70312V8.00012H8.01819V20.0001H12.0182V14.5001C12.0182 13.9697 12.2289 13.461 12.604 13.0859C12.979 12.7108 13.4878 12.5001 14.0182 12.5001C14.5486 12.5001 15.0573 12.7108 15.4324 13.0859C15.8075 13.461 16.0182 13.9697 16.0182 14.5001V20.0001H20.0182V12.5001C20.0182 11.3066 19.5441 10.1621 18.7002 9.31814C17.8563 8.47423 16.7117 8.00012 15.5182 8.00012Z" fill="currentColor"></path>
+                            </svg></div>
+                        </a>
+                      </div>
+                      <div class="nav_legal-links">
+                        <a href="terms-of-service.html" class="text-size-tiny text-color-green">Terms of Service</a>
+                        <a href="privacy.html" class="text-size-tiny text-color-green">Privacy Policy</a>
+                        <a href="cookie-policy.html" class="text-size-tiny text-color-green">Cookie Policy</a>
+                        <a href="mailto:support@joinheard.com?subject=Enquiry%20-%20Join%20Heard" class="text-size-tiny text-color-green">Contact us</a>
+                      </div>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              <div class="nav_right-column">
+                <div class="nav_buttons-wrapper hide-tablet">
+                  <a data-amp-event-type="clicked sign in button" href="https://dashboard.joinheard.com/?event=clicked+sign+in+button&amp;source=topnav" class="button-secondary nav-bar w-button">Sign in</a>
+                  <a href="https://www.joinheard.com/welcome-form?event=clicked+free+consult+button&amp;source=topnav" class="button-primary nav-bar w-button">Book a free consult</a>
+                </div>
+                <a scroll="both" href="#" class="nav_menu-button w-inline-block">
+                  <div class="nav_menu-icon is-black">
+                    <div class="nav_menu-line is-top"></div>
+                    <div class="nav_menu-line is-bottom"></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="nav_menu-background"></div>
+          <div class="nav_sticky-background"></div>
+        </div>
+      </div>
+      <div class="global-css-styles w-embed">
+        <style>
+.text-style-2lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.text-style-3lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+</style>
+      </div>
+    </div>
+    <main class="main-section">
+      <section class="section-hero">
+        <div class="background-color-neutral">
+          <div class="page-padding">
+            <div class="padding-vertical custom-padding-how-it-works_hero">
+              <div class="container-xlarge w-container">
+                <div class="hero-how-it-works_component">
+                  <div id="w-node-f7324756-8cfc-6c42-146a-7bdf388cd85a-9349a8c1" class="hero-left-column">
+                    <div class="hero_text-container align-center">
+                      <div class="hero_text-wrapper text-align-center fix-center-hiw">
+                        <h1 class="heading-xlarge text-color-black">How</h1>
+                        <h1 class="heading-xlarge text-color-green">Heard</h1>
+                        <div class="text-wrapper">
+                          <h1 class="heading-xlarge text-color-black">works</h1>
+                          <div class="how-it-works-hero_lottie-wrapper">
+                            <div class="full-lottie-animation hiw" data-w-id="98b8d58c-07bc-eee9-7eac-aaf48da2de9a" data-animation-type="lottie" data-src="documents/underline-green.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="1.0333333333333334" data-duration="0"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <p>Every therapist who joins Heard is supported by a team of bookkeeping and tax professionals who specialize in therapy practices. <br><br><strong>You don&#x27;t have to manage your finances alone.</strong></p>
+                      <div class="buttons-container">
+                        <a id="get-started-other" href="https://www.joinheard.com/welcome-form?event=clicked+schedule+consult+button&amp;source=how-it-works" class="button-primary is-full-width w-button">Book a consult</a>
+                        <a href="https://dashboard.joinheard.com/signup?event=clicked+sign+up+button&amp;source=how-it-works" class="button-secondary w-button">Sign up</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="how-it-works-features_component">
+        <div class="background-color-neutral">
+          <div class="padding-vertical bottom-96-padding">
+            <section class="text-template-section">
+              <div class="background-color-neutral">
+                <div class="page-padding">
+                  <div class="padding-vertical padding-96">
+                    <div class="container-xlarge w-container"></div>
+                    <div class="text-template_component">
+                      <div id="w-node-fbfee1db-fa9a-217b-712b-9029cdac450c-9349a8c1" class="text-template_image-wrapper"><img src="images/pl.svg" loading="lazy" alt="light-skin black girl with curly dark hair smiling at laptop. she is wearing a yellow top and sitting on a bean bag. she is in a living room" class="full-scale-image"></div>
+                      <div class="how-it-works-content_component">
+                        <div class="text-template_text-container">
+                          <div class="text-template_text-heading">
+                            <div class="icon_wrapper">
+                              <div class="w-embed"><svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M34 27V7C34 5.375 32.625 4 31 4H11C8.1875 4 6 6.25 6 9V32C6 34.25 7.75 36 10 36H33C33.5 36 34 35.5625 34 35C34 34.5 33.5 34 33 34H32V29.875C33.125 29.4375 34 28.3125 34 27ZM26 6V16.9375L22.5625 14.25C22.4375 14.125 22.1875 14 22 14C21.75 14 21.5 14.125 21.375 14.25L18 16.9375V6H26ZM30 34H10C8.875 34 8 33.125 8 32C8 30.9375 8.875 30 10 30H30V34ZM31 28H10C9.25 28 8.5625 28.25 8 28.5625V9C8 7.375 9.3125 6 11 6H16V19C16 19.4375 16.1875 19.75 16.5625 19.9375C16.875 20.125 17.3125 20.0625 17.625 19.8125L22 16.3125L26.3125 19.8125C26.5 19.9375 26.75 20 27 20C27.125 20 27.25 20 27.375 19.9375C27.75 19.75 28 19.4375 28 19V6H31C31.5 6 32 6.5 32 7V27C32 27.5625 31.5 28 31 28Z" fill="#226752"></path>
+                                </svg></div>
+                            </div>
+                            <h4 class="heading-small">Bookkeeping</h4>
+                          </div>
+                          <div class="text-size-medium">We streamline your bookkeeping so you can spend more time with clients.</div>
+                        </div>
+                        <div class="how-it-works-tab_component">
+                          <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="how-it-works_tabs w-tabs">
+                            <div class="how-it-works_tab-menu w-tab-menu">
+                              <a data-w-tab="Tab 1" class="how-it-works_tab w-inline-block w-tab-link w--current">
+                                <div>What Heard does</div>
+                              </a>
+                              <a data-w-tab="Tab 2" class="how-it-works_tab w-inline-block w-tab-link">
+                                <div>What you do</div>
+                              </a>
+                            </div>
+                            <div class="how-it-works_tabs-content w-tab-content">
+                              <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                                <div class="how-it-works-tab-content_wrapper">
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Record and categorize transactions</div>
+                                  </div>
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Identify tax-deductible expenses</div>
+                                  </div>
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Generate financial reports</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div data-w-tab="Tab 2" class="w-tab-pane">
+                                <div class="how-it-works-tab-content_wrapper">
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Connect business bank accounts and credit cards</div>
+                                  </div>
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Occasionally review unknown transactions</div>
+                                  </div>
+                                  <div class="how-it-works-tab-content_row">
+                                    <div>
+                                      <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                        </svg></div>
+                                    </div>
+                                    <div>Upload monthly bank statements</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pricing-faq_see-all-wrapper">
+                          <div class="text-size-medium">Learn more about bookkeeping</div>
+                          <a aria-label="frequently asked questions" href="bookkeeping.html" class="pricing-faq_icon-wrapper w-inline-block">
+                            <div class="icon-1x1-xsmall w-embed"><svg width="inherit" height="inherit" viewbox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.18787 10.1879L5.75645 5.61929L10.325 1.0507M10.325 1.0507L1.9493 1.0507M10.325 1.0507L10.325 8.66501" stroke="currentColor"></path>
+                              </svg></div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="text-template-section">
+              <div class="background-color-neutral">
+                <div class="page-padding">
+                  <div class="padding-vertical padding-96">
+                    <div class="container-xlarge w-container">
+                      <div class="text-template_component flex-reverse">
+                        <div id="w-node-_02d355a7-8331-366c-63bc-231cbcf19cce-9349a8c1" class="how-it-works-content_component">
+                          <div class="text-template_text-container">
+                            <div class="text-template_text-heading">
+                              <div class="icon_wrapper">
+                                <div class="w-embed"><svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30.8125 11.875L24.125 5.1875C23.375 4.4375 22.375 4 21.3125 4H12C9.75 4 8 5.8125 8 8V32C8 34.25 9.75 36 12 36H28C30.1875 36 32 34.25 32 32V14.6875C32 13.625 31.5625 12.625 30.8125 11.875ZM22 6.1875C22.25 6.25 22.5 6.375 22.75 6.625L29.375 13.25C29.625 13.5 29.75 13.75 29.8125 14H23C22.4375 14 22 13.5625 22 13V6.1875ZM30 32C30 33.125 29.0625 34 28 34H12C10.875 34 10 33.125 10 32V8C10 6.9375 10.875 6 12 6H20V13C20 14.6875 21.3125 16 23 16H30V32ZM13 10H17C17.5 10 18 9.5625 18 9C18 8.5 17.5 8 17 8H13C12.4375 8 12 8.5 12 9C12 9.5625 12.4375 10 13 10ZM18 13C18 12.5 17.5 12 17 12H13C12.4375 12 12 12.5 12 13C12 13.5625 12.4375 14 13 14H17C17.5 14 18 13.5625 18 13ZM20.625 22.0625C21 22.125 21.5 22.25 21.9375 22.4375C22.4375 22.5625 23 22.25 23.1875 21.75C23.3125 21.25 23.0625 20.6875 22.5 20.5C21.875 20.3125 21.375 20.1875 20.9375 20.125C20.9375 20.0625 21 20.0625 21 20V19C21 18.5 20.5 18 20 18C19.4375 18 19 18.5 19 19V20C19 20.0625 19 20.0625 19 20.0625C17.375 20.3125 16.25 21.125 16 22.4375C15.5625 24.9375 18.0625 25.5625 19.3125 25.875L19.75 26C21.75 26.5 22.0625 26.75 21.9375 27.25C21.8125 27.875 20.6875 28.1875 19.3125 28C18.8125 27.875 18.125 27.6875 17.5625 27.5L17.25 27.4375C16.75 27.25 16.1875 27.5625 16 28.0625C15.875 28.5625 16.125 29.125 16.6875 29.3125L17 29.4375C17.625 29.625 18.3125 29.8125 19 29.9375V30V31C19 31.5625 19.4375 32 20 32C20.5 32 21 31.5625 21 31V30C21 30 20.9375 30 20.9375 29.9375C22.5625 29.75 23.6875 28.9375 23.9375 27.625C24.375 25.125 21.875 24.5 20.1875 24.0625L19.8125 23.9375C17.875 23.4375 17.9375 23.125 18 22.8125C18.125 22.1875 19.25 21.875 20.625 22.0625Z" fill="#226752"></path>
+                                  </svg></div>
+                              </div>
+                              <h4 class="heading-small">Taxes</h4>
+                            </div>
+                            <div class="text-size-medium">Tax prep and filing specifically for therapists so you never miss a write-off.</div>
+                          </div>
+                          <div class="how-it-works-tab_component">
+                            <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="how-it-works_tabs w-tabs">
+                              <div class="how-it-works_tab-menu w-tab-menu">
+                                <a data-w-tab="Tab 1" class="how-it-works_tab w-inline-block w-tab-link w--current">
+                                  <div>What Heard does</div>
+                                </a>
+                                <a data-w-tab="Tab 2" class="how-it-works_tab w-inline-block w-tab-link">
+                                  <div>What you do</div>
+                                </a>
+                              </div>
+                              <div class="how-it-works_tabs-content w-tab-content">
+                                <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Prepare and file your business tax return</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Prepare and file your personal tax return</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Estimate quarterly taxes</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div data-w-tab="Tab 2" class="w-tab-pane">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Approve tax returns</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Pay quarterly taxes</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Pay annual taxes</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-faq_see-all-wrapper">
+                            <div class="text-size-medium">Learn more about taxes</div>
+                            <a aria-label="frequently asked questions" href="taxes.html" class="pricing-faq_icon-wrapper w-inline-block">
+                              <div class="icon-1x1-xsmall w-embed"><svg width="inherit" height="inherit" viewbox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.18787 10.1879L5.75645 5.61929L10.325 1.0507M10.325 1.0507L1.9493 1.0507M10.325 1.0507L10.325 8.66501" stroke="currentColor"></path>
+                                </svg></div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="text-template_image-wrapper"><img src="images/tax-center-img.svg" loading="lazy" alt="light-skin black girl with curly dark hair smiling at laptop. she is wearing a yellow top and sitting on a bean bag. she is in a living room" class="full-scale-image"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="text-template-section">
+              <div class="background-color-neutral">
+                <div class="page-padding">
+                  <div class="padding-vertical padding-96">
+                    <div class="container-xlarge w-container">
+                      <div class="text-template_component">
+                        <div id="w-node-_973ffa48-d273-e91c-5b5f-176e7e589b2d-9349a8c1" class="text-template_image-wrapper"><img src="images/payroll-img.svg" loading="lazy" alt="light-skin black girl with curly dark hair smiling at laptop. she is wearing a yellow top and sitting on a bean bag. she is in a living room" class="full-scale-image"></div>
+                        <div class="how-it-works-content_component">
+                          <div id="w-node-_973ffa48-d273-e91c-5b5f-176e7e589b27-9349a8c1" class="text-template_text-container">
+                            <div class="text-template_text-heading">
+                              <div class="icon_wrapper">
+                                <div class="w-embed"><svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_2000_6014)">
+                                      <path d="M18.0016 17.5833H24.6766C23.8703 18.1758 23.1453 18.8789 22.5141 19.6667H17.0016C16.4516 19.6667 16.0016 19.1979 16.0016 18.625V4.15234C16.0016 3.52734 16.4641 3 17.0703 3C24.3203 3 30.3641 8.38412 31.7203 15.526C31.4828 15.513 31.2453 15.5 31.0016 15.5C30.5578 15.5 30.1141 15.526 29.6828 15.5781C28.4516 9.875 23.7453 5.54557 18.0016 5.11589V17.5833ZM16.0016 21.75H21.2016C20.8766 22.4076 20.6141 23.1042 20.4141 23.8333H14.0016C12.8953 23.8333 12.0016 22.9023 12.0016 21.75V7.53125C6.27034 8.9375 2.00159 14.3086 2.00159 20.7083C2.00159 28.1888 7.82034 34.25 15.0016 34.25C17.3203 34.25 19.4953 33.6185 21.3766 32.5117C21.7016 33.1237 22.0828 33.7031 22.5078 34.237C20.3016 35.5716 17.7391 36.3333 15.0016 36.3333C6.72034 36.3333 0.00158691 29.3346 0.00158691 20.7083C0.00158691 13.1888 5.09534 6.91276 11.8891 5.42188C13.0203 5.17448 14.0016 6.13802 14.0016 7.34245V19.6667V21.75H16.0016ZM31.0016 34.25C32.8581 34.25 34.6386 33.4818 35.9513 32.1143C37.2641 30.7469 38.0016 28.8922 38.0016 26.9583C38.0016 25.0245 37.2641 23.1698 35.9513 21.8024C34.6386 20.4349 32.8581 19.6667 31.0016 19.6667C29.1451 19.6667 27.3646 20.4349 26.0518 21.8024C24.7391 23.1698 24.0016 25.0245 24.0016 26.9583C24.0016 28.8922 24.7391 30.7469 26.0518 32.1143C27.3646 33.4818 29.1451 34.25 31.0016 34.25ZM31.0016 17.5833C33.3885 17.5833 35.6777 18.5711 37.3655 20.3292C39.0534 22.0874 40.0016 24.4719 40.0016 26.9583C40.0016 29.4447 39.0534 31.8293 37.3655 33.5875C35.6777 35.3456 33.3885 36.3333 31.0016 36.3333C28.6146 36.3333 26.3255 35.3456 24.6376 33.5875C22.9498 31.8293 22.0016 29.4447 22.0016 26.9583C22.0016 24.4719 22.9498 22.0874 24.6376 20.3292C26.3255 18.5711 28.6146 17.5833 31.0016 17.5833ZM29.5516 24.8359C29.5266 24.8815 29.4953 24.9401 29.5016 25.0703V25.0768C29.5016 25.1029 29.5016 25.2005 29.8016 25.3698C30.1516 25.5651 30.6453 25.7083 31.2953 25.9037H31.3078C31.8891 26.0729 32.6266 26.2943 33.2141 26.6524C33.8516 27.043 34.4641 27.7005 34.4953 28.7552C34.5266 29.9401 33.8891 30.7344 33.1391 31.1576C32.7766 31.3594 32.3828 31.4896 31.9953 31.5612V32.2643V33.306H30.0016V32.2643V31.5221C29.4641 31.4115 28.9578 31.2422 28.5203 31.0925C28.4141 31.0534 28.3078 31.0208 28.2078 30.9883L27.2516 30.6823L27.8453 28.6901L28.8016 29.0026C28.9266 29.0417 29.0453 29.0807 29.1641 29.1198C29.8766 29.3542 30.4391 29.543 31.0328 29.5625C31.4516 29.5755 31.8953 29.4909 32.1891 29.3281C32.3266 29.25 32.4016 29.1719 32.4391 29.1133C32.4703 29.0612 32.5078 28.9766 32.5016 28.8203C32.5016 28.7292 32.4891 28.625 32.2078 28.4557C31.8766 28.2539 31.4016 28.1042 30.7578 27.9154L30.6453 27.8828C30.0891 27.7201 29.4078 27.5182 28.8578 27.2122C28.2391 26.8672 27.5703 26.2552 27.5078 25.2135C27.4328 23.9896 28.1328 23.2018 28.8703 22.7917C29.2266 22.5898 29.6203 22.4596 29.9953 22.3815V21.75V20.7083H31.9953V21.75V22.362C32.3891 22.4206 32.7641 22.5117 33.1141 22.6029L34.0828 22.8568L33.6016 24.8815L32.6328 24.6276C32.0516 24.4779 31.4953 24.3672 30.9828 24.3607C30.5953 24.3542 30.1328 24.4453 29.8141 24.6211C29.6641 24.7057 29.5891 24.7839 29.5516 24.8425V24.8359Z" fill="#226752"></path>
+                                    </g>
+                                    <defs>
+                                      <clippath id="clip0_2000_6014">
+                                        <rect width="40" height="40" fill="white"></rect>
+                                      </clippath>
+                                    </defs>
+                                  </svg></div>
+                              </div>
+                              <h4 class="heading-small">Payroll</h4>
+                            </div>
+                            <div class="text-size-medium">Pay yourself, employees, and contractors in minutes with Heard payroll powered by Gusto.</div>
+                          </div>
+                          <div class="how-it-works-tab_component">
+                            <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="how-it-works_tabs w-tabs">
+                              <div class="how-it-works_tab-menu w-tab-menu">
+                                <a data-w-tab="Tab 1" class="how-it-works_tab w-inline-block w-tab-link w--current">
+                                  <div>What Heard does</div>
+                                </a>
+                                <a data-w-tab="Tab 2" class="how-it-works_tab w-inline-block w-tab-link">
+                                  <div>What you do</div>
+                                </a>
+                              </div>
+                              <div class="how-it-works_tabs-content w-tab-content">
+                                <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Assist with Gusto payroll setup</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Take care of payroll tax witholdings and filings</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Provide support as needed</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div data-w-tab="Tab 2" class="w-tab-pane">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Log hours</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Set pay amounts</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Run payroll</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-faq_see-all-wrapper">
+                            <div class="text-size-medium">Learn more about payroll</div>
+                            <a aria-label="frequently asked questions" href="payroll.html" class="pricing-faq_icon-wrapper w-inline-block">
+                              <div class="icon-1x1-xsmall w-embed"><svg width="inherit" height="inherit" viewbox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.18787 10.1879L5.75645 5.61929L10.325 1.0507M10.325 1.0507L1.9493 1.0507M10.325 1.0507L10.325 8.66501" stroke="currentColor"></path>
+                                </svg></div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="text-template-section">
+              <div class="background-color-neutral">
+                <div class="page-padding">
+                  <div class="padding-vertical padding-96">
+                    <div class="container-xlarge w-container">
+                      <div class="text-template_component flex-reverse">
+                        <div class="how-it-works-content_component">
+                          <div id="w-node-e2b4ea39-2753-9f6c-852e-6ce5f68c6f6b-9349a8c1" class="text-template_text-container">
+                            <div class="text-template_text-heading">
+                              <div class="icon_wrapper">
+                                <div class="w-embed"><svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M31 18C26 18 22 22.0625 22 27C22 32 26 36 31 36C35.9375 36 40 32 40 27C40 22.0625 35.9375 18 31 18ZM31 34C27.125 34 24 30.875 24 27C24 23.1875 27.125 20 31 20C34.8125 20 38 23.1875 38 27C38 30.875 34.8125 34 31 34ZM34 26H32V23C32 22.5 31.5 22 31 22C30.4375 22 30 22.5 30 23V27C30 27.5625 30.4375 28 31 28H34C34.5 28 35 27.5625 35 27C35 26.5 34.5 26 34 26ZM21 32H4C2.875 32 2 31.125 2 30V22H11V26C11 26.5625 11.4375 27 12 27H19C19.5 27 20 26.5625 20 26C20 25.5 19.5 25 19 25H13V22H21C21.5 22 22 21.5625 22 21C22 20.5 21.5 20 21 20H2V14C2 12.9375 2.875 12 4 12H28C29.0625 12 30 12.9375 30 14V15C30 15.5625 30.4375 16 31 16C31.5 16 32 15.5625 32 15V14C32 11.8125 30.1875 10 28 10H24V7C24 5.375 22.625 4 21 4H11C9.3125 4 8 5.375 8 7V10H4C1.75 10 0 11.8125 0 14V30C0 32.25 1.75 34 4 34H21C21.5 34 22 33.5625 22 33C22 32.5 21.5 32 21 32ZM10 7C10 6.5 10.4375 6 11 6H21C21.5 6 22 6.5 22 7V10H10V7Z" fill="#226752"></path>
+                                  </svg></div>
+                              </div>
+                              <h4 class="heading-small">S Corp</h4>
+                            </div>
+                            <div class="text-size-medium">We’ll tell you when it’s the right time to form an S corporation and even file the paperwork for you.</div>
+                          </div>
+                          <div class="how-it-works-tab_component">
+                            <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="how-it-works_tabs w-tabs">
+                              <div class="how-it-works_tab-menu w-tab-menu">
+                                <a data-w-tab="Tab 1" class="how-it-works_tab w-inline-block w-tab-link w--current">
+                                  <div>What Heard does</div>
+                                </a>
+                                <a data-w-tab="Tab 2" class="how-it-works_tab w-inline-block w-tab-link">
+                                  <div>What you do</div>
+                                </a>
+                              </div>
+                              <div class="how-it-works_tabs-content w-tab-content">
+                                <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Recommend when to elect with the IRS</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>File Form 2553 on your behalf</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Help determine reasonable salary</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div data-w-tab="Tab 2" class="w-tab-pane">
+                                  <div class="how-it-works-tab-content_wrapper">
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Review reasonable salary</div>
+                                    </div>
+                                    <div class="how-it-works-tab-content_row">
+                                      <div>
+                                        <div class="w-embed"><svg width="21" height="14" viewbox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 6.5L8 12.5L19 1.5" stroke="#226752" stroke-width="2" stroke-linecap="square"></path>
+                                          </svg></div>
+                                      </div>
+                                      <div>Review benefits</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pricing-faq_see-all-wrapper">
+                            <div class="text-size-medium">Learn more about S corp</div>
+                            <a aria-label="frequently asked questions" href="s-corp.html" class="pricing-faq_icon-wrapper w-inline-block">
+                              <div class="icon-1x1-xsmall w-embed"><svg width="inherit" height="inherit" viewbox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M1.18787 10.1879L5.75645 5.61929L10.325 1.0507M10.325 1.0507L1.9493 1.0507M10.325 1.0507L10.325 8.66501" stroke="currentColor"></path>
+                                </svg></div>
+                            </a>
+                          </div>
+                        </div>
+                        <div id="w-node-e2b4ea39-2753-9f6c-852e-6ce5f68c6f69-9349a8c1" class="text-template_image-wrapper no-shadow"><img src="images/s-corp-hero-img.svg" loading="lazy" width="430" alt="light-skin black girl with curly dark hair smiling at laptop. she is wearing a yellow top and sitting on a bean bag. she is in a living room" class="full-scale-image"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <section class="getting-started-section">
+        <div class="background-color-blush">
+          <div class="page-padding">
+            <div class="padding-vertical padding-xlarge">
+              <div class="container-xlarge w-container">
+                <div class="get-started_component">
+                  <div id="w-node-_914ea2dd-03d8-3648-7540-b3a61bb21132-9349a8c1" class="get-started_text-container">
+                    <div class="testimonials_text-heading">
+                      <h2 class="heading-medium text-color-black">Getting started is easy...</h2>
+                    </div>
+                    <a href="/welcome-form?source=getstarted&amp;event=clicked+schedule+consult+button" class="button-primary w-button">Book a free consult</a>
+                  </div>
+                  <div class="get-started-steps_container">
+                    <div class="get-started-steps-flex_wrapper">
+                      <div class="get-started-step_wrapper">
+                        <div class="get-started-icon-line_wrapper">
+                          <div class="get-started-steps-icon_wrapper">
+                            <div class="w-embed"><svg width="56" height="56" viewbox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M28.5626 36H30.2786V20.38H28.8706V21.304C28.8706 23.262 27.8366 23.35 25.8786 23.35H24.4046V24.714H28.5626V36Z" fill="#1D1D1D"></path>
+                                <rect x="0.5" y="0.5" width="55" height="55" rx="28" stroke="#1D1D1D"></rect>
+                              </svg></div>
+                          </div>
+                          <div class="get-started-step_line"></div>
+                        </div>
+                        <div class="getstarted_content-container">
+                          <h4 class="heading-small">We learn about you</h4>
+                          <div>We start with a <a href="welcome-form.html">free consult call</a> to better understand your practice. We only accept therapists if we&#x27;re confident we can successfully support your practice.</div>
+                        </div>
+                      </div>
+                      <div class="get-started-step_wrapper">
+                        <div class="get-started-icon-line_wrapper">
+                          <div class="get-started-steps-icon_wrapper">
+                            <div class="w-embed"><svg width="56" height="56" viewbox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.5192 34.79V36H33.4312V34.658H25.0272C29.0532 31.622 33.0792 28.652 33.0792 24.604C33.0792 21.832 31.1652 20.116 28.1072 20.116C24.8512 20.116 22.8712 22.118 22.7392 25.748L24.3232 25.902C24.3892 23.24 25.6872 21.48 28.0412 21.48C30.0652 21.48 31.2752 22.8 31.2752 24.692C31.2752 28.388 27.0732 31.49 22.5192 34.79Z" fill="#1D1D1D"></path>
+                                <rect x="0.5" y="0.5" width="55" height="55" rx="28" stroke="#1D1D1D"></rect>
+                              </svg></div>
+                          </div>
+                          <div class="get-started-step_line"></div>
+                        </div>
+                        <div class="getstarted_content-container">
+                          <h4 class="heading-small">You onboard to Heard</h4>
+                          <div>Once you join Heard and connect your bank account(s), you&#x27;ll join an onboarding webinar with a specialist from our team. We&#x27;ll walk you through the platform and answer any questions you have.</div>
+                        </div>
+                      </div>
+                      <div class="get-started-step_wrapper">
+                        <div class="get-started-icon-line_wrapper">
+                          <div class="get-started-steps-icon_wrapper">
+                            <div class="w-embed"><svg width="56" height="56" viewbox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27.9031 34.9C25.8131 34.9 24.1631 33.712 23.8991 31.732L22.2051 31.93C22.5351 34.504 24.7351 36.264 27.9251 36.264C31.1151 36.264 33.4031 34.57 33.4031 31.776C33.4031 29.334 31.7311 28.146 29.9491 27.904V27.86C31.7091 27.486 33.0291 26.21 33.0291 24.23C33.0291 21.7 30.9611 20.138 28.0791 20.138C24.9991 20.138 23.0631 21.876 22.6671 24.318L24.4711 24.494C24.7351 22.712 26.0551 21.48 28.0571 21.48C29.8611 21.48 31.2471 22.514 31.2471 24.23C31.2471 25.88 29.9711 27.222 27.3751 27.222H26.3411V28.586H27.5511C30.0811 28.586 31.6211 29.708 31.6211 31.71C31.6211 33.646 30.1471 34.9 27.9031 34.9Z" fill="#1D1D1D"></path>
+                                <rect x="0.5" y="0.5" width="55" height="55" rx="28" stroke="#1D1D1D"></rect>
+                              </svg></div>
+                          </div>
+                        </div>
+                        <div class="getstarted_content-container last-step">
+                          <h4 class="heading-small">We get your books up-to-date</h4>
+                          <div>This typically takes our team 2-4 weeks, depending on how many months of bookkeeping you need completed. We&#x27;re only able to complete catch up bookkeeping for the year(s) we are providing tax services. Catch up bookkeeping costs $99/mo.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="faq-section">
+        <div class="background-color-moss">
+          <div class="page-padding">
+            <div class="padding-vertical padding-large">
+              <div class="container-xlarge w-container">
+                <div class="faq-section_component">
+                  <div data-w-id="8d5c1072-ee33-b03f-051c-fae57dbac90d" class="faq-section_heading-container">
+                    <div>Still need some things answered?</div>
+                    <h2 class="heading-xlarge text-color-black">Frequently asked questions</h2>
+                  </div>
+                  <div id="w-node-_8d5c1072-ee33-b03f-051c-fae57dbac912-7dbac907" class="pricing-faq_content-container">
+                    <div class="pricing-faq_row is-first acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">How does pricing work?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon is-1"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">Our pricing is subscription-based, billed either monthly or annually. We offer a 15% discount with annual billing. There are two plan options for Solo Practices (whether you&#x27;re taxed as a sole proprietor or S corporation) and one plan option for Group Practices.<br><br>There is a $450 charge for personal tax returns for Group Practice S Corporations and $99/mo charge for catch up bookkeeping.<br>‍<br>Our pricing plans do not include third-party fees (such as fees and taxes charged by your city, state, or the federal government), Gusto for payroll (available as an add-on), or business license filing fees, which vary by city. With that said, those fees are tax deductible.</p>
+                    </div>
+                    <div class="pricing-faq_row acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">Does Heard do historical or catch up bookkeeping?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">Yes, we provide historical or catch bookkeeping for the tax year(s) we are providing tax services. There is a $99/mo fee for catch up bookkeeping. <br><br>We do not offer historical bookkeeping for prior tax years at this time.<br></p>
+                    </div>
+                    <div class="pricing-faq_row acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">How does bookkeeping help your private practice?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">Bookkeeping gives you a clear picture of your practice finances, where your money is coming from, and where it&#x27;s going. When your bookkeeping is up-to-date, you will be able to understand areas to save and areas to invest more, seasonal fluctuations in your practice, and have an overall clear picture on how much you can pay yourself and your team.<br><br>Having accurate finances saves you hours during tax season as well. When your books are reconciled and up-to-date, you avoid scrambling to get caught up prior to the tax deadline, or miss out on any tax write-offs or deductions. Most importantly, you will avoid subjecting yourself to any potential errors or late fees.</p>
+                    </div>
+                    <div class="pricing-faq_row acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">Do I get my own accountant?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">While you do not get your own accountant, you get access to an entire team of accounting and tax professionals.<br><br>Our support team will answer any questions you have as they come up during the tax year within the app through Heard Conversations. We will also work with you to calculate quarterly tax estimated payments.<br><br>When your annual tax return(s) is ready, we will connect you with a third-party tax preparer who will work with you to complete your return(s) and make any required payments.<br></p>
+                    </div>
+                    <div class="pricing-faq_row acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">What if I already have an accountant?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">We can discuss what makes the most sense for you and your practice. Just like in the mental health profession, clients sometimes switch professionals in the accounting world for various practical reasons.<br><br>If you&#x27;re looking to completely transition both your bookkeeping and your taxes to Heard, we will ask for access to any bookkeeping software you&#x27;re currently using to help us transition. If you&#x27;re only looking to use our bookkeeping services and want to keep your tax professional, we will ask for an introduction to your tax professional.</p>
+                    </div>
+                    <div class="pricing-faq_row is-last acc-item">
+                      <div class="pricing-faq_question acc-head">
+                        <h5 class="heading-xsmall">Who does Heard work and not work with?</h5>
+                        <div aria-pressed="false" role="button" aria-label="toggle accordion" class="accordion-wrapper">
+                          <div class="accordion-icon"></div>
+                          <div class="accordion-icon is-2"></div>
+                        </div>
+                      </div>
+                      <p class="text-size-regular acc-body">We work exclusively with mental health therapy practices, including: psychologists, psychiatrists, social workers, mental health counselors, professional counselors, marriage and family therapists, and psychiatric nurse practitioners. We are able to support therapists who have other streams of income (e.g. coaching, consulting).<br><br>We do not work with non-mental health practices, practices based outside the US, practices with multiple owners, group practices with more than 10 therapists, and practices taxed as C corporations.</p>
+                    </div>
+                  </div>
+                  <div class="pricing-faq_see-all-wrapper">
+                    <h3 class="heading-small text-color-black">See all FAQs</h3>
+                    <a aria-label="frequently asked questions" href="https://support.joinheard.com/hc/en-us/categories/360006112673-Frequently-Asked-Questions" class="pricing-faq_icon-wrapper w-inline-block">
+                      <div class="icon-1x1-xsmall w-embed"><svg width="inherit" height="inherit" viewbox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.18787 10.1879L5.75645 5.61929L10.325 1.0507M10.325 1.0507L1.9493 1.0507M10.325 1.0507L10.325 8.66501" stroke="currentColor"></path>
+                        </svg></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="testimonials-section">
+        <div class="background-color-forest">
+          <div class="page-padding">
+            <div class="padding-vertical padding-xxhuge">
+              <div class="container-xlarge w-container">
+                <div class="testimonials_component">
+                  <figure id="w-node-ac6f02e2-2488-04c4-e53f-70011f283b73-9349a8c1" class="testimonials_image-wrapper"><img src="images/s-corp-testimony-img.webp" loading="lazy" sizes="(max-width: 479px) 83vw, 316px" alt="white lady with brown curls smiling at camera while wearing navy suit" width="316" srcset="images/s-corp-testimony-img-p-500.png 500w, images/s-corp-testimony-img.webp 592w" class="full-scale-image"></figure>
+                  <div id="w-node-ac6f02e2-2488-04c4-e53f-70011f283b75-9349a8c1" class="testimonials_text-container">
+                    <div class="testimonials_text-heading">
+                      <div role="figure" aria-label="quotation-mark" class="icon-medium quotation-sunrise w-embed"><svg width="48" height="42" viewbox="0 0 48 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M26.7259 15.9716V41.4H47.1107V22.2762H38.0741V16.1817C38.0741 11.7685 40.1757 10.0873 45.2193 10.0873H47.1107V0H43.9584C32.1899 0 26.7259 4.8335 26.7259 15.9716ZM0 41.4H20.3848V22.2762H11.3482V16.1817C11.3482 11.7685 13.4498 10.0873 18.4934 10.0873H20.3848V0H17.2325C5.46396 0 0 4.8335 0 15.9716V41.4Z" fill="#FAE3C3"></path>
+                        </svg></div>
+                      <h2 class="heading-medium text-color-white">Heard makes everything simple when it comes to tracking my finances. I love that I can manage my books and file my taxes all from one place.<br></h2>
+                    </div>
+                    <div class="testimonials_credit-container">
+                      <div class="testimonials_author-details">
+                        <h5 class="heading-xsmall text-color-white">Amanda Budris</h5>
+                        <div class="heading-eyebrow">PHD</div>
+                      </div>
+                      <div class="arrow-wrapper hide">
+                        <div class="icon-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.896973 12.1553H13.6249L26.3528 12.1553M26.3528 12.1553L14.6856 0.488037M26.3528 12.1553L15.7462 22.7619" stroke="currentColor"></path>
+                          </svg></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="consult-section">
+        <div class="background-color-green">
+          <div class="page-padding">
+            <div class="padding-vertical padding-xxhuge">
+              <div class="container-xlarge w-container">
+                <div class="consult_component">
+                  <div class="margin-bottom margin-large">
+                    <div class="consult_heading">
+                      <div class="consult_text-wrapper">
+                        <h2 class="heading-large text-color-blush">Heard</h2>
+                        <h2 class="heading-large text-color-blush">is</h2>
+                        <h2 class="heading-large text-color-blush">the</h2>
+                        <div class="text-wrapper">
+                          <h2 class="heading-large text-color-blush">only</h2>
+                          <figure aria-hidden="true" class="consult_decoration-wrapper">
+                            <div class="full-lottie-animation" data-w-id="9ef8d3eb-1bcc-a3d0-b468-8c908a10099f" data-animation-type="lottie" data-src="documents/UC2sSXT8jL.lottie" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-duration="0"></div>
+                          </figure>
+                        </div>
+                        <h2 class="heading-large text-color-blush">accounting</h2>
+                        <h2 class="heading-large text-color-blush">platform</h2>
+                        <h2 class="heading-large text-color-blush">for</h2>
+                        <h2 class="heading-large text-color-blush">therapist</h2>
+                        <h2 class="heading-large text-color-blush">entrepreneurs</h2>
+                        <h2 class="heading-large text-color-blush">that</h2>
+                        <h2 class="heading-large text-color-blush">enables</h2>
+                        <h2 class="heading-large text-color-blush">you</h2>
+                        <h2 class="heading-large text-color-blush">to</h2>
+                        <h2 class="heading-large text-color-blush">manage</h2>
+                        <h2 class="heading-large text-color-blush">your</h2>
+                        <h2 class="heading-large text-color-blush">bookkeeping,</h2>
+                        <h2 class="heading-large text-color-blush">taxes,</h2>
+                        <h2 class="heading-large text-color-blush">and</h2>
+                        <h2 class="heading-large text-color-blush">payroll,</h2>
+                        <h2 class="heading-large text-color-blush">all</h2>
+                        <h2 class="heading-large text-color-blush">in</h2>
+                        <h2 class="heading-large text-color-blush">one</h2>
+                        <h2 class="heading-large text-color-blush">place.</h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="buttons-container">
+                    <a id="get-started-other" href="/welcome-form?source=bottombanner&amp;event=clicked schedule consult button" class="button-primary is-blush w-button">Book a free consult</a>
+                    <a id="get-started-other" href="https://dashboard.joinheard.com/signup?event=clicked+sign+up+button&amp;source=bottombanner" class="button-secondary is-white w-button">Sign up</a>
+                    <a scroll="disable" href="#" class="button-secondary play-button is-white w-button">View a product demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer" class="footer-section">
+      <div class="background-color-natural">
+        <div class="page-padding">
+          <div class="padding-vertical padding-custom1">
+            <div class="footer_component">
+              <div class="footer_top-row">
+                <div class="footer_menu-links">
+                  <div class="footer_menu-column">
+                    <h6 class="heading-xxsmall">Company</h6>
+                    <div class="margin-top margin-small">
+                      <div class="footer_links-wrapper">
+                        <a href="about.html" class="text-size-regular is-footer-link">About</a>
+                        <a href="pricing.html" class="text-size-regular is-footer-link">Pricing</a>
+                        <a href="https://jobs.lever.co/heard" target="_blank" class="text-size-regular is-footer-link">Careers</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer_menu-column">
+                    <h6 class="heading-xxsmall">Resources</h6>
+                    <div class="margin-top margin-small">
+                      <div class="footer_links-wrapper">
+                        <a href="resources.html" class="text-size-regular is-footer-link">Resource Hub</a>
+                        <a href="newsletter.html" class="text-size-regular is-footer-link">Newsletter</a>
+                        <a href="https://support.joinheard.com/hc/en-us" target="_blank" class="text-size-regular is-footer-link">Support</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer_menu-column">
+                    <h6 class="heading-xxsmall">Contact</h6>
+                    <div class="margin-top margin-small">
+                      <div class="footer_links-wrapper">
+                        <a href="mailto:support@joinheard.com?subject=Enquiry%20-%20Join%20Heard" class="text-size-regular is-footer-link">support@joinheard.com</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer_menu-column">
+                    <div class="footer_social-media-container">
+                      <div aria-label="social media" class="socials-wrapper">
+                        <a aria-label="twitter" href="https://twitter.com/joinheardinc?lang=en" target="_blank" class="social-link-wrapper w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M21.46 2C20.69 2.35 19.86 2.58 19 2.69C19.88 2.16 20.56 1.32 20.88 0.31C20.05 0.81 19.13 1.16 18.16 1.36C17.37 0.5 16.26 0 15 0C12.65 0 10.73 1.92 10.73 4.29C10.73 4.63 10.77 4.96 10.84 5.27C7.28004 5.09 4.11004 3.38 2.00004 0.79C1.63004 1.42 1.42004 2.16 1.42004 2.94C1.42004 4.43 2.17004 5.75 3.33004 6.5C2.62004 6.5 1.96004 6.3 1.38004 6V6.03C1.38004 8.11 2.86004 9.85 4.82004 10.24C4.19077 10.4122 3.53013 10.4362 2.89004 10.31C3.16165 11.1625 3.69358 11.9084 4.41106 12.4429C5.12854 12.9775 5.99549 13.2737 6.89004 13.29C5.37367 14.4904 3.49404 15.1393 1.56004 15.13C1.22004 15.13 0.880039 15.11 0.540039 15.07C2.44004 16.29 4.70004 17 7.12004 17C15 17 19.33 10.46 19.33 4.79C19.33 4.6 19.33 4.42 19.32 4.23C20.16 3.63 20.88 2.87 21.46 2Z" fill="#226752"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="facebook" href="https://www.facebook.com/joinheardinc/" target="_blank" class="social-link-wrapper w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M10 0.0400391C4.5 0.0400391 0 4.53004 0 10.06C0 15.06 3.66 19.21 8.44 19.96V12.96H5.9V10.06H8.44V7.85004C8.44 5.34004 9.93 3.96004 12.22 3.96004C13.31 3.96004 14.45 4.15004 14.45 4.15004V6.62004H13.19C11.95 6.62004 11.56 7.39004 11.56 8.18004V10.06H14.34L13.89 12.96H11.56V19.96C13.9164 19.5879 16.0622 18.3856 17.6099 16.5701C19.1576 14.7546 20.0054 12.4457 20 10.06C20 4.53004 15.5 0.0400391 10 0.0400391Z" fill="#226752"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="instagram" href="https://www.instagram.com/joinheardinc/?hl=en" target="_blank" class="social-link-wrapper w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6.66747 10C6.66747 8.15913 8.15946 6.6664 10.0004 6.6664C11.8414 6.6664 13.3341 8.15913 13.3341 10C13.3341 11.8409 11.8414 13.3336 10.0004 13.3336C8.15946 13.3336 6.66747 11.8409 6.66747 10ZM4.8653 10C4.8653 12.836 7.16426 15.1349 10.0004 15.1349C12.8365 15.1349 15.1355 12.836 15.1355 10C15.1355 7.16397 12.8365 4.8651 10.0004 4.8651C7.16426 4.8651 4.8653 7.16397 4.8653 10ZM14.1387 4.66155C14.1387 5.32391 14.6759 5.86187 15.3391 5.86187C16.0015 5.86187 16.5394 5.32391 16.5394 4.66155C16.5394 3.99919 16.0023 3.46204 15.3391 3.46204C14.6759 3.46204 14.1387 3.99919 14.1387 4.66155ZM5.95985 18.1397C4.98485 18.0953 4.45495 17.933 4.10275 17.7956C3.63585 17.6139 3.30304 17.3974 2.95246 17.0477C2.60269 16.6979 2.3854 16.3651 2.20445 15.8982C2.06713 15.546 1.90476 15.0162 1.86033 14.0412C1.81187 12.9871 1.80217 12.6704 1.80217 10C1.80217 7.32956 1.81267 7.01373 1.86033 5.9588C1.90476 4.98384 2.06793 4.45477 2.20445 4.10178C2.3862 3.63489 2.60269 3.3021 2.95246 2.95153C3.30223 2.60178 3.63504 2.38449 4.10275 2.20355C4.45495 2.06624 4.98485 1.90388 5.95985 1.85945C7.01402 1.81099 7.33067 1.80129 10.0004 1.80129C12.6709 1.80129 12.9868 1.81179 14.0418 1.85945C15.0168 1.90388 15.5459 2.06704 15.8989 2.20355C16.3658 2.38449 16.6986 2.60178 17.0492 2.95153C17.3989 3.30129 17.6154 3.63489 17.7972 4.10178C17.9345 4.45396 18.0969 4.98384 18.1413 5.9588C18.1898 7.01373 18.1994 7.32956 18.1994 10C18.1994 12.6696 18.1898 12.9863 18.1413 14.0412C18.0969 15.0162 17.9337 15.546 17.7972 15.8982C17.6154 16.3651 17.3989 16.6979 17.0492 17.0477C16.6994 17.3974 16.3658 17.6139 15.8989 17.7956C15.5467 17.933 15.0168 18.0953 14.0418 18.1397C12.9876 18.1882 12.6709 18.1979 10.0004 18.1979C7.33067 18.1979 7.01402 18.1882 5.95985 18.1397ZM5.87746 0.0605816C4.8128 0.109047 4.08579 0.277868 3.45006 0.52504C2.79252 0.780291 2.23515 1.12278 1.67858 1.67851C1.12282 2.23425 0.780322 2.7916 0.525062 3.44992C0.277879 4.08562 0.109051 4.8126 0.060584 5.87722C0.011309 6.94346 0 7.28433 0 10C0 12.7157 0.011309 13.0565 0.060584 14.1228C0.109051 15.1874 0.277879 15.9144 0.525062 16.5501C0.780322 17.2076 1.12202 17.7658 1.67858 18.3215C2.23434 18.8772 2.79171 19.2189 3.45006 19.475C4.0866 19.7221 4.8128 19.891 5.87746 19.9394C6.94455 19.9879 7.28462 20 10.0004 20C12.717 20 13.0571 19.9887 14.1234 19.9394C15.188 19.891 15.915 19.7221 16.5507 19.475C17.2083 19.2189 17.7657 18.8772 18.3222 18.3215C18.878 17.7658 19.2197 17.2076 19.4757 16.5501C19.7229 15.9144 19.8926 15.1874 19.9402 14.1228C19.9887 13.0557 20 12.7157 20 10C20 7.28433 19.9887 6.94346 19.9402 5.87722C19.8918 4.8126 19.7229 4.08562 19.4757 3.44992C19.2197 2.79241 18.878 2.23506 18.3222 1.67851C17.7665 1.12278 17.2083 0.780291 16.5516 0.52504C15.915 0.277868 15.188 0.108239 14.1242 0.0605816C13.0579 0.0121163 12.717 0 10.0012 0C7.28462 0 6.94455 0.0113086 5.87746 0.0605816Z" fill="#226752"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="linkedin" href="https://www.linkedin.com/company/heardaccounting" target="_blank" class="social-link-wrapper w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="inherit" height="inherit" viewbox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3.004 4.99983H2.975C2.66795 5.01902 2.36024 4.97461 2.07114 4.86938C1.78204 4.76415 1.51778 4.60037 1.2949 4.38829C1.07203 4.17621 0.895337 3.9204 0.775896 3.63688C0.656455 3.35336 0.596834 3.04823 0.600769 2.7406C0.604703 2.43297 0.672107 2.12947 0.79876 1.84909C0.925413 1.56872 1.10859 1.31751 1.33681 1.1112C1.56504 0.904887 1.8334 0.747917 2.1251 0.650116C2.41679 0.552315 2.72554 0.51579 3.032 0.542827C3.33906 0.521377 3.64724 0.563584 3.93723 0.666803C4.22722 0.770022 4.49275 0.932028 4.7172 1.14267C4.94165 1.35331 5.12017 1.60804 5.24157 1.89089C5.36298 2.17375 5.42464 2.47863 5.42271 2.78643C5.42078 3.09424 5.35528 3.39832 5.23034 3.67963C5.10539 3.96094 4.92368 4.21341 4.69661 4.42121C4.46953 4.62901 4.20198 4.78767 3.91072 4.88723C3.61946 4.9868 3.31077 5.02513 3.004 4.99983Z" fill="#226752"></path>
+                              <path d="M1.01807 8.00012H5.01807V20.0001H1.01807V8.00012Z" fill="#226752"></path>
+                              <path d="M15.5182 8.00012C14.8442 8.00195 14.1793 8.15606 13.5732 8.45096C12.9672 8.74586 12.4356 9.17391 12.0182 9.70312V8.00012H8.01819V20.0001H12.0182V14.5001C12.0182 13.9697 12.2289 13.461 12.604 13.0859C12.979 12.7108 13.4878 12.5001 14.0182 12.5001C14.5486 12.5001 15.0573 12.7108 15.4324 13.0859C15.8075 13.461 16.0182 13.9697 16.0182 14.5001V20.0001H20.0182V12.5001C20.0182 11.3066 19.5441 10.1621 18.7002 9.31814C17.8563 8.47423 16.7117 8.00012 15.5182 8.00012Z" fill="#226752"></path>
+                            </svg></div>
+                        </a>
+                        <a aria-label="linkedin" href="https://www.youtube.com/@joinheardinc" target="_blank" class="social-link-wrapper w-inline-block">
+                          <div class="icon-1x1-small w-embed"><svg width="auto" height="auto" viewbox="0 0 113 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_0_5)">
+                                <path d="M90.8907 3.05733C68.156 -0.723868 44.9533 -0.723868 22.224 3.05733C9.224 5.77613 1.10933 14.1667 1.10933 25.1093V64C1.10933 75.1093 9.21866 83.3907 22.4427 86.224C33.7552 88.1251 45.1973 89.0937 56.6667 89.1095C68.1719 89.1095 79.6507 88.1615 91 86.2761C103.891 83.8335 112.224 75.1668 112.224 64.0521V25.1615C112.224 14.1093 103.891 5.44267 90.8907 3.05733ZM74.7813 47.1667L47.0053 63.8333H47.0001C46.5678 64.099 46.0626 64.2344 45.5575 64.224C45.0731 64.2188 44.5991 64.1042 44.1668 63.8906C43.2762 63.349 42.7449 62.375 42.7761 61.3333V28C42.7865 27 43.3126 26.0729 44.1668 25.5573C45.0522 25.0833 46.1147 25.0833 47.0001 25.5573L74.7761 42.224C75.5938 42.7448 76.0886 43.6458 76.0886 44.6094C76.0886 45.5782 75.5938 46.4792 74.7761 47.0001L74.7813 47.1667Z" fill="#226752"></path>
+                              </g>
+                              <defs>
+                              </defs>
+                            </svg></div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="footer_legal-links">
+                      <a href="terms-of-service.html" class="text-size-tiny is-footer-link">Terms of Service</a>
+                      <a href="privacy.html" class="text-size-tiny is-footer-link">Privacy Policy</a>
+                      <a href="cookie-policy.html" class="text-size-tiny is-footer-link">Cookie Policy</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer_bottom-row">
+                <p class="text-size-tiny">Heard Technologies, Inc. is not a law or financial firm. We do not provide legal or financial services or advice. We provide self-help tools for your convenience.</p>
+              </div>
+              <figure aria-hidden="true" class="footer_logo-wrapper"><img src="images/Black.svg" loading="lazy" alt="" class="full-scale-image"></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <div class="scroll-trigger"></div>
+  <div class="exit-popup-wrapper">
+    <div data-w-id="56f90d2f-52e3-71bd-7c60-bb08b2a65f0b" class="exit-overlay"></div>
+    <div class="exit-popup">
+      <div class="exit-popup-form">
+        <div class="magnet-hero_top-row">
+          <h2 class="heading-small exit-pop">Get our Tax Deduction Cheatsheet for Therapists</h2>
+          <p class="text-size-regular">Use this cheatsheet to maximize your deductions and save money on taxes for your therapy practice.</p>
+        </div>
+        <div class="exit-popup-form-embed w-embed"><!--  Begin Mailchimp Signup Form  -->
+          <div id="mailchimp">
+            <form action="https://joinheard.us17.list-manage.com/subscribe/post?u=542e4264f848f30472aaca298&amp;id=1857edc29f&amp;f_id=00adbee0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self">
+              <div id="mc_embed_signup_scroll">
+                <div class="mc-field-group">
+                  <input type="email" value="" placeholder="Email Address" name="EMAIL" class="required email" id="mce-EMAIL" required="">
+                  <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
+                </div>
+                <div class="mc-field-group input-group" style="display: none">
+                  <strong>Lead Magnets </strong>
+                  <ul>
+                    <li>
+                      <input type="checkbox" value="1" name="group[335906][1]" id="mce-group[335906]-335906-0" checked="">
+                      <label for="mce-group[335906]-335906-0">Tax Deduction Cheatsheet</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="2" name="group[335906][2]" id="mce-group[335906]-335906-1">
+                      <label for="mce-group[335906]-335906-1">Independent Contractor Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="4" name="group[335906][4]" id="mce-group[335906]-335906-2">
+                      <label for="mce-group[335906]-335906-2">Relocation Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="8" name="group[335906][8]" id="mce-group[335906]-335906-3">
+                      <label for="mce-group[335906]-335906-3">Monthly Financial Planning Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="16" name="group[335906][16]" id="mce-group[335906]-335906-4">
+                      <label for="mce-group[335906]-335906-4">HIPAA-Compliance Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="32" name="group[335906][32]" id="mce-group[335906]-335906-5">
+                      <label for="mce-group[335906]-335906-5">Budget Template</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="64" name="group[335906][64]" id="mce-group[335906]-335906-6">
+                      <label for="mce-group[335906]-335906-6">Private Practice Startup Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="128" name="group[335906][128]" id="mce-group[335906]-335906-7">
+                      <label for="mce-group[335906]-335906-7">S Corporation Checklist</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="256" name="group[335906][256]" id="mce-group[335906]-335906-8">
+                      <label for="mce-group[335906]-335906-8">2023 Financial State of Private Practice Report</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" value="512" name="group[335906][512]" id="mce-group[335906]-335906-9">
+                      <label for="mce-group[335906]-335906-9">Income Stream Cheatsheet for Therapists</label>
+                    </li>
+                    <li><input type="checkbox" name="group[335906][1024]" id="mce-group[335906]-335906-10" value="1024"><label for="mce-group[335906]-335906-10">LLC and PLLC Registration Checklist</label></li>
+                    <li><input type="checkbox" name="group[335906][2048]" id="mce-group[335906]-335906-11" value="2048"><label for="mce-group[335906]-335906-11">Invoice Template for Therapists</label></li>
+                    <li><input type="checkbox" name="group[335906][4096]" id="mce-group[335906]-335906-12" value="4096"><label for="mce-group[335906]-335906-12">Tax Season Checklist for Therapists</label></li>
+                  </ul>
+                  <span id="mce-group[335906]-HELPERTEXT" class="helper_text"></span>
+                </div>
+                <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display: none"></div>
+                  <div class="response" id="mce-success-response" style="display: none"></div>
+                </div>
+                <!--  real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+                <div style="position: absolute; left: -5000px" aria-hidden="true"><input type="text" name="b_542e4264f848f30472aaca298_1857edc29f" tabindex="-1" value=""></div>
+                <div class="clear"><input type="submit" class="button-primary" value="Download Free Cheatsheet" name="subscribe" id="mc-embedded-subscribe"></div>
+              </div>
+            </form>
+          </div>
+          <!-- End mc_embed_signup -->
+          <style>
+  #mailchimp {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    width: 100%;
+  }
+  #mailchimp input {
+    margin-bottom: 0;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: #000 #000 #1d1d1d;
+    background-color: transparent;
+    font-size: 1rem;
+    min-height: 4.7rem;
+    width: 100%;
+    color: black;
+  }
+  #mailchimp input:focus {
+    border-color: #216752;
+    outline: none;
+  }
+  #mailchimp input.email {
+    background: #fff;
+  }
+  #mailchimp input.name {
+    background: #fff;
+  }
+  #mailchimp input[type="submit"] {
+    border-radius: 50px;
+    background-color: #226752;
+    border: 0.5px solid #226752;
+    -webkit-transition: color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    transition: color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    color: #fff;
+    min-height: 3.8rem;
+    font-size: 1rem;
+    line-height: 100%;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 1.5rem;
+    outline: none;
+    letter-spacing: 0;
+  }
+  #mailchimp input[type="submit"]:hover {
+    color: #226752;
+    background-color: white;
+  }
+</style>
+        </div>
+        <div class="exit-popup-logic w-embed w-script"><!-- <script>
+function showPopup() {
+  // Check if the 'exitPopupShown' cookie exists
+  if (getCookie("exitPopupShown") !== "true") {
+    document.querySelector(".exit-popup").style.display = "block";
+    document.querySelector(".exit-overlay").style.display = "block";
+    document.querySelector(".exit-popup-wrapper").style.display = "flex";
+  }
+}
+function closePopup() {
+  // Set the 'exitPopupShown' cookie to 'true' for 30 days
+  setCookie("exitPopupShown", "true", 90);
+}
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+document.addEventListener("mouseleave", function (event) {
+  if (!event.toElement && !event.relatedTarget) {
+    showPopup();
+  }
+});
+// Set up event listeners for both the overlay and the modal to close them when clicked
+document.addEventListener("DOMContentLoaded", function () {
+  var overlay = document.querySelector(".exit-overlay");
+  var modal = document.querySelector(".exit-modal"); // Ensure this selector matches your modal's class
+  if (overlay) {
+    overlay.addEventListener("click", closePopup);
+  }
+  if (modal) {
+    modal.addEventListener("click", closePopup);
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.getElementById("mc-embedded-subscribe-form"); // Replace with your form's ID
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      // Log the event to Amplitude
+      amplitude.getInstance().logEvent("Exit popup submitted");
+    });
+  }
+});
+</script> --></div>
+        <div data-w-id="a9fdce2a-dbfb-5e96-fc3a-482336307099" class="exit-modal">X</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=60f583385ec9fe9471bd1278" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script><!--  Pricing Switcher Logic DO NOT DELETE -->
+  <script async="" src="https://cdn.jsdelivr.net/gh/austin-thesing/heard-pricing@3c5b56eb/pricing-swap.min.js"></script>
+  <!-- <script async src="https://heard-74.localcan.dev/pricing-swap.js"></script> -->
+  <!--  Disable Scroll Script  -->
+  <script async="">
+  var Webflow=Webflow||[];Webflow.push(function(){var o=$(document.body),s=0;$('[scroll="disable"]').on("click",function(){var i=o.innerWidth();s=window.pageYOffset,o.css("overflow","hidden"),o.css("position","fixed"),o.css("top",`-${s}px`),o.width(i)}),$('[scroll="enable"]').on("click",function(){"hidden"!=o.css("overflow")&&(s=window.pageYOffset),o.css("overflow",""),o.css("position",""),o.css("top",""),o.width(""),$(window).scrollTop(s)}),$('[scroll="both"]').on("click",function(){if("hidden"!==o.css("overflow")){var i=o.innerWidth();s=window.pageYOffset,o.css("overflow","hidden"),o.css("position","fixed"),o.css("top",`-${s}px`),o.width(i)}else o.css("overflow",""),o.css("position",""),o.css("top",""),o.width(""),$(window).scrollTop(s)})});
+</script>
+  <!--  Handle Background sizing for Navigation w/ Background Prefilled  -->
+  <script async="">
+  document.addEventListener("DOMContentLoaded",function(){function e(){let e=document.querySelector(".nav-w-banner");if(!e){console.warn("Target element not found.");return}let t=e.offsetHeight,n=document.querySelector(".nav-start-filled");n?n.style.height=`${t}px`:console.warn("nav-start-filled element not found.")}e(),window.addEventListener("resize",e)});
+</script>
+  <script async="">
+  function getQueryParam(e){var r=RegExp("[\\?&]"+(e=e.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]"))+"=([^&#]*)").exec(location.search);return null===r?"":decodeURIComponent(r[1].replace(/\+/g," "))}var gclid=getQueryParam("gclid");function setCookie(e,r,i){var t="";if(i){var l=new Date;l.setTime(l.getTime()+864e5*i),t="; expires="+l.toUTCString()}document.cookie=e+"="+(r||"")+t+"; path=/"}if(gclid){function e(e){for(var r=e+"=",i=document.cookie.split(";"),t=0;t<i.length;t++){for(var l=i[t];" "==l.charAt(0);)l=l.substring(1,l.length);if(0==l.indexOf(r))return l.substring(r.length,l.length)}return null}setCookie("gclid",gclid,30);var r=e("gclid");console.log(gclid)}
+</script>
+  <!--  Reddit Conversions API  -->
+  <script>
+!function(){const WORKER_URL="https://heard-reddit-conv-api.designxdevelop.workers.dev";function sendConversion(conversionData){const data={...conversionData,timestamp:(new Date).toISOString(),url:window.location.href,userAgent:navigator.userAgent};return fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).catch(error=>console.error("Reddit conversion tracking error:",error))}window.trackRedditConversion=function(event_type,value=0,currency="USD"){return sendConversion({event_type:event_type,value:value,currency:currency})}}();
+</script><!--  Simple JQuery Accordion  -->
+  <script>
+(function ($) {
+	'use strict'; 
+  	// Targeting the head/button of the accordion item to run a function when it's clicked
+		$('.acc-head').on("click", function () {
+    	// Looking for the next sibling within this accordion item, which is the body (for content) of the accordion to show and slide open  
+      	$(this).next().slideToggle(250).css("display", "flex"); // 300 is the milliseconds on open
+      // Finds any body of any accordion that is NOT the one currently being clicked on to hide and slide closed
+      //$('.acc-body').not($(this).next()).slideUp('fast');
+		});
+}(jQuery));
+</script>
+</body>
+</html>
