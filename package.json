@@ -3,21 +3,7 @@
   "version": "1.0.0",
   "description": "Form routing logic for qualification and redirection",
   "main": "src/form-router.js",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
-  },
+  "scripts": {},
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFiles": [
-      "./src/test-setup.js"
-    ]
-  }
+  "license": "ISC"
 }
