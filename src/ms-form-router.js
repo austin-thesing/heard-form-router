@@ -1,61 +1,3 @@
-// Configuration
-const LANDING_PAGES = {
-  FREE_TRIAL: "/thank-you/free-trial",
-  SCHEDULER: "/thank-you/schedule",
-  NOT_QUALIFIED: "/thank-you/success",
-};
-
-// Add these configurations directly in ms-form-router.js
-const DISQUALIFYING_CONDITIONS = {
-  multiOwner: ["yes"],
-  state: ["international"],
-  practiceSetup: ["c corp"],
-  income: ["none", "less than $20,000"],
-  profession: ["dietician", "nutritionist", "massage therapist", "physical therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
-  practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
-};
-
-const INCOME_TIERS = {
-  HIGH_INCOME: ["$50,000 - $99,999", "more than $100,000"],
-  MID_INCOME: ["$20,000 - $49,999"],
-};
-
-// Update the determineRoute function
-function determineRoute(formData) {
-  // Extract relevant fields (with null checks)
-  const multiOwner = (formData.is_your_practice_a_c_corp_or_our_does_it_have_multiple_owners_ || "").toLowerCase();
-  const state = (formData.state || "").toLowerCase();
-  const practiceSetup = (formData.how_is_your_business_setup__v2 || "").toLowerCase();
-  const income = (formData.what_is_your_expected_annual_income_for_2024___1099__private_practice_ || "").toLowerCase();
-  const practiceRunning = (formData.how_long_have_you_been_running_your_private_practice_ || "").toLowerCase();
-  const profession = (formData.what_best_describes_your_practice_ || "").toLowerCase();
-
-  // Check DQ conditions
-  const isDQ =
-    DISQUALIFYING_CONDITIONS.multiOwner.includes(multiOwner) ||
-    DISQUALIFYING_CONDITIONS.state.includes(state) ||
-    DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup) ||
-    DISQUALIFYING_CONDITIONS.income.includes(income) ||
-    DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
-    DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning);
-
-  if (isDQ) {
-    return "NOT_QUALIFIED";
-  }
-
-  // Check for qualified booking (income >= $50k)
-  if (INCOME_TIERS.HIGH_INCOME.some((tier) => income.includes(tier))) {
-    return "SCHEDULER";
-  }
-
-  // Check for free trial ($20k-$50k)
-  if (INCOME_TIERS.MID_INCOME.some((tier) => income.includes(tier))) {
-    return "FREE_TRIAL";
-  }
-
-  return "NOT_QUALIFIED";
-}
-
 // Track if we've already added the field tracking
 let trackingInitialized = false;
 
@@ -70,50 +12,40 @@ function addFieldTracking() {
     return;
   }
 
+  console.log("MS Form - Adding field tracking");
+
   // Track all input and select elements
   form.querySelectorAll("input, select").forEach((element) => {
     element.addEventListener("change", function (event) {
-      // console.log("Field Changed:", {
-      //   name: this.name,
-      //   value: this.value,
-      // });
-    });
-  });
-
-  // Track radio buttons
-  form.querySelectorAll('input[type="radio"]').forEach((radio) => {
-    radio.addEventListener("change", function (event) {
-      // console.log("Field Changed:", {
-      //   name: this.name,
-      //   value: this.value,
-      // });
+      console.log("MS Form - Field Changed:", {
+        name: event.target.name,
+        value: event.target.value,
+      });
     });
   });
 
   trackingInitialized = true;
-  // console.log("Field tracking successfully initialized");
 }
 
 // Initialize form handling
 window.addEventListener("message", function (event) {
   if (event.data.type === "hsFormCallback") {
     if (event.data.eventName === "onFormReady") {
+      console.log("MS Form - Form Ready");
       // Add field tracking once form is ready
       setTimeout(addFieldTracking, 1000);
     }
 
-    // Track validation errors
-    if (event.data.eventName === "onFormFailedValidation") {
-      // console.log("Form Validation Failed:", event.data.data);
-    }
-
     // Handle form submission
     if (event.data.eventName === "onFormSubmit") {
+      console.log("MS Form - Form Submitted");
+
       // Check if we have a valid HubSpot submission
       const hsData = event.data.data;
       const submissionTime = new Date().toISOString();
 
       if (!hsData || !Array.isArray(hsData) || hsData.length === 0) {
+        console.error("MS Form - HubSpot submission data missing");
         Sentry.captureMessage("MS Form: HubSpot submission data missing", {
           level: "error",
           tags: {
@@ -134,10 +66,14 @@ window.addEventListener("message", function (event) {
         formData[event.data.data[key].name] = event.data.data[key].value;
       }
 
+      console.log("MS Form - Prepared form data:", formData);
+
       // Store form data
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
+        console.log("MS Form - Stored form data in localStorage");
       } catch (error) {
+        console.error("MS Form - Storage failed:", error);
         Sentry.captureException(error, {
           extra: {
             context: "MS Form submission storage failed",
@@ -148,15 +84,19 @@ window.addEventListener("message", function (event) {
             form: "ms_hubspot_contact",
           },
         });
-        console.error("Error storing form data:", error);
       }
 
-      // Determine route and redirect (always proceed regardless of errors)
-      const route = determineRoute(formData);
+      // Determine route and redirect
+      const route = window.FormRouterConfig.determineRoute(formData);
+      console.log("MS Form - Determined route:", route);
+
       setTimeout(() => {
         try {
-          window.location.href = LANDING_PAGES[route];
+          const redirectUrl = window.FormRouterConfig.LANDING_PAGES[route];
+          console.log("MS Form - Redirecting to:", redirectUrl);
+          window.location.href = redirectUrl;
         } catch (error) {
+          console.error("MS Form - Redirect failed:", error);
           Sentry.captureException(error, {
             extra: {
               context: "MS Form redirect failed",
@@ -167,8 +107,7 @@ window.addEventListener("message", function (event) {
               form: "ms_hubspot_contact",
             },
           });
-          console.error("Redirect failed:", error);
-          window.location.href = LANDING_PAGES.NOT_QUALIFIED;
+          window.location.href = window.FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
         }
       }, 700);
     }
