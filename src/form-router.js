@@ -1,10 +1,6 @@
 // Initialize HubSpot form handler
 function initializeForm() {
-  if (!window.FormRouterConfig) {
-    console.error("FormRouterConfig not found - ensure form-config.js is loaded first");
-    return;
-  }
-
+  // Create the form immediately, but verify config before handling submissions
   window.hbspt.forms.create({
     region: "na1",
     portalId: "7507639",
@@ -23,6 +19,12 @@ function initializeForm() {
       });
     },
     onFormSubmit: function ($form) {
+      // Verify config is available before proceeding
+      if (!window.FormRouterConfig) {
+        console.error("FormRouterConfig not found - ensure form-config.js is loaded");
+        return false;
+      }
+
       console.log("Form Submit - Starting submission process");
       const formData = new FormData($form);
       const formDataObj = {};
@@ -50,6 +52,12 @@ function initializeForm() {
       return true;
     },
     onFormSubmitted: function ($form) {
+      // Verify config is available before proceeding
+      if (!window.FormRouterConfig) {
+        console.error("FormRouterConfig not found during submission - ensure form-config.js is loaded");
+        return false;
+      }
+
       console.log("Form Submitted - Processing submission");
       handleRedirect();
       return false;
