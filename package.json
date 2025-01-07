@@ -5,5 +5,8 @@
   "main": "src/form-router.js",
   "scripts": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@antiwork/shortest": "^0.4.0"
+  }
 }
