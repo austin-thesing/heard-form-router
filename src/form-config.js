@@ -41,6 +41,16 @@
     const practiceRunning = (formData[FORM_FIELDS.practiceRunning] || "").toLowerCase();
     const profession = (formData[FORM_FIELDS.profession] || "").toLowerCase();
 
+    console.log("Form Router Debug:", {
+      multiOwner,
+      state,
+      practiceSetup,
+      income,
+      practiceRunning,
+      profession,
+      formData,
+    });
+
     // Check DQ conditions
     const isDQ =
       DISQUALIFYING_CONDITIONS.multiOwner.includes(multiOwner) ||
@@ -51,14 +61,17 @@
       DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning);
 
     if (isDQ) {
+      console.log("Form Router: Not qualified due to DQ conditions");
       return "NOT_QUALIFIED";
     }
 
     // Check for qualified booking (income >= $20k)
     if (INCOME_TIERS.QUALIFIED_INCOME.some((tier) => income.includes(tier))) {
+      console.log("Form Router: Qualified for scheduler");
       return "SCHEDULER";
     }
 
+    console.log("Form Router: Not qualified (default)");
     return "NOT_QUALIFIED";
   }
 
