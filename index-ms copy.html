@@ -1,0 +1,485 @@
+<!-- Load form router config first -->
+<div class="right_step_form">
+  <div class="custom_step_form" id="hubspot-form-container"></div>
+</div>
+<script src="src/form-config.js"></script>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  hbspt.forms.create({
+    region: "na1",
+    portalId: "7507639",
+    formId: "807fd7b2-0593-475d-a6e9-4a3a08520238",
+    target: ".right_step_form",
+  });
+</script>
+<!-- Replace with JS Deliver Version for Prod Env-->
+<script src="src/ms-form-router.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Function to initialize form
+    function initializeMultiStepForm() {
+      const form = document.querySelector(".right_step_form form");
+      if (!form) {
+        // If form is not ready yet, try again in 100ms
+        setTimeout(initializeMultiStepForm, 100);
+        return;
+      }
+
+      // Show form immediately when found
+      const hubspotForm = document.querySelector(".hbspt-form");
+      if (hubspotForm) {
+        hubspotForm.style.display = "block";
+      }
+
+      const fieldsets = Array.from(form.querySelectorAll("> div"));
+
+      // Create and wrap steps
+      const createStep = (elements, stepNumber) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "form-step";
+        wrapper.dataset.step = stepNumber;
+        elements.forEach((el) => wrapper.appendChild(el));
+        return wrapper;
+      };
+
+      // Group fieldsets into steps
+      const firstTwo = createStep(fieldsets.slice(1, 3), "1");
+      const nextThree = createStep(fieldsets.slice(3, 6), "2");
+      const nextTwo = createStep(fieldsets.slice(6, 8), "3");
+      const lastSix = createStep(fieldsets.slice(8, 14), "4");
+
+      // Clear form and add wrapped steps
+      while (form.firstChild) {
+        form.removeChild(form.firstChild);
+      }
+
+      // Create step navigation
+      const stepNav = document.createElement("div");
+      stepNav.className = "step-nav";
+      [1, 2, 3, 4].forEach((num) => {
+        const span = document.createElement("span");
+        span.className = "step-number";
+        span.dataset.step = (num - 1).toString();
+        span.textContent = num.toString();
+        stepNav.appendChild(span);
+      });
+
+      // Add all elements to form
+      form.appendChild(stepNav);
+      form.appendChild(firstTwo);
+      form.appendChild(nextThree);
+      form.appendChild(nextTwo);
+      form.appendChild(lastSix);
+
+      // Create navigation buttons
+      const formNavigation = document.createElement("div");
+      formNavigation.className = "form-navigation";
+      formNavigation.innerHTML = `
+        <button type="button" class="previous button-secondary">Previous</button>
+        <button type="button" class="next button-primary">Next</button>
+        <button type="submit" class="submit button-primary">Submit</button>
+      `;
+
+      // Create error message
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "error-message";
+      errorMessage.style.color = "red";
+      errorMessage.style.display = "none";
+      errorMessage.textContent = "Please fill out all required fields.";
+
+      form.appendChild(formNavigation);
+      form.appendChild(errorMessage);
+
+      // Setup step functionality
+      const steps = Array.from(document.querySelectorAll(".form-step"));
+      const stepNumbers = Array.from(document.querySelectorAll(".step-number"));
+      let currentStep = 0;
+
+      function showStep(index) {
+        steps.forEach((step) => step.classList.remove("active"));
+        steps[index].classList.add("active");
+        stepNumbers[index].classList.add("active");
+        updateButtons(index);
+      }
+
+      function updateButtons(index) {
+        const prevButton = document.querySelector(".previous");
+        const nextButton = document.querySelector(".next");
+        const submitButton = document.querySelector(".submit");
+
+        prevButton.style.display = index === 0 ? "none" : "block";
+        nextButton.style.display = index === steps.length - 1 ? "none" : "block";
+        submitButton.style.display = index === steps.length - 1 ? "block" : "none";
+      }
+
+      function validateStep(index) {
+        const currentStep = steps[index];
+        let isValid = true;
+
+        // Validate select elements
+        currentStep.querySelectorAll("select").forEach((select) => {
+          if (select.closest("[required]") && !select.value) {
+            isValid = false;
+          }
+        });
+
+        // Validate input elements
+        currentStep.querySelectorAll("input").forEach((input) => {
+          const parent = input.closest("[required]");
+          if (parent && !input.value) {
+            isValid = false;
+          }
+          if (input.getAttribute("data-gtm-form-interact-field-id")) {
+            isValid = true;
+          }
+        });
+
+        // Validate radio buttons
+        currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
+          if (!ul.querySelector('input[type="radio"]:checked')) {
+            isValid = false;
+          }
+        });
+
+        return isValid;
+      }
+
+      function displayError(show) {
+        const errorMessage = document.querySelector(".error-message");
+        errorMessage.style.display = show ? "block" : "none";
+      }
+
+      // Event listeners
+      document.querySelector(".next").addEventListener("click", () => {
+        if (validateStep(currentStep)) {
+          displayError(false);
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+          }
+        } else {
+          displayError(true);
+        }
+      });
+
+      document.querySelector(".previous").addEventListener("click", () => {
+        if (currentStep > 0) {
+          currentStep--;
+          showStep(currentStep);
+        }
+      });
+
+      showStep(currentStep);
+
+      // Show form and set email if available
+      const myEmail = localStorage.getItem("my_email");
+      const emailInput = document.querySelector('input[type="email"]');
+      if (emailInput && myEmail) emailInput.value = myEmail;
+    }
+
+    // Function to create and insert the image container
+    function addImageContainer(inputDiv) {
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "image-container";
+
+      const img = document.createElement("img");
+      img.className = "select-image";
+      img.src = "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd1273be99e0d3b8c9cde_%5E.svg";
+      img.alt = "Image";
+
+      imageContainer.appendChild(img);
+      inputDiv.appendChild(imageContainer);
+    }
+
+    // Initialize form with a slight delay to ensure HubSpot form is ready
+    setTimeout(initializeMultiStepForm, 100);
+
+    // Move select container initialization inside the form initialization
+    // to ensure form exists before trying to add select containers
+    document.querySelectorAll(".form-step .input select").forEach((selectElement) => {
+      addImageContainer(selectElement.parentElement);
+
+      selectElement.addEventListener("change", (event) => {
+        const img = selectElement.parentElement.querySelector(".select-image");
+        const selectedValue = event.target.value;
+        img.src =
+          selectedValue === "default" || selectedValue === ""
+            ? "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd1273be99e0d3b8c9cde_%5E.svg"
+            : "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd131c9a0a6e9c7f805c3_Vector%202533.svg";
+      });
+    });
+  });
+</script>
+
+<style>
+  .step-nav {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+  }
+  .step-number {
+    display: flex;
+    margin: 0;
+    padding: 5px;
+    background: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(203, 213, 202, 1);
+    position: relative;
+  }
+  .step-number.active {
+    background: #fff;
+    color: rgba(34, 103, 82, 1);
+    border: 1px solid rgba(34, 103, 82, 1);
+  }
+  .step-number:after {
+    content: "";
+    border: 1px solid rgba(203, 213, 202, 1);
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 64px;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .step-number.active:after {
+    border-color: rgba(34, 103, 82, 1);
+  }
+  span.step-number:first-child:after {
+    display: none;
+  }
+  .form-step {
+    display: none;
+  }
+  .form-step.active {
+    display: block;
+  }
+  .form-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .form-navigation .previous,
+  .form-navigation .next,
+  .form-navigation .submit {
+    display: none;
+  }
+  .form-navigation .next,
+  .form-navigation .previous {
+    display: inline-block;
+  }
+  .form-step.active + .form-navigation .next,
+  .form-step.active + .form-navigation .previous,
+  .form-step:last-of-type.active + .form-navigation .submit {
+    display: inline-block;
+  }
+  .form-step:last-of-type.active + .form-navigation .next {
+    display: none;
+  }
+  .hs_submit.hs-submit {
+    display: none;
+  }
+  .hs_recaptcha.hs-recaptcha.field.hs-form-field {
+    display: none;
+  }
+  .form-step {
+    text-align: center;
+  }
+  .form-step > div {
+    margin: auto !important;
+  }
+  .form-step > div .input {
+    max-width: 100%;
+    margin: 0 auto !important;
+  }
+  .form-step fieldset h3 {
+    font-size: 35px;
+    margin-bottom: 28px;
+  }
+  .form-step > div {
+    max-width: 100%;
+  }
+  .legal-consent-container .hs-form-booleancheckbox-display input {
+    margin-top: 10px;
+  }
+  .legal-consent-container {
+    margin-top: 30px;
+  }
+  .hbspt-form {
+    display: none;
+  }
+  .error-message {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .hs_firstname.hs-firstname.hs-fieldtype-text.field.hs-form-field,
+  .hs_email.hs-email.hs-fieldtype-text.field.hs-form-field {
+    margin-bottom: 28px;
+  }
+  .form-step > div .input select {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 16px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background: rgba(217, 217, 217, 0.4);
+    border: none;
+  }
+  li.hs-form-radio label {
+    cursor: pointer;
+  }
+  .form-navigation button {
+    width: 180px;
+    height: 50px;
+    padding: 10px 20px;
+  }
+  .right_step_form {
+    border-radius: 44px;
+  }
+  .hs-richtext.hs-main-font-element h3 {
+    font-size: 30px;
+    color: #000;
+    margin-bottom: 20px;
+  }
+  .form-step > div label[placeholder] {
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
+  .form-step > div .input .image-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    border-radius: 30px;
+    background: #f0f0f0;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 6px;
+  }
+  .form-step > div .input {
+    position: relative;
+  }
+  button.previous.button-secondary {
+    display: none !important;
+  }
+  button.next.button-primary {
+    width: 100%;
+  }
+  .form-navigation button.next.button-primary:after,
+  .form-navigation button.submit.button-primary:after {
+    content: "";
+    background-image: url(https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667ddf9a57792e8d997250ba_Arrow%202.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 44px;
+    z-index: 99999;
+    height: 14px;
+    margin-left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .form-navigation button.next.button-primary,
+  .form-navigation button.submit.button-primary {
+    position: relative;
+    padding-right: 30px;
+  }
+  .form-navigation button:hover {
+    background: #226752;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+  ul.inputs-list.multi-container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  label.hs-form-radio-display {
+    text-align: left;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+  }
+  ul.no-list.hs-error-msgs.inputs-list {
+    padding: 0;
+    list-style: none;
+    color: red;
+  }
+  legend.hs-field-desc {
+    font-size: 16px;
+    text-align: left;
+  }
+  input.hs-input {
+    background: rgba(217, 217, 217, 0.4);
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 16px;
+  }
+  input.hs-input[type="radio"] {
+    width: auto;
+  }
+  ul.no-list.hs-error-msgs.inputs-list label {
+    font-size: 14px;
+    text-align: left;
+  }
+  .legal-consent-container .hs-richtext p {
+    font-size: 14px;
+  }
+  .legal-consent-container .hs-richtext {
+    margin-top: 26px;
+    text-align: left;
+  }
+  .legal-consent-container .hs-form-booleancheckbox-display input {
+    width: auto;
+  }
+  .hs-dependent-field label.hs-form-booleancheckbox-display span p {
+    font-size: 12px;
+  }
+  ul.inputs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  button.submit.button-primary {
+    width: 100%;
+  }
+  .form-step[data-step="2"] > div:first-child ul li,
+  .form-step[data-step="2"] > div:last-child ul li {
+    width: 50%;
+  }
+  .form-step[data-step="2"] > div:first-child ul,
+  .form-step[data-step="2"] > div:last-child ul {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+  }
+  @media only screen and (max-width: 600px) {
+    .step-number {
+      width: 35px;
+      height: 35px;
+    }
+    .step-number:after {
+      width: 22px;
+    }
+    .step-nav {
+      gap: 22px;
+    }
+  }
+</style>
