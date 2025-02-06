@@ -1,80 +1,197 @@
-import "./ms-loader.js";
+// Loader CSS
+const spinnerCSS = `
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #226752;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .form-loading {
+    min-height: 200px;
+    position: relative;
+  }
+`;
+
+// Initialize loader
+const styleSheet = document.createElement("style");
+styleSheet.textContent = spinnerCSS;
+document.head.appendChild(styleSheet);
 
 // Constants
-const CHECK_INTERVAL = 20; // Lowered to 20ms for faster response time
-const MAX_RETRIES = 150; // Increased to 150 (3 second total maximum wait time)
+const CHECK_INTERVAL = 100;
+const MAX_RETRIES = 50;
 let retryCount = 0;
 
 function initializeMultiStepForm() {
-  const form = document.querySelector(".right_step_form form");
-  const fieldsets = Array.from(form.querySelectorAll("> div"));
+  const hubspotForm = document.querySelector(".hbspt-form form");
 
-  // Create and wrap steps
-  const createStep = (elements, stepNumber) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "form-step";
-    wrapper.dataset.step = stepNumber;
-    elements.forEach((el) => wrapper.appendChild(el));
-    return wrapper;
-  };
-
-  // Group fieldsets into steps
-  const firstTwo = createStep(fieldsets.slice(1, 3), "1");
-  const nextThree = createStep(fieldsets.slice(3, 6), "2");
-  const nextTwo = createStep(fieldsets.slice(6, 8), "3");
-  const lastSix = createStep(fieldsets.slice(8, 14), "4");
-
-  // Clear form and add wrapped steps
-  while (form.firstChild) {
-    form.removeChild(form.firstChild);
+  // Early return if no form found
+  if (!hubspotForm) {
+    console.warn("HubSpot form not found, retrying...");
+    if (retryCount < MAX_RETRIES) {
+      retryCount++;
+      setTimeout(initializeMultiStepForm, CHECK_INTERVAL);
+    }
+    return;
   }
 
-  // Create step navigation
+  // Get all form fields using HubSpot's specific class structure
+  const formFields = Array.from(hubspotForm.querySelectorAll(".hs-form-field:not(.hs_submit):not(.hs_recaptcha):not(.hs_error_rollup)"));
+
+  // Find and preserve the HubSpot title
+  const hubspotTitle = hubspotForm.querySelector(".hs-richtext h3");
+  if (hubspotTitle) {
+    hubspotTitle.remove(); // Remove it temporarily to reposition it
+  }
+
+  // Move the legal consent container to be handled separately
+  const legalConsentContainer = hubspotForm.querySelector(".legal-consent-container");
+  const disclaimerText = hubspotForm.querySelector(".hs-richtext:not(:has(h3))"); // Don't select the title container
+
+  // Remove disclaimer and consent from their current location
+  if (disclaimerText) disclaimerText.remove();
+  if (legalConsentContainer) legalConsentContainer.remove();
+
+  // Clean up any existing multi-step elements
+  const existingElements = hubspotForm.querySelectorAll(".step-nav, .form-step, .form-navigation, .error-message");
+  existingElements.forEach((el) => el.remove());
+
+  // Create step navigation and title section
+  const headerSection = document.createElement("div");
+  headerSection.className = "form-header";
+
   const stepNav = document.createElement("div");
   stepNav.className = "step-nav";
   [1, 2, 3, 4].forEach((num) => {
     const span = document.createElement("span");
-    span.className = "step-number";
+    span.className = num === 1 ? "step-number active" : "step-number";
     span.dataset.step = (num - 1).toString();
     span.textContent = num.toString();
     stepNav.appendChild(span);
   });
 
-  // Add all elements to form
-  form.appendChild(stepNav);
-  form.appendChild(firstTwo);
-  form.appendChild(nextThree);
-  form.appendChild(nextTwo);
-  form.appendChild(lastSix);
+  headerSection.appendChild(stepNav);
+  if (hubspotTitle) {
+    const titleWrapper = document.createElement("div");
+    titleWrapper.className = "hubspot-title-wrapper";
+    titleWrapper.appendChild(hubspotTitle);
+    headerSection.appendChild(titleWrapper);
+  }
 
-  // Create navigation buttons
+  // Add header section to form
+  hubspotForm.insertBefore(headerSection, hubspotForm.firstChild);
+
+  // Create form steps with proper field distribution
+  const step1Fields = formFields.slice(0, 2);
+  const step2Fields = formFields.slice(2, 5);
+  const step3Fields = formFields.slice(5, 7);
+  const step4Fields = formFields.slice(7);
+
+  // Create step wrappers
+  const steps = [
+    { fields: step1Fields, num: 1 },
+    { fields: step2Fields, num: 2 },
+    { fields: step3Fields, num: 3 },
+    { fields: step4Fields, num: 4 },
+  ].map(({ fields, num }) => {
+    if (!fields.length) {
+      console.warn(`No fields for step ${num}`);
+      return null;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = num === 1 ? "form-step active" : "form-step";
+    wrapper.dataset.step = num.toString();
+
+    // Move fields into wrapper
+    fields.forEach((field) => {
+      if (field && field.parentNode) {
+        wrapper.appendChild(field);
+      }
+    });
+
+    // Add disclaimer and consent to the last step
+    if (num === 4 && legalConsentContainer) {
+      // Create a wrapper for the consent section
+      const consentWrapper = document.createElement("div");
+      consentWrapper.className = "consent-wrapper";
+
+      // Create and add the privacy text above the checkbox
+      const privacyText = document.createElement("div");
+      privacyText.className = "privacy-text";
+      privacyText.textContent =
+        "Heard is committed to protecting and respecting your privacy, and we'll only use your personal information to administer your account and to provide the services you requested from us. By clicking submit on the form below, you consent to allow Heard to send SMS meeting reminders as well as store and process the personal information submitted above to provide you with the content requested.";
+      consentWrapper.appendChild(privacyText);
+
+      // Add the legal consent container with the checkbox
+      if (legalConsentContainer) {
+        consentWrapper.appendChild(legalConsentContainer);
+      }
+
+      wrapper.appendChild(consentWrapper);
+    }
+
+    // Insert wrapper before submit button
+    const submitDiv = hubspotForm.querySelector(".hs_submit");
+    hubspotForm.insertBefore(wrapper, submitDiv);
+
+    return wrapper;
+  });
+
+  // Verify all steps were created
+  if (steps.some((step) => !step)) {
+    console.error("Failed to create all form steps");
+    return;
+  }
+
+  // Add navigation buttons
   const formNavigation = document.createElement("div");
   formNavigation.className = "form-navigation";
   formNavigation.innerHTML = `
-      <button type="button" class="previous button-secondary">Previous</button>
-      <button type="button" class="next button-primary">Next</button>
-      <button type="submit" class="submit button-primary">Submit</button>
-    `;
+    <button type="button" class="previous button-secondary">Previous</button>
+    <button type="button" class="next button-primary">Next</button>
+    <button type="submit" class="submit button-primary">Submit</button>
+  `;
 
-  // Create error message
+  // Add error message
   const errorMessage = document.createElement("div");
   errorMessage.className = "error-message";
-  errorMessage.style.color = "red";
   errorMessage.style.display = "none";
   errorMessage.textContent = "Please fill out all required fields.";
 
-  form.appendChild(formNavigation);
-  form.appendChild(errorMessage);
+  // Add navigation and error message to form
+  hubspotForm.appendChild(formNavigation);
+  hubspotForm.appendChild(errorMessage);
 
   // Setup step functionality
-  const steps = Array.from(document.querySelectorAll(".form-step"));
-  const stepNumbers = Array.from(document.querySelectorAll(".step-number"));
   let currentStep = 0;
+  const stepNumbers = document.querySelectorAll(".step-nav .step-number");
 
   function showStep(index) {
-    steps.forEach((step) => step.classList.remove("active"));
-    steps[index].classList.add("active");
-    stepNumbers[index].classList.add("active");
+    document.querySelectorAll(".form-step").forEach((step, i) => {
+      step.classList.toggle("active", i === index);
+    });
+    stepNumbers.forEach((num, i) => {
+      num.classList.toggle("active", i <= index);
+    });
     updateButtons(index);
   }
 
@@ -121,7 +238,6 @@ function initializeMultiStepForm() {
   }
 
   function displayError(show) {
-    const errorMessage = document.querySelector(".error-message");
     errorMessage.style.display = show ? "block" : "none";
   }
 
@@ -145,11 +261,41 @@ function initializeMultiStepForm() {
     }
   });
 
+  // Handle form submission
+  hubspotForm.addEventListener("submit", function (e) {
+    if (!validateStep(currentStep)) {
+      e.preventDefault();
+      displayError(true);
+      return;
+    }
+
+    // Store form data in localStorage
+    const formData = {};
+    hubspotForm.querySelectorAll("input, select").forEach((input) => {
+      if (input.name) {
+        if (input.type === "radio") {
+          if (input.checked) {
+            formData[input.name] = input.value;
+          }
+        } else {
+          formData[input.name] = input.value;
+        }
+      }
+    });
+
+    try {
+      localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
+      console.log("MS Form - Stored form data in localStorage");
+    } catch (error) {
+      console.error("MS Form - Storage failed:", error);
+    }
+  });
+
   showStep(currentStep);
 
   // Show form and set email if available
-  const hubspotForm = document.querySelector(".hbspt-form");
-  if (hubspotForm) hubspotForm.style.display = "block";
+  const hubspotFormContainer = document.querySelector(".hbspt-form");
+  if (hubspotFormContainer) hubspotFormContainer.style.display = "block";
 
   const myEmail = localStorage.getItem("my_email");
   const emailInput = document.querySelector('input[type="email"]');
@@ -172,58 +318,83 @@ function addImageContainer(inputDiv) {
 
 // Initialize form when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Wait for form to be ready
-  setTimeout(() => {
-    initializeMultiStepForm();
-
-    // Add image containers to selects
-    document.querySelectorAll(".form-step .input select").forEach((selectElement) => {
-      addImageContainer(selectElement.parentElement);
-
-      selectElement.addEventListener("change", (event) => {
-        const img = selectElement.parentElement.querySelector(".select-image");
-        const selectedValue = event.target.value;
-        img.src =
-          selectedValue === "default" || selectedValue === ""
-            ? "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd1273be99e0d3b8c9cde_%5E.svg"
-            : "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd131c9a0a6e9c7f805c3_Vector%202533.svg";
-      });
-    });
-  }, 1000);
+  // Start checking for HubSpot form
+  checkForHubSpotForm();
 });
 
-// Wait for HubSpot form to be ready
-window.addEventListener("load", function () {
-  setTimeout(checkForHubSpotForm, 500); // Give HubSpot time to create the form
-});
-
+// Optimized form checker
 function checkForHubSpotForm() {
   const hubspotForm = document.querySelector(".hbspt-form");
-  if (!hubspotForm) {
-    setTimeout(checkForHubSpotForm, CHECK_INTERVAL);
-    return;
-  }
-
   const formContainer = document.querySelector(".right_step_form");
+
+  // Show loader only once
   if (formContainer && !formContainer.querySelector(".loader")) {
     formContainer.classList.add("form-loading");
     const loader = document.createElement("span");
     loader.className = "loader";
     formContainer.appendChild(loader);
+
+    // Hide the HubSpot form until it's ready
+    if (hubspotForm) {
+      hubspotForm.style.display = "none";
+    }
   }
 
+  if (!hubspotForm || !hubspotForm.querySelector("form")) {
+    retryCount++;
+    if (retryCount < MAX_RETRIES) {
+      requestAnimationFrame(checkForHubSpotForm);
+      return;
+    }
+    console.warn("HubSpot form not found or not fully loaded after maximum retries");
+    if (formContainer) {
+      formContainer.classList.remove("form-loading");
+      const loader = formContainer.querySelector(".loader");
+      if (loader) loader.remove();
+    }
+    return;
+  }
+
+  // Reset retry count for subsequent operations
+  retryCount = 0;
+
+  // Initialize form immediately when found
   initializeMultiStepForm();
 
-  document.querySelectorAll(".form-step .input select").forEach((selectElement) => {
-    addImageContainer(selectElement.parentElement);
+  // Remove loader and show form once initialization is complete
+  const loader = formContainer?.querySelector(".loader");
+  if (loader) {
+    loader.remove();
+    formContainer.classList.remove("form-loading");
+  }
+  if (hubspotForm) {
+    hubspotForm.style.display = "block";
+  }
 
-    selectElement.addEventListener("change", (event) => {
-      const img = selectElement.parentElement.querySelector(".select-image");
-      const selectedValue = event.target.value;
-      img.src =
-        selectedValue === "default" || selectedValue === ""
-          ? "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd1273be99e0d3b8c9cde_%5E.svg"
-          : "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd131c9a0a6e9c7f805c3_Vector%202533.svg";
+  // Add image containers to selects only if form is properly initialized
+  const formSteps = document.querySelectorAll(".form-step .input select");
+  if (formSteps.length) {
+    formSteps.forEach((selectElement) => {
+      if (selectElement && selectElement.parentElement) {
+        addImageContainer(selectElement.parentElement);
+
+        selectElement.addEventListener("change", (event) => {
+          const img = selectElement.parentElement.querySelector(".select-image");
+          if (!img) return;
+
+          const selectedValue = event.target.value;
+          img.src =
+            selectedValue === "default" || selectedValue === ""
+              ? "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd1273be99e0d3b8c9cde_%5E.svg"
+              : "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd131c9a0a6e9c7f805c3_Vector%202533.svg";
+        });
+      }
     });
-  });
+  }
 }
+
+// Modify the window.initializeMultiStepFormOnReady function
+window.initializeMultiStepFormOnReady = function () {
+  console.log("MS Form - HubSpot form ready callback received");
+  checkForHubSpotForm(); // Remove timeout and call directly
+};

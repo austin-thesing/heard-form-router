@@ -40,12 +40,30 @@ window.addEventListener("message", function (event) {
     if (event.data.eventName === "onFormSubmit") {
       console.log("MS Form - Form Submitted");
 
-      const hsData = event.data.data;
-      const submissionTime = new Date().toISOString();
+      // Get the stored form data
+      let formData;
+      try {
+        formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+        console.log("MS Form - Retrieved stored form data:", formData);
+      } catch (error) {
+        console.error("MS Form - Failed to retrieve stored form data:", error);
+        formData = {};
+      }
 
-      if (!hsData || !Array.isArray(hsData) || hsData.length === 0) {
-        console.error("MS Form - HubSpot submission data missing");
-        Sentry.captureMessage("MS Form: HubSpot submission data missing", {
+      // Merge with HubSpot data if available
+      const hsData = event.data.data;
+      if (hsData && Array.isArray(hsData)) {
+        hsData.forEach((field) => {
+          formData[field.name] = field.value;
+        });
+      }
+
+      const submissionTime = new Date().toISOString();
+      console.log("MS Form - Final form data:", formData);
+
+      if (Object.keys(formData).length === 0) {
+        console.error("MS Form - No form data available");
+        Sentry.captureMessage("MS Form: No form data available", {
           level: "error",
           tags: {
             type: "hubspot_submission",
@@ -55,30 +73,6 @@ window.addEventListener("message", function (event) {
             eventData: event.data,
             submissionTime: submissionTime,
             formElement: document.querySelector(".right_step_form form")?.outerHTML,
-          },
-        });
-      }
-
-      const formData = {};
-      for (const key in event.data.data) {
-        formData[event.data.data[key].name] = event.data.data[key].value;
-      }
-
-      console.log("MS Form - Prepared form data:", formData);
-
-      try {
-        localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
-        console.log("MS Form - Stored form data in localStorage");
-      } catch (error) {
-        console.error("MS Form - Storage failed:", error);
-        Sentry.captureException(error, {
-          extra: {
-            context: "MS Form submission storage failed",
-            formData: formData,
-          },
-          tags: {
-            type: "local_storage",
-            form: "ms_hubspot_contact",
           },
         });
       }
@@ -97,6 +91,7 @@ window.addEventListener("message", function (event) {
             extra: {
               context: "MS Form redirect failed",
               route: route,
+              formData: formData,
             },
             tags: {
               type: "redirect",
