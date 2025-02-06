@@ -1,3 +1,5 @@
+import { FormRouterConfig } from "./form-config.js";
+
 // Initialize HubSpot form handler
 function initializeForm() {
   // Create the form immediately, but verify config before handling submissions
@@ -7,7 +9,7 @@ function initializeForm() {
     formId: "0d9c387a-9c8b-40c4-8d46-3135f754f077",
     target: "#hubspot-form-container",
     onFormReady: function ($form) {
-      console.log("Form Ready - Config loaded:", !!window.FormRouterConfig);
+      console.log("Form Ready - Config loaded:", !!FormRouterConfig);
       const formElements = $form.querySelectorAll("input, select, textarea");
       formElements.forEach((element) => {
         element.addEventListener("change", function () {
@@ -20,7 +22,7 @@ function initializeForm() {
     },
     onFormSubmit: function ($form) {
       // Verify config is available before proceeding
-      if (!window.FormRouterConfig) {
+      if (!FormRouterConfig) {
         console.error("FormRouterConfig not found - ensure form-config.js is loaded");
         return false;
       }
@@ -53,7 +55,7 @@ function initializeForm() {
     },
     onFormSubmitted: function ($form) {
       // Verify config is available before proceeding
-      if (!window.FormRouterConfig) {
+      if (!FormRouterConfig) {
         console.error("FormRouterConfig not found during submission - ensure form-config.js is loaded");
         return false;
       }
@@ -80,14 +82,14 @@ function initializeForm() {
 // Form routing logic
 function determineRoute(formData) {
   // Use the form fields from config
-  const multiOwner = (formData[window.FormRouterConfig.FORM_FIELDS.multiOwner] || "").toLowerCase();
-  const state = (formData[window.FormRouterConfig.FORM_FIELDS.state] || "").toLowerCase();
-  const practiceSetup = (formData[window.FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
-  const income = (formData[window.FormRouterConfig.FORM_FIELDS.income] || "").toLowerCase();
-  const practiceRunning = (formData[window.FormRouterConfig.FORM_FIELDS.practiceRunning] || "").toLowerCase();
-  const profession = (formData[window.FormRouterConfig.FORM_FIELDS.profession] || "").toLowerCase();
+  const multiOwner = (formData[FormRouterConfig.FORM_FIELDS.multiOwner] || "").toLowerCase();
+  const state = (formData[FormRouterConfig.FORM_FIELDS.state] || "").toLowerCase();
+  const practiceSetup = (formData[FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
+  const income = (formData[FormRouterConfig.FORM_FIELDS.income] || "").toLowerCase();
+  const practiceRunning = (formData[FormRouterConfig.FORM_FIELDS.practiceRunning] || "").toLowerCase();
+  const profession = (formData[FormRouterConfig.FORM_FIELDS.profession] || "").toLowerCase();
 
-  return window.FormRouterConfig.determineRoute(formData);
+  return FormRouterConfig.determineRoute(formData);
 }
 
 // Initialize when HubSpot script is loaded
@@ -111,11 +113,11 @@ function handleRedirect() {
     const route = determineRoute(formData);
     console.log("Redirect Debug - Determined Route:", route);
 
-    const finalUrl = window.FormRouterConfig.LANDING_PAGES[route] || window.FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    const finalUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
     console.log("Redirect Debug - Final URL:", finalUrl);
 
     // Ensure window.FormRouterConfig exists
-    if (!window.FormRouterConfig) {
+    if (!FormRouterConfig) {
       console.error("FormRouterConfig not found - form-config.js may not be loaded");
       return;
     }
@@ -136,6 +138,6 @@ function handleRedirect() {
       },
     });
     // Fallback to NOT_QUALIFIED if something goes wrong
-    window.location.href = window.FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
   }
 }

@@ -1,3 +1,5 @@
+import { FormRouterConfig } from "./form-config.js";
+
 // Track if we've already added the field tracking
 let trackingInitialized = false;
 
@@ -32,15 +34,12 @@ window.addEventListener("message", function (event) {
   if (event.data.type === "hsFormCallback") {
     if (event.data.eventName === "onFormReady") {
       console.log("MS Form - Form Ready");
-      // Add field tracking once form is ready
       setTimeout(addFieldTracking, 1000);
     }
 
-    // Handle form submission
     if (event.data.eventName === "onFormSubmit") {
       console.log("MS Form - Form Submitted");
 
-      // Check if we have a valid HubSpot submission
       const hsData = event.data.data;
       const submissionTime = new Date().toISOString();
 
@@ -60,7 +59,6 @@ window.addEventListener("message", function (event) {
         });
       }
 
-      // Prepare form data
       const formData = {};
       for (const key in event.data.data) {
         formData[event.data.data[key].name] = event.data.data[key].value;
@@ -68,7 +66,6 @@ window.addEventListener("message", function (event) {
 
       console.log("MS Form - Prepared form data:", formData);
 
-      // Store form data
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formData));
         console.log("MS Form - Stored form data in localStorage");
@@ -86,13 +83,12 @@ window.addEventListener("message", function (event) {
         });
       }
 
-      // Determine route and redirect
-      const route = window.FormRouterConfig.determineRoute(formData);
+      const route = FormRouterConfig.determineRoute(formData);
       console.log("MS Form - Determined route:", route);
 
       setTimeout(() => {
         try {
-          const redirectUrl = window.FormRouterConfig.LANDING_PAGES[route];
+          const redirectUrl = FormRouterConfig.LANDING_PAGES[route];
           console.log("MS Form - Redirecting to:", redirectUrl);
           window.location.href = redirectUrl;
         } catch (error) {
@@ -107,7 +103,7 @@ window.addEventListener("message", function (event) {
               form: "ms_hubspot_contact",
             },
           });
-          window.location.href = window.FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+          window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
         }
       }, 700);
     }
