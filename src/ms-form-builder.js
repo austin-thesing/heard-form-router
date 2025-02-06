@@ -1,75 +1,49 @@
-// Add this at the top of the file
-const spinnerCSS = `
-  .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: #226752;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+// Constants
+const CHECK_INTERVAL = 20; // Lowered to 20ms for faster response time
+const MAX_RETRIES = 150; // Increased to 150 (3 second total maximum wait time)
+let retryCount = 0;
 
-  @keyframes rotation {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  .form-loading {
-    min-height: 200px;
-    position: relative;
-  }
-`;
-
-// Add this right after the CSS
-const styleSheet = document.createElement("style");
-styleSheet.textContent = spinnerCSS;
-document.head.appendChild(styleSheet);
-
-// Function to initialize form
 function initializeMultiStepForm() {
-  const form = document.querySelector(".right_step_form form");
-  if (!form) {
-    // If form is not ready yet, show loading spinner if not already shown
-    const formContainer = document.querySelector(".right_step_form");
-    if (formContainer && !formContainer.querySelector(".loader")) {
-      formContainer.classList.add("form-loading");
-      const loader = document.createElement("span");
-      loader.className = "loader";
-      formContainer.appendChild(loader);
-    }
+  // Cache DOM queries
+  const formContainer = document.querySelector(".right_step_form");
+  const form = formContainer?.querySelector("form");
+  const hubspotForm = document.querySelector(".hbspt-form");
 
-    // Try again sooner (reduced from 100ms to 50ms)
-    setTimeout(initializeMultiStepForm, 25);
+  // Early return if core elements aren't ready
+  if (!form || !formContainer || !hubspotForm) {
+    retryCount++;
+    if (retryCount < MAX_RETRIES) {
+      setTimeout(initializeMultiStepForm, CHECK_INTERVAL);
+    } else {
+      console.error("Failed to initialize form after maximum retries");
+    }
     return;
   }
 
-  // Remove loader when form is ready
-  const formContainer = document.querySelector(".right_step_form");
-  const loader = formContainer.querySelector(".loader");
-  if (loader) {
-    loader.remove();
-    formContainer.classList.remove("form-loading");
-  }
-
-  // Show form immediately when found
-  const hubspotForm = document.querySelector(".hbspt-form");
-  if (hubspotForm) {
-    hubspotForm.style.display = "block";
+  // Start showing loader immediately when we have the container
+  let loader = formContainer.querySelector(".loader");
+  if (!loader) {
+    loader = document.createElement("span");
+    loader.className = "loader";
+    formContainer.appendChild(loader);
+    formContainer.classList.add("form-loading");
   }
 
   const fieldsets = Array.from(form.querySelectorAll(":scope > div"));
+  if (fieldsets.length < 14) {
+    retryCount++;
+    if (retryCount < MAX_RETRIES) {
+      setTimeout(initializeMultiStepForm, CHECK_INTERVAL);
+    } else {
+      console.error("Failed to load all form fields after maximum retries");
+    }
+    return;
+  }
 
-  // Create and wrap steps
+  // Reset retry count since we succeeded
+  retryCount = 0;
+
+  // Now we can safely initialize the form
   const createStep = (elements, stepNumber) => {
     const wrapper = document.createElement("div");
     wrapper.className = "form-step";
@@ -78,36 +52,18 @@ function initializeMultiStepForm() {
     return wrapper;
   };
 
-  // Group fieldsets into steps
-  const firstTwo = createStep(fieldsets.slice(1, 3), "1");
-  const nextThree = createStep(fieldsets.slice(3, 6), "2");
-  const nextTwo = createStep(fieldsets.slice(6, 8), "3");
-  const lastSix = createStep(fieldsets.slice(8, 14), "4");
+  // Create title element that stays visible throughout
+  const formTitle = document.createElement("div");
+  formTitle.className = "hs-richtext hs-main-font-element";
+  formTitle.innerHTML = '<h3 style="text-align: center;">Book a free consult</h3>';
 
-  // Clear form and add wrapped steps
-  while (form.firstChild) {
-    form.removeChild(form.firstChild);
-  }
-
-  // Create step navigation
+  // Create navigation elements
   const stepNav = document.createElement("div");
   stepNav.className = "step-nav";
-  [1, 2, 3, 4].forEach((num) => {
-    const span = document.createElement("span");
-    span.className = "step-number";
-    span.dataset.step = (num - 1).toString();
-    span.textContent = num.toString();
-    stepNav.appendChild(span);
-  });
+  const navHTML = [1, 2, 3, 4].map((num) => `<span class="step-number" data-step="${num - 1}">${num}</span>`).join("");
+  stepNav.innerHTML = navHTML;
 
-  // Add all elements to form
-  form.appendChild(stepNav);
-  form.appendChild(firstTwo);
-  form.appendChild(nextThree);
-  form.appendChild(nextTwo);
-  form.appendChild(lastSix);
-
-  // Create navigation buttons
+  // Build form navigation
   const formNavigation = document.createElement("div");
   formNavigation.className = "form-navigation";
   formNavigation.innerHTML = `
@@ -116,80 +72,89 @@ function initializeMultiStepForm() {
     <button type="submit" class="submit button-primary">Submit</button>
   `;
 
-  // Create error message
   const errorMessage = document.createElement("div");
   errorMessage.className = "error-message";
   errorMessage.style.color = "red";
   errorMessage.style.display = "none";
   errorMessage.textContent = "Please fill out all required fields.";
 
-  form.appendChild(formNavigation);
-  form.appendChild(errorMessage);
+  // Create all steps at once to minimize reflows
+  const steps = [createStep(fieldsets.slice(1, 3), "1"), createStep(fieldsets.slice(3, 6), "2"), createStep(fieldsets.slice(6, 8), "3"), createStep(fieldsets.slice(8, 14), "4")];
 
-  // Setup step functionality
-  const steps = Array.from(document.querySelectorAll(".form-step"));
+  // Clear and rebuild form in one operation
+  const fragment = document.createDocumentFragment();
+  fragment.appendChild(stepNav); // Add step navigation first
+  fragment.appendChild(formTitle); // Add title second
+  steps.forEach((step) => fragment.appendChild(step));
+  fragment.appendChild(formNavigation);
+  fragment.appendChild(errorMessage);
+
+  while (form.firstChild) {
+    form.removeChild(form.firstChild);
+  }
+  form.appendChild(fragment);
+
+  // Cache step elements after adding to DOM
+  const stepElements = Array.from(document.querySelectorAll(".form-step"));
   const stepNumbers = Array.from(document.querySelectorAll(".step-number"));
   let currentStep = 0;
 
   function showStep(index) {
-    steps.forEach((step) => step.classList.remove("active"));
-    steps[index].classList.add("active");
+    stepElements.forEach((step) => step.classList.remove("active"));
+    stepElements[index].classList.add("active");
     stepNumbers[index].classList.add("active");
     updateButtons(index);
   }
 
-  function updateButtons(index) {
-    const prevButton = document.querySelector(".previous");
-    const nextButton = document.querySelector(".next");
-    const submitButton = document.querySelector(".submit");
-
-    prevButton.style.display = index === 0 ? "none" : "block";
-    nextButton.style.display = index === steps.length - 1 ? "none" : "block";
-    submitButton.style.display = index === steps.length - 1 ? "block" : "none";
-  }
-
   function validateStep(index) {
-    const currentStep = steps[index];
-    let isValid = true;
+    const currentStep = stepElements[index];
+    const requiredSelects = currentStep.querySelectorAll("select:required");
+    const requiredInputs = currentStep.querySelectorAll("input:required");
+    const multiContainers = currentStep.querySelectorAll("ul.multi-container");
 
-    // Validate select elements
-    currentStep.querySelectorAll("select").forEach((select) => {
-      if (select.closest("[required]") && !select.value) {
-        isValid = false;
-      }
-    });
+    // Check selects
+    for (const select of requiredSelects) {
+      if (!select.value) return false;
+    }
 
-    // Validate input elements
-    currentStep.querySelectorAll("input").forEach((input) => {
-      const parent = input.closest("[required]");
-      if (parent && !input.value) {
-        isValid = false;
+    // Check inputs
+    for (const input of requiredInputs) {
+      if (!input.value && !input.getAttribute("data-gtm-form-interact-field-id")) {
+        return false;
       }
-      if (input.getAttribute("data-gtm-form-interact-field-id")) {
-        isValid = true;
-      }
-    });
+    }
 
-    // Validate radio buttons
-    currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
-      if (!ul.querySelector('input[type="radio"]:checked')) {
-        isValid = false;
+    // Check radio groups
+    for (const container of multiContainers) {
+      if (!container.querySelector('input[type="radio"]:checked')) {
+        return false;
       }
-    });
+    }
 
-    return isValid;
+    return true;
   }
+
+  // Cache navigation buttons
+  const prevButton = document.querySelector(".previous");
+  const nextButton = document.querySelector(".next");
+  const submitButton = document.querySelector(".submit");
+  const errorMessageElement = document.querySelector(".error-message");
 
   function displayError(show) {
-    const errorMessage = document.querySelector(".error-message");
-    errorMessage.style.display = show ? "block" : "none";
+    errorMessageElement.style.display = show ? "block" : "none";
   }
 
-  // Event listeners
-  document.querySelector(".next").addEventListener("click", () => {
+  function updateButtons(index) {
+    prevButton.style.display = index === 0 ? "none" : "block";
+    nextButton.style.display = index === stepElements.length - 1 ? "none" : "block";
+    submitButton.style.display = index === stepElements.length - 1 ? "block" : "none";
+  }
+
+  // Event handlers
+  nextButton.addEventListener("click", () => {
     if (validateStep(currentStep)) {
       displayError(false);
-      if (currentStep < steps.length - 1) {
+      if (currentStep < stepElements.length - 1) {
         currentStep++;
         showStep(currentStep);
       }
@@ -198,22 +163,28 @@ function initializeMultiStepForm() {
     }
   });
 
-  document.querySelector(".previous").addEventListener("click", () => {
+  prevButton.addEventListener("click", () => {
     if (currentStep > 0) {
       currentStep--;
       showStep(currentStep);
+      displayError(false);
     }
   });
 
+  // Initialize first step
   showStep(currentStep);
 
-  // Show form and set email if available
+  // Set email if available
   const myEmail = localStorage.getItem("my_email");
   const emailInput = document.querySelector('input[type="email"]');
   if (emailInput && myEmail) emailInput.value = myEmail;
+
+  // Now that everything is initialized, remove loader and show form
+  loader.remove();
+  formContainer.classList.remove("form-loading");
+  hubspotForm.style.display = "block";
 }
 
-// Function to create and insert the image container
 function addImageContainer(inputDiv) {
   const imageContainer = document.createElement("div");
   imageContainer.className = "image-container";
@@ -227,11 +198,23 @@ function addImageContainer(inputDiv) {
   inputDiv.appendChild(imageContainer);
 }
 
-// Initialize form when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
+function checkForHubSpotForm() {
+  const hubspotForm = document.querySelector(".hbspt-form");
+  if (!hubspotForm) {
+    setTimeout(checkForHubSpotForm, CHECK_INTERVAL);
+    return;
+  }
+
+  const formContainer = document.querySelector(".right_step_form");
+  if (formContainer && !formContainer.querySelector(".loader")) {
+    formContainer.classList.add("form-loading");
+    const loader = document.createElement("span");
+    loader.className = "loader";
+    formContainer.appendChild(loader);
+  }
+
   initializeMultiStepForm();
 
-  // Add image containers to selects
   document.querySelectorAll(".form-step .input select").forEach((selectElement) => {
     addImageContainer(selectElement.parentElement);
 
@@ -244,4 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
           : "https://uploads-ssl.webflow.com/6661826b05a68c92d1e4be41/667dd131c9a0a6e9c7f805c3_Vector%202533.svg";
     });
   });
-});
+}
+
+checkForHubSpotForm();
