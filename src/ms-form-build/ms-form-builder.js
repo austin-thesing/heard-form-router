@@ -134,19 +134,19 @@ function initializeMultiStepForm() {
       const consentWrapper = document.createElement("div");
       consentWrapper.className = "consent-wrapper";
 
-      // Create and add the privacy text above the checkbox
+      // Add the legal consent container with the checkbox first
+      if (legalConsentContainer) {
+        consentWrapper.appendChild(legalConsentContainer);
+      }
+
+      // Create and add the privacy text below the checkbox
       const privacyText = document.createElement("div");
       privacyText.className = "privacy-text";
       privacyText.textContent =
         "Heard is committed to protecting and respecting your privacy, and we'll only use your personal information to administer your account and to provide the services you requested from us. By clicking submit on the form below, you consent to allow Heard to send SMS meeting reminders as well as store and process the personal information submitted above to provide you with the content requested.";
 
-      // Add the privacy text first
+      // Add the privacy text after the checkbox
       consentWrapper.appendChild(privacyText);
-
-      // Add the legal consent container with the checkbox
-      if (legalConsentContainer) {
-        consentWrapper.appendChild(legalConsentContainer);
-      }
 
       wrapper.appendChild(consentWrapper);
     }
