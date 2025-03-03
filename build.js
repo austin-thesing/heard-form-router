@@ -7,7 +7,7 @@ const config = {
 
 // Define dependencies for smarter rebuilds
 const dependencies = {
-  "form-config.js": ["form-router.js", "ms-form-router.js"],
+  "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js"],
 };
 
 async function buildFile(entrypoint) {
@@ -33,11 +33,11 @@ async function buildFiles(changedFile = null) {
       const filesToBuild = new Set();
       const baseFileName = changedFile.split("/").pop();
 
-      if (dependencies[baseFileName]) {
-        // Add dependent files to build list
-        dependencies[baseFileName].forEach((dep) => {
-          filesToBuild.add(`./src/${dep}`);
-        });
+      // Check if the changed file is form-config.js
+      if (baseFileName === "form-config.js") {
+        // Build all dependent files
+        dependencies["form-config.js"].forEach((dep) => filesToBuild.add(dep));
+        console.log("Config file changed, rebuilding:", [...filesToBuild]);
       } else {
         // Just build the changed file if it's an entrypoint
         const fullPath = `./src/${baseFileName}`;
