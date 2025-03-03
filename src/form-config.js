@@ -41,7 +41,7 @@ const FormRouterConfig = {
     const income = (formData[this.FORM_FIELDS.income] || "").toLowerCase();
     const practiceRunning = (formData[this.FORM_FIELDS.practiceRunning] || "").toLowerCase();
     const profession = (formData[this.FORM_FIELDS.profession] || "").toLowerCase();
-
+    const employeeCount = (formData[this.FORM_FIELDS.employeeCount] || "").toLowerCase();
     console.log("Form Router Debug:", {
       multiOwner,
       state,
@@ -49,6 +49,7 @@ const FormRouterConfig = {
       income,
       practiceRunning,
       profession,
+      employeeCount,
       formData,
     });
 
@@ -61,6 +62,7 @@ const FormRouterConfig = {
       this.DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
       this.DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning) ||
       this.DISQUALIFYING_CONDITIONS.employeeCount.includes(employeeCount);
+    console.log("isDQ", isDQ);
 
     if (isDQ) {
       console.log("Form Router: Not qualified due to DQ conditions");

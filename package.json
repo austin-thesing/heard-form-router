@@ -4,9 +4,8 @@
   "description": "Form routing logic for qualification and redirection",
   "main": "src/form-router.js",
   "scripts": {
-    "watch": "bun run minify.js --watch",
-    "minify": "bun run minify.js",
-    "build": "bun run minify.js"
+    "watch": "bun run build.js --watch",
+    "build": "bun run build.js"
   },
   "author": "",
   "license": "ISC",
