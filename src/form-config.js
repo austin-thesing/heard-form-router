@@ -7,10 +7,7 @@ const FormRouterConfig = {
     income: "what_is_your_expected_annual_income_for_2024___1099__private_practice_",
     practiceRunning: "how_long_have_you_been_running_your_private_practice_",
     profession: "what_best_describes_your_practice_",
-    employeeCount: [
-      "does_your_practice_employ_any_w2_employees_or_1099_contractors_who_see_patients_-0d9c387a-9c8b-40c4-8d46-3135f754f077",
-      "does_your_practice_employ_any_w2_employees_or_1099_contractors_who_see_patients_-807fd7b2-0593-475d-a6e9-4a3a08520238",
-    ],
+    employeeCount: "does_your_practice_employ_any_w2_employees_or_1099_contractors_who_see_patients_",
   },
 
   // Landing page routes
@@ -44,9 +41,7 @@ const FormRouterConfig = {
     const income = (formData[this.FORM_FIELDS.income] || "").toLowerCase();
     const practiceRunning = (formData[this.FORM_FIELDS.practiceRunning] || "").toLowerCase();
     const profession = (formData[this.FORM_FIELDS.profession] || "").toLowerCase();
-
-    // Handle both possible employee count field IDs
-    const employeeCount = (formData[this.FORM_FIELDS.employeeCount[0]] || formData[this.FORM_FIELDS.employeeCount[1]] || "").toLowerCase();
+    const employeeCount = (formData[this.FORM_FIELDS.employeeCount] || "").toLowerCase();
 
     console.log("Form Router Debug:", {
       multiOwner,
