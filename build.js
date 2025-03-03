@@ -1,3 +1,5 @@
+import { watch } from "node:fs";
+
 const config = {
   entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/schedule-guard.js"],
   outdir: "./dist",
@@ -62,16 +64,18 @@ async function buildFiles(changedFile = null) {
   }
 }
 
+// Initial build
+buildFiles();
+
 // Handle watch flag
 if (process.argv.includes("--watch")) {
   console.log("Watching for changes in src directory...");
 
-  const watcher = Bun.watch("./src");
-  watcher.on("change", async (path) => {
-    console.log(`File ${path} changed. Rebuilding dependent files...`);
-    await buildFiles(path);
+  // Using node:fs watch instead of Bun.watch
+  watch("./src", { recursive: true }, async (eventType, filename) => {
+    if (filename) {
+      console.log(`File ${filename} changed. Rebuilding dependent files...`);
+      await buildFiles(filename);
+    }
   });
-} else {
-  // Just do a single build
-  buildFiles();
 }
