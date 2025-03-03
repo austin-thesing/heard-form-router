@@ -7,6 +7,7 @@ const FormRouterConfig = {
     income: "what_is_your_expected_annual_income_for_2024___1099__private_practice_",
     practiceRunning: "how_long_have_you_been_running_your_private_practice_",
     profession: "what_best_describes_your_practice_",
+    employeeCount: "does_your_practice_employ_any_w2_employees_or_1099_contractors_who_see_patients_",
   },
 
   // Landing page routes
@@ -24,6 +25,8 @@ const FormRouterConfig = {
     income: ["none", "less than $20,000"],
     profession: ["dietician", "nutritionist", "massage therapist", "physical therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
     practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
+    // practiceRunning: ["no"],
+    employeeCount: ["yes (more than 10 employees)"],
   },
 
   INCOME_TIERS: {
@@ -38,6 +41,7 @@ const FormRouterConfig = {
     const income = (formData[this.FORM_FIELDS.income] || "").toLowerCase();
     const practiceRunning = (formData[this.FORM_FIELDS.practiceRunning] || "").toLowerCase();
     const profession = (formData[this.FORM_FIELDS.profession] || "").toLowerCase();
+    const employeeCount = (formData[this.FORM_FIELDS.employeeCount] || "").toLowerCase();
 
     console.log("Form Router Debug:", {
       multiOwner,
@@ -46,6 +50,7 @@ const FormRouterConfig = {
       income,
       practiceRunning,
       profession,
+      employeeCount,
       formData,
     });
 
@@ -56,7 +61,9 @@ const FormRouterConfig = {
       this.DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup) ||
       this.DISQUALIFYING_CONDITIONS.income.includes(income) ||
       this.DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
-      this.DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning);
+      this.DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning) ||
+      this.DISQUALIFYING_CONDITIONS.employeeCount.includes(employeeCount);
+    console.log("isDQ", isDQ);
 
     if (isDQ) {
       console.log("Form Router: Not qualified due to DQ conditions");
