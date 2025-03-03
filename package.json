@@ -15,7 +15,8 @@
     "babel-loader": "^9.2.1",
     "core-js": "^3.40.0",
     "webpack": "^5.90.3",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "cursor-tools": "latest"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
