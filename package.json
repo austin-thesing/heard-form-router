@@ -4,7 +4,9 @@
   "description": "Form routing logic for qualification and redirection",
   "main": "src/form-router.js",
   "scripts": {
-    "build": "webpack --mode production"
+    "watch": "bun run minify.js --watch",
+    "minify": "bun run minify.js",
+    "build": "bun run minify.js"
   },
   "author": "",
   "license": "ISC",
