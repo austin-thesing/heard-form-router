@@ -2,6 +2,7 @@ import { FormRouterConfig } from "./form-config.js";
 
 // Initialize HubSpot form handler
 function initializeForm() {
+  console.log("Form Router - Initializing form handler");
   // Create the form immediately, but verify config before handling submissions
   window.hbspt.forms.create({
     region: "na1",
@@ -9,13 +10,17 @@ function initializeForm() {
     formId: "0d9c387a-9c8b-40c4-8d46-3135f754f077",
     target: "#hubspot-form-container",
     onFormReady: function ($form) {
-      console.log("Form Ready - Config loaded:", !!FormRouterConfig);
+      console.log("Form Router - Form Ready");
+      console.log("Form Router - Config loaded:", !!FormRouterConfig);
+
       // Add change event listeners to form fields
+      console.log("Form Router - Adding field tracking");
       $form.find("input, select, textarea").each(function () {
         $(this).on("change", function () {
-          console.log("Field Changed:", {
+          console.log("Form Router - Field Changed:", {
             name: this.name,
             value: this.value,
+            type: this.type || "textarea",
           });
         });
       });
@@ -23,11 +28,11 @@ function initializeForm() {
     onFormSubmit: function ($form) {
       // Verify config is available before proceeding
       if (!FormRouterConfig) {
-        console.error("FormRouterConfig not found - ensure form-config.js is loaded");
+        console.error("Form Router - FormRouterConfig not found - ensure form-config.js is loaded");
         return false;
       }
 
-      console.log("Form Submit - Starting submission process");
+      console.log("Form Router - Starting submission process");
       const formData = new FormData($form);
       const formDataObj = {};
       formData.forEach((value, key) => {
@@ -36,9 +41,9 @@ function initializeForm() {
 
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
-        console.log("Form Submit - Stored form data:", formDataObj);
+        console.log("Form Router - Stored form data:", formDataObj);
       } catch (error) {
-        console.error("Form Submit - Storage failed:", error);
+        console.error("Form Router - Storage failed:", error);
         Sentry.captureException(error, {
           extra: {
             context: "Form submission storage failed",
@@ -56,11 +61,11 @@ function initializeForm() {
     onFormSubmitted: function ($form) {
       // Verify config is available before proceeding
       if (!FormRouterConfig) {
-        console.error("FormRouterConfig not found during submission - ensure form-config.js is loaded");
+        console.error("Form Router - FormRouterConfig not found during submission - ensure form-config.js is loaded");
         return false;
       }
 
-      console.log("Form Submitted - Processing submission");
+      console.log("Form Router - Processing submission");
       handleRedirect();
       return false;
     },
@@ -108,26 +113,26 @@ if (window.hbspt) {
 function handleRedirect() {
   try {
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
-    console.log("Redirect Debug - Form Data:", formData);
+    console.log("Form Router - Retrieved form data:", formData);
 
     const route = determineRoute(formData);
-    console.log("Redirect Debug - Determined Route:", route);
+    console.log("Form Router - Determined route:", route);
 
     const finalUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
-    console.log("Redirect Debug - Final URL:", finalUrl);
+    console.log("Form Router - Final URL:", finalUrl);
 
     // Ensure window.FormRouterConfig exists
     if (!FormRouterConfig) {
-      console.error("FormRouterConfig not found - form-config.js may not be loaded");
+      console.error("Form Router - FormRouterConfig not found - form-config.js may not be loaded");
       return;
     }
 
     setTimeout(() => {
-      console.log("Redirect Debug - Executing redirect to:", finalUrl);
+      console.log("Form Router - Executing redirect to:", finalUrl);
       window.location.href = finalUrl;
     }, 700);
   } catch (error) {
-    console.error("Redirect Debug - Error:", error);
+    console.error("Form Router - Redirect failed:", error);
     Sentry.captureException(error, {
       extra: {
         context: "Post-submission redirect failed",
