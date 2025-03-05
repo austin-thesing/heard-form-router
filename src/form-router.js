@@ -10,9 +10,9 @@ function initializeForm() {
     target: "#hubspot-form-container",
     onFormReady: function ($form) {
       console.log("Form Ready - Config loaded:", !!FormRouterConfig);
-      const formElements = $form.querySelectorAll("input, select, textarea");
-      formElements.forEach((element) => {
-        element.addEventListener("change", function () {
+      // Add change event listeners to form fields
+      $form.find("input, select, textarea").each(function () {
+        $(this).on("change", function () {
           console.log("Field Changed:", {
             name: this.name,
             value: this.value,
