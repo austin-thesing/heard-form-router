@@ -156,5 +156,5 @@ if (document.readyState === "complete") {
   window.addEventListener("load", initializeSchedulerWithGuard);
 }
 
-// Export for use in other files if needed
-export { initScheduler, determineCalendarType, initializeSchedulerWithGuard };
+// // Export for use in other files if needed
+// export { initScheduler, determineCalendarType, initializeSchedulerWithGuard };
