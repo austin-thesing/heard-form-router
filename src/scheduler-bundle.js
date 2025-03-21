@@ -40,69 +40,47 @@ function determineCalendarType(formData) {
   return "SOLE_PROP";
 }
 
-// Function to create the iframe modal
+// Function to create the calendar container
 function createSchedulerModal(calendarType) {
   const calendar = FormRouterConfig.HUBSPOT_CALENDARS[calendarType];
 
-  // Create modal container
-  const modalContainer = document.createElement("div");
-  modalContainer.id = "scheduler-modal";
-  modalContainer.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
+  // Create container
+  const container = document.createElement("div");
+  container.id = "scheduler-container";
+  container.style.cssText = `
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  `;
-
-  // Create modal content
-  const modalContent = document.createElement("div");
-  modalContent.style.cssText = `
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 95%;
     max-width: 800px;
     height: 90vh;
-    position: relative;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
   `;
 
-  // Create close button
-  const closeButton = document.createElement("button");
-  closeButton.innerHTML = "×";
-  closeButton.style.cssText = `
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: none;
+  // Create title
+  const title = document.createElement("h2");
+  title.textContent = calendar.title;
+  title.style.cssText = `
+    margin-bottom: 20px;
+    text-align: center;
+    color: #226752;
     font-size: 24px;
-    cursor: pointer;
-    padding: 5px 10px;
   `;
-  closeButton.onclick = () => modalContainer.remove();
 
   // Create iframe
   const iframe = document.createElement("iframe");
   iframe.src = calendar.url;
   iframe.style.cssText = `
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 60px);
     border: none;
-    margin-top: 20px;
   `;
 
-  // Assemble modal
-  modalContent.appendChild(closeButton);
-  modalContent.appendChild(iframe);
-  modalContainer.appendChild(modalContent);
+  // Assemble container
+  container.appendChild(title);
+  container.appendChild(iframe);
 
-  return modalContainer;
+  return container;
 }
 
 // Main initialization function
