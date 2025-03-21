@@ -5,13 +5,20 @@
   "main": "src/form-router.js",
   "scripts": {
     "watch": "bun run build.js --watch",
-    "build": "bun run build.js"
+    "build": "bun run build.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@antiwork/shortest": "^0.4.0",
-    "cursor-tools": "^0.5.0"
+    "@babel/preset-env": "^7.24.0",
+    "@testing-library/jest-dom": "^6.4.2",
+    "cursor-tools": "^0.5.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
