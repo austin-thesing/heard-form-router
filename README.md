@@ -78,3 +78,40 @@ If none of the above criteria are explicitly met, users will be routed to the "N
 - `what_best_describes_your_practice_`
 
 ### Landing Page Routes
+
+## Using in Webflow
+
+### Option 1: Using jsDelivr (Recommended)
+
+Add the following script tag to your Webflow page's custom code section:
+
+```html
+<!-- For production -->
+<script src="https://cdn.jsdelivr.net/gh/[your-github-username]/form-router@main/dist/scheduler-bundle.min.js"></script>
+
+<!-- For development/debugging -->
+<script src="https://cdn.jsdelivr.net/gh/[your-github-username]/form-router@main/dist/scheduler-bundle.js"></script>
+```
+
+### Option 2: Inline Script
+
+If you prefer to embed the code directly, copy the contents of `dist/scheduler-bundle.min.js` into a script tag in your Webflow page's custom code section:
+
+```html
+<script>
+  // Paste the contents of dist/scheduler-bundle.min.js here
+</script>
+```
+
+### Version Control
+
+The build process generates both minified (`.min.js`) and debug (`.js`) versions of each file. The minified version is optimized for production use, while the debug version is useful during development.
+
+A `version.js` file is also generated in the dist directory with a timestamp, which can be used for cache busting if needed.
+
+### Important Notes
+
+1. The scripts are built as IIFE (Immediately Invoked Function Expression) modules, which means they will work directly in the browser without any module system.
+2. All dependencies are bundled into the final output file.
+3. The code automatically initializes when the page loads - no additional setup required.
+4. Make sure to add the script to pages where you need the scheduler functionality (typically your scheduling/thank you pages).
