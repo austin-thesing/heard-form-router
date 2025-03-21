@@ -2,16 +2,37 @@ import { FormRouterConfig } from "./form-config.js";
 
 // Function to determine which calendar to show based on business type
 function determineCalendarType(formData) {
+  // Check if form data exists and has required fields
+  if (!formData || typeof formData !== "object") {
+    console.error("Form data is missing or invalid");
+    window.location.href = "https://joinheard.com";
+    return null;
+  }
+
   const practiceSetup = (formData[FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
   const employeeCount = (formData[FormRouterConfig.FORM_FIELDS.employeeCount] || "").toLowerCase();
 
+  // Validate required fields are present
+  if (!practiceSetup || !employeeCount) {
+    console.error("Required form fields are missing", { practiceSetup, employeeCount });
+    window.location.href = "https://joinheard.com/welcome-form";
+    return null;
+  }
+
   // Check if it's an S-Corp or meets the employee criteria for S-Corp routing
-  if (practiceSetup.includes("s corp") || ((practiceSetup.includes("llc") || practiceSetup.includes("pllc") || practiceSetup.includes("sole prop")) && (employeeCount.includes("less than 5") || employeeCount.includes("5-10")))) {
+  const isScorp = practiceSetup.includes("s corp");
+  const isLLCorSoleProp = practiceSetup.includes("llc") || practiceSetup.includes("pllc") || practiceSetup.includes("sole prop");
+  const hasSmallTeam = employeeCount.includes("less than 5") || employeeCount.includes("5-10");
+
+  if (isScorp || (isLLCorSoleProp && hasSmallTeam)) {
     return "S_CORP";
   }
 
   // Route to Sole Prop if it's a sole prop with no employees
-  if (practiceSetup.includes("sole prop") && employeeCount.includes("no")) {
+  const isSoleProp = practiceSetup.includes("sole prop");
+  const hasNoEmployees = employeeCount.includes("no");
+
+  if (isSoleProp && hasNoEmployees) {
     return "SOLE_PROP";
   }
 
@@ -92,6 +113,11 @@ function initScheduler() {
 
     // Determine which calendar to show
     const calendarType = determineCalendarType(formData);
+
+    // If calendarType is null, the determineCalendarType function will have already redirected
+    if (calendarType === null) {
+      return;
+    }
 
     // Create and show the modal
     const modal = createSchedulerModal(calendarType);
