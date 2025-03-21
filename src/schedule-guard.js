@@ -1,3 +1,5 @@
+import { initScheduler } from "./hubspot-scheduler.js";
+
 // Check if we're on the scheduler page
 if (window.location.pathname === "/thank-you/schedule") {
   try {
@@ -13,13 +15,15 @@ if (window.location.pathname === "/thank-you/schedule") {
     // Try to parse the JSON to ensure it's valid
     try {
       JSON.parse(formData);
+      // Initialize the scheduler if form data is valid
+      initScheduler();
     } catch (e) {
       console.error("Invalid form data in localStorage:", e);
       window.location.href = "https://joinheard.com";
       throw new Error("Invalid form data");
     }
 
-    console.log("Valid form data found, allowing access to scheduler");
+    console.log("Valid form data found, initializing scheduler");
   } catch (error) {
     console.error("Error checking form data:", error);
     // Redirect will have already happened if needed
