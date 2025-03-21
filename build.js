@@ -1,7 +1,7 @@
 import { watch } from "node:fs";
 
 const config = {
-  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/schedule-guard.js"],
+  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/schedule-guard.js", "./src/hubspot-scheduler.js"],
   outdir: "./dist",
   minify: true,
   target: "browser",
