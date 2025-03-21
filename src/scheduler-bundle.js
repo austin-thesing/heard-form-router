@@ -12,6 +12,11 @@ function determineCalendarType(formData) {
   const practiceSetup = (formData[FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
   const employeeCount = (formData[FormRouterConfig.FORM_FIELDS.employeeCount] || "").toLowerCase();
 
+  console.log("Form data detected:", {
+    practiceSetup,
+    employeeCount,
+  });
+
   // Validate required fields are present
   if (!practiceSetup || !employeeCount) {
     console.error("Required form fields are missing", { practiceSetup, employeeCount });
@@ -24,7 +29,18 @@ function determineCalendarType(formData) {
   const isLLCorSoleProp = practiceSetup.includes("llc") || practiceSetup.includes("pllc") || practiceSetup.includes("sole prop");
   const hasSmallTeam = employeeCount.includes("less than 5") || employeeCount.includes("5-10");
 
+  console.log("Business type analysis:", {
+    isScorp,
+    isLLCorSoleProp,
+    hasSmallTeam,
+    practiceSetup,
+    employeeCount,
+  });
+
   if (isScorp || (isLLCorSoleProp && hasSmallTeam)) {
+    console.log("Routing to S_CORP calendar due to:", {
+      reason: isScorp ? "S Corp detected" : "LLC/Sole Prop with small team",
+    });
     return "S_CORP";
   }
 
@@ -33,16 +49,24 @@ function determineCalendarType(formData) {
   const hasNoEmployees = employeeCount.includes("no");
 
   if (isSoleProp && hasNoEmployees) {
+    console.log("Routing to SOLE_PROP calendar due to sole proprietorship with no employees");
     return "SOLE_PROP";
   }
 
   // Default to Sole Proprietor for all other cases
+  console.log("Routing to SOLE_PROP calendar as default case");
   return "SOLE_PROP";
 }
 
 // Function to create the calendar container
 function createSchedulerModal(calendarType) {
   const calendar = FormRouterConfig.HUBSPOT_CALENDARS[calendarType];
+
+  console.log("Creating scheduler modal:", {
+    calendarType,
+    calendarTitle: calendar.title,
+    calendarUrl: calendar.url,
+  });
 
   // Create container
   const container = document.createElement("div");
@@ -89,22 +113,30 @@ function initScheduler() {
     // Get form data from localStorage
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
 
+    console.log("Initializing scheduler with stored form data:", {
+      hasFormData: !!localStorage.getItem("hubspot_form_data"),
+      formDataKeys: Object.keys(formData),
+    });
+
     // Determine which calendar to show
     const calendarType = determineCalendarType(formData);
 
     // If calendarType is null, the determineCalendarType function will have already redirected
     if (calendarType === null) {
+      console.log("Calendar type is null, redirecting has occurred");
       return;
     }
 
     // Create and show the modal
     const modal = createSchedulerModal(calendarType);
     document.body.appendChild(modal);
+    console.log("Scheduler modal successfully mounted to DOM");
 
     // Clean up form data after successful scheduling
     window.addEventListener("message", (event) => {
       // Check if the message is from HubSpot and indicates a successful scheduling
       if (event.data.type === "CALENDAR_EVENT_SCHEDULED") {
+        console.log("Calendar event successfully scheduled, cleaning up form data");
         localStorage.removeItem("hubspot_form_data");
         modal.remove();
       }
@@ -118,10 +150,16 @@ function initScheduler() {
 
 // Guard and initialization logic
 function initializeSchedulerWithGuard() {
+  console.log("Starting scheduler initialization guard checks");
+
   // Check if we're on the scheduler page
   if (window.location.pathname === "/thank-you/schedule") {
     try {
       const formData = localStorage.getItem("hubspot_form_data");
+      console.log("Checking localStorage for form data:", {
+        formDataExists: !!formData,
+        formDataLength: formData?.length || 0,
+      });
 
       // If no form data exists or it's invalid JSON, redirect
       if (!formData) {
