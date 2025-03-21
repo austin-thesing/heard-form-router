@@ -3,10 +3,16 @@ import { FormRouterConfig } from "./form-config.js";
 // Function to determine which calendar to show based on business type
 function determineCalendarType(formData) {
   const practiceSetup = (formData[FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
+  const employeeCount = (formData[FormRouterConfig.FORM_FIELDS.employeeCount] || "").toLowerCase();
 
-  // Check if it's an S-Corp
-  if (practiceSetup.includes("s corp")) {
+  // Check if it's an S-Corp or meets the employee criteria for S-Corp routing
+  if (practiceSetup.includes("s corp") || ((practiceSetup.includes("llc") || practiceSetup.includes("pllc") || practiceSetup.includes("sole prop")) && (employeeCount.includes("less than 5") || employeeCount.includes("5-10")))) {
     return "S_CORP";
+  }
+
+  // Route to Sole Prop if it's a sole prop with no employees
+  if (practiceSetup.includes("sole prop") && employeeCount.includes("no")) {
+    return "SOLE_PROP";
   }
 
   // Default to Sole Proprietor for all other cases
