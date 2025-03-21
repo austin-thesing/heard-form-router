@@ -14,11 +14,11 @@ const FormRouterConfig = {
   HUBSPOT_CALENDARS: {
     SOLE_PROP: {
       url: "https://meetings.hubspot.com/bz/consultations?embed=true",
-      title: "Schedule a Call - Sole Proprietor",
+      title: "Schedule a Call",
     },
     S_CORP: {
       url: "https://meetings.hubspot.com/bz/consultation?embed=true",
-      title: "Schedule a Call - S Corporation",
+      title: "Schedule a Call",
     },
   },
 
