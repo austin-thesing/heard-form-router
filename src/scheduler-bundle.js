@@ -100,6 +100,18 @@ function createSchedulerModal(calendarType) {
     border: none;
   `;
 
+  // Inject HubSpot Meetings script if not already present
+  if (!document.querySelector('script[src*="MeetingsEmbedCode.js"]')) {
+    const hubspotScript = document.createElement("script");
+    hubspotScript.type = "text/javascript";
+    hubspotScript.src = "https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js";
+    hubspotScript.async = true;
+    console.log("Injecting HubSpot Meetings script");
+    document.head.appendChild(hubspotScript);
+  } else {
+    console.log("HubSpot Meetings script already present");
+  }
+
   // Assemble container
   container.appendChild(title);
   container.appendChild(iframe);
