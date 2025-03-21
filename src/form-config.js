@@ -13,11 +13,11 @@ const FormRouterConfig = {
   // HubSpot Calendar Configuration
   HUBSPOT_CALENDARS: {
     SOLE_PROP: {
-      url: "YOUR_SOLE_PROP_SCHEDULING_URL", // Replace with actual HubSpot scheduling page URL
+      url: "https://meetings.hubspot.com/bz/consultations?embed=true",
       title: "Schedule a Call - Sole Proprietor",
     },
     S_CORP: {
-      url: "YOUR_S_CORP_SCHEDULING_URL", // Replace with actual HubSpot scheduling page URL
+      url: "https://meetings.hubspot.com/bz/consultation?embed=true",
       title: "Schedule a Call - S Corporation",
     },
   },

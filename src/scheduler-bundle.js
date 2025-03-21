@@ -106,12 +106,45 @@ function initScheduler() {
   }
 }
 
-// Initialize when the page loads
-if (document.readyState === "complete") {
-  initScheduler();
-} else {
-  window.addEventListener("load", initScheduler);
+// Guard and initialization logic
+function initializeSchedulerWithGuard() {
+  // Check if we're on the scheduler page
+  if (window.location.pathname === "/thank-you/schedule") {
+    try {
+      const formData = localStorage.getItem("hubspot_form_data");
+
+      // If no form data exists or it's invalid JSON, redirect
+      if (!formData) {
+        console.log("No form data found in localStorage, redirecting to homepage");
+        window.location.href = "https://joinheard.com";
+        throw new Error("No form data found");
+      }
+
+      // Try to parse the JSON to ensure it's valid
+      try {
+        JSON.parse(formData);
+        // Initialize the scheduler if form data is valid
+        initScheduler();
+      } catch (e) {
+        console.error("Invalid form data in localStorage:", e);
+        window.location.href = "https://joinheard.com";
+        throw new Error("Invalid form data");
+      }
+
+      console.log("Valid form data found, initializing scheduler");
+    } catch (error) {
+      console.error("Error checking form data:", error);
+      // Redirect will have already happened if needed
+    }
+  }
 }
 
-// Export for use in other files
-export { initScheduler, determineCalendarType };
+// Initialize when the page loads
+if (document.readyState === "complete") {
+  initializeSchedulerWithGuard();
+} else {
+  window.addEventListener("load", initializeSchedulerWithGuard);
+}
+
+// Export for use in other files if needed
+export { initScheduler, determineCalendarType, initializeSchedulerWithGuard };

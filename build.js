@@ -1,7 +1,7 @@
 import { watch } from "node:fs";
 
 const config = {
-  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/schedule-guard.js", "./src/hubspot-scheduler.js"],
+  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
   outdir: "./dist",
   minify: true,
   target: "browser",
@@ -9,7 +9,7 @@ const config = {
 
 // Define dependencies for smarter rebuilds
 const dependencies = {
-  "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js"],
+  "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
 };
 
 async function buildFile(entrypoint) {
