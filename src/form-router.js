@@ -36,7 +36,12 @@ function initializeForm() {
       const formData = new FormData($form);
       const formDataObj = {};
       formData.forEach((value, key) => {
-        formDataObj[key] = value;
+        // Ensure consistent field value handling
+        if (key === FormRouterConfig.FORM_FIELDS.employeeCount || key === FormRouterConfig.FORM_FIELDS.practiceRunning) {
+          formDataObj[key] = value.toLowerCase().trim();
+        } else {
+          formDataObj[key] = value;
+        }
       });
 
       try {
