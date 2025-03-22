@@ -1,7 +1,7 @@
 import { watch } from "node:fs";
 
 const config = {
-  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/schedule-guard.js"],
+  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
   outdir: "./dist",
   minify: true,
   target: "browser",
@@ -9,22 +9,32 @@ const config = {
 
 // Define dependencies for smarter rebuilds
 const dependencies = {
-  "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js"],
+  "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
 };
 
 async function buildFile(entrypoint) {
   console.log(`Building ${entrypoint}...`);
+
   const result = await Bun.build({
     entrypoints: [entrypoint],
     outdir: config.outdir,
-    minify: config.minify,
-    target: config.target,
+    minify: true,
+    target: "browser",
+    format: "esm", // Bun will handle the IIFE wrapping
   });
 
   if (!result.success) {
     console.error(`Build failed for ${entrypoint}:`, result.logs);
     return false;
   }
+
+  // Add IIFE wrapper to the output
+  for (const output of result.outputs) {
+    const code = await output.text();
+    const wrappedCode = `(function(){${code}})();`;
+    await Bun.write(output.path, wrappedCode);
+  }
+
   console.log(`Successfully built ${entrypoint}`);
   return true;
 }
@@ -35,13 +45,10 @@ async function buildFiles(changedFile = null) {
       const filesToBuild = new Set();
       const baseFileName = changedFile.split("/").pop();
 
-      // Check if the changed file is form-config.js
       if (baseFileName === "form-config.js") {
-        // Build all dependent files
         dependencies["form-config.js"].forEach((dep) => filesToBuild.add(dep));
         console.log("Config file changed, rebuilding:", [...filesToBuild]);
       } else {
-        // Just build the changed file if it's an entrypoint
         const fullPath = `./src/${baseFileName}`;
         if (config.entrypoints.includes(fullPath)) {
           filesToBuild.add(fullPath);
@@ -52,7 +59,6 @@ async function buildFiles(changedFile = null) {
         if (!(await buildFile(file))) return;
       }
     } else {
-      // Initial build - build all entrypoints
       for (const entrypoint of config.entrypoints) {
         if (!(await buildFile(entrypoint))) return;
       }
@@ -71,7 +77,6 @@ buildFiles();
 if (process.argv.includes("--watch")) {
   console.log("Watching for changes in src directory...");
 
-  // Using node:fs watch instead of Bun.watch
   watch("./src", { recursive: true }, async (eventType, filename) => {
     if (filename) {
       console.log(`File ${filename} changed. Rebuilding dependent files...`);

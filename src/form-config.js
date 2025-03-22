@@ -10,6 +10,18 @@ const FormRouterConfig = {
     employeeCount: "does_your_practice_employ_any_w2_employees_or_1099_contractors_who_see_patients_",
   },
 
+  // HubSpot Calendar Configuration
+  HUBSPOT_CALENDARS: {
+    SOLE_PROP: {
+      url: "https://meetings.hubspot.com/bz/consultations?embed=true",
+      title: "Schedule a Call",
+    },
+    S_CORP: {
+      url: "https://meetings.hubspot.com/bz/consultation?embed=true",
+      title: "Schedule a Call",
+    },
+  },
+
   // Landing page routes
   LANDING_PAGES: {
     FREE_TRIAL: "/thank-you/free-trial",
