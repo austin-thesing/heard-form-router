@@ -35,6 +35,13 @@ function initializeForm() {
       console.log("Form Router - Starting submission process");
       const formData = new FormData($form);
       const formDataObj = {};
+
+      // Log all field names and values for debugging
+      console.log("Form Router - Raw form fields:");
+      for (let [key, value] of formData.entries()) {
+        console.log(`Field: "${key}" = "${value}"`);
+      }
+
       formData.forEach((value, key) => {
         // Ensure consistent field value handling
         if (key === FormRouterConfig.FORM_FIELDS.employeeCount || key === FormRouterConfig.FORM_FIELDS.practiceRunning) {
@@ -111,6 +118,28 @@ function handleRedirect() {
   try {
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
     console.log("Form Router - Retrieved form data:", formData);
+
+    // Log the exact field names from FormRouterConfig
+    console.log("Form Router - Expected field names:", {
+      multiOwner: FormRouterConfig.FORM_FIELDS.multiOwner,
+      state: FormRouterConfig.FORM_FIELDS.state,
+      practiceSetup: FormRouterConfig.FORM_FIELDS.practiceSetup,
+      income: FormRouterConfig.FORM_FIELDS.income,
+      practiceRunning: FormRouterConfig.FORM_FIELDS.practiceRunning,
+      profession: FormRouterConfig.FORM_FIELDS.profession,
+      employeeCount: FormRouterConfig.FORM_FIELDS.employeeCount,
+    });
+
+    // Check if each expected field exists in the form data
+    console.log("Form Router - Field existence check:", {
+      multiOwner: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.multiOwner),
+      state: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.state),
+      practiceSetup: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.practiceSetup),
+      income: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.income),
+      practiceRunning: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.practiceRunning),
+      profession: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.profession),
+      employeeCount: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.employeeCount),
+    });
 
     const route = determineRoute(formData);
     console.log("Form Router - Determined route:", route);

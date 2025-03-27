@@ -53,13 +53,36 @@ window.addEventListener("message", function (event) {
       // Merge with HubSpot data if available
       const hsData = event.data.data;
       if (hsData && Array.isArray(hsData)) {
+        console.log("MS Form - Raw HubSpot form fields:", hsData);
         hsData.forEach((field) => {
+          console.log(`MS Form - Field: "${field.name}" = "${field.value}"`);
           formData[field.name] = field.value;
         });
       }
 
       const submissionTime = new Date().toISOString();
       console.log("MS Form - Final form data:", formData);
+
+      // Log the expected field names and check if they exist in the form data
+      console.log("MS Form - Expected field names:", {
+        multiOwner: FormRouterConfig.FORM_FIELDS.multiOwner,
+        state: FormRouterConfig.FORM_FIELDS.state,
+        practiceSetup: FormRouterConfig.FORM_FIELDS.practiceSetup,
+        income: FormRouterConfig.FORM_FIELDS.income,
+        practiceRunning: FormRouterConfig.FORM_FIELDS.practiceRunning,
+        profession: FormRouterConfig.FORM_FIELDS.profession,
+        employeeCount: FormRouterConfig.FORM_FIELDS.employeeCount,
+      });
+
+      console.log("MS Form - Field existence check:", {
+        multiOwner: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.multiOwner),
+        state: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.state),
+        practiceSetup: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.practiceSetup),
+        income: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.income),
+        practiceRunning: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.practiceRunning),
+        profession: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.profession),
+        employeeCount: formData.hasOwnProperty(FormRouterConfig.FORM_FIELDS.employeeCount),
+      });
 
       if (Object.keys(formData).length === 0) {
         console.error("MS Form - No form data available");

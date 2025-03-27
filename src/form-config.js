@@ -83,7 +83,20 @@ const FormRouterConfig = {
     }
 
     // Check for qualified booking (income >= $20k)
-    if (this.INCOME_TIERS.QUALIFIED_INCOME.some((tier) => income.includes(tier))) {
+    console.log("Form Router: Checking income qualification. Current income value:", income);
+    console.log("Form Router: Looking for income in qualified tiers:", this.INCOME_TIERS.QUALIFIED_INCOME);
+
+    const incomeMatches = this.INCOME_TIERS.QUALIFIED_INCOME.map((tier) => {
+      // Convert both income and tier to lowercase for case-insensitive comparison
+      const matches = income.includes(tier.toLowerCase());
+      console.log(`Form Router: Does income "${income}" include "${tier.toLowerCase()}"? ${matches}`);
+      return matches;
+    });
+
+    const isQualifiedIncome = incomeMatches.some((match) => match === true);
+    console.log("Form Router: Is income qualified?", isQualifiedIncome);
+
+    if (isQualifiedIncome) {
       console.log("Form Router: Qualified for scheduler");
       return "SCHEDULER";
     }
