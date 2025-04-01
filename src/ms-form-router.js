@@ -107,7 +107,7 @@ window.addEventListener("message", function (event) {
         try {
           const redirectUrl = FormRouterConfig.LANDING_PAGES[route];
           console.log("MS Form - Redirecting to:", redirectUrl);
-          window.location.href = redirectUrl;
+          // window.location.href = redirectUrl; // Commented out for debugging
         } catch (error) {
           console.error("MS Form - Redirect failed:", error);
           Sentry.captureException(error, {
@@ -121,7 +121,8 @@ window.addEventListener("message", function (event) {
               form: "ms_hubspot_contact",
             },
           });
-          window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+          // Fallback to NOT_QUALIFIED if something goes wrong
+          // window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED; // Commented out for debugging
         }
       }, 700);
     }

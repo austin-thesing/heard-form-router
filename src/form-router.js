@@ -155,7 +155,7 @@ function handleRedirect() {
 
     setTimeout(() => {
       console.log("Form Router - Executing redirect to:", finalUrl);
-      window.location.href = finalUrl;
+      // window.location.href = finalUrl; // Commented out for debugging
     }, 700);
   } catch (error) {
     console.error("Form Router - Redirect failed:", error);
@@ -169,6 +169,6 @@ function handleRedirect() {
       },
     });
     // Fallback to NOT_QUALIFIED if something goes wrong
-    window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    // window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED; // Commented out for debugging
   }
 }
