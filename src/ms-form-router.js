@@ -63,18 +63,18 @@ window.addEventListener("message", function (event) {
 
       if (Object.keys(formData).length === 0) {
         console.error("MS Form - No form data available");
-        Sentry.captureMessage("MS Form: No form data available", {
-          level: "error",
-          tags: {
-            type: "hubspot_submission",
-            form: "ms_hubspot_contact",
-          },
-          extra: {
-            eventData: event.data,
-            submissionTime: submissionTime,
-            formElement: document.querySelector(".right_step_form form")?.outerHTML,
-          },
-        });
+        // Sentry.captureMessage("MS Form: No form data available", {
+        //   level: "error",
+        //   tags: {
+        //     type: "hubspot_submission",
+        //     form: "ms_hubspot_contact",
+        //   },
+        //   extra: {
+        //     eventData: event.data,
+        //     submissionTime: submissionTime,
+        //     formElement: document.querySelector(".right_step_form form")?.outerHTML,
+        //   },
+        // });
       }
 
       const route = FormRouterConfig.determineRoute(formData);
@@ -87,17 +87,17 @@ window.addEventListener("message", function (event) {
           window.location.href = redirectUrl;
         } catch (error) {
           console.error("MS Form - Redirect failed:", error);
-          Sentry.captureException(error, {
-            extra: {
-              context: "MS Form redirect failed",
-              route: route,
-              formData: formData,
-            },
-            tags: {
-              type: "redirect",
-              form: "ms_hubspot_contact",
-            },
-          });
+          // Sentry.captureException(error, {
+          //   extra: {
+          //     context: "MS Form redirect failed",
+          //     route: route,
+          //     formData: formData,
+          //   },
+          //   tags: {
+          //     type: "redirect",
+          //     form: "ms_hubspot_contact",
+          //   },
+          // });
           window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
         }
       }, 700);
