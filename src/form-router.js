@@ -49,16 +49,6 @@ function initializeForm() {
         console.log("Form Router - Stored form data:", formDataObj);
       } catch (error) {
         console.error("Form Router - Storage failed:", error);
-        Sentry.captureException(error, {
-          extra: {
-            context: "Form submission storage failed",
-            formData: formDataObj,
-          },
-          tags: {
-            type: "local_storage",
-            form: "hubspot_contact",
-          },
-        });
       }
 
       return true;
@@ -75,16 +65,7 @@ function initializeForm() {
       return false;
     },
     onFormSubmitError: function ($form, error) {
-      Sentry.captureException(error, {
-        extra: {
-          context: "HubSpot form submission error",
-          formData: Object.fromEntries(new FormData($form)),
-        },
-        tags: {
-          type: "hubspot_submission_error",
-          form: "hubspot_contact",
-        },
-      });
+      console.error("Form Router - HubSpot form submission error:", error, Object.fromEntries(new FormData($form)));
     },
   });
 }
@@ -130,15 +111,6 @@ function handleRedirect() {
     }, 700);
   } catch (error) {
     console.error("Form Router - Redirect failed:", error);
-    Sentry.captureException(error, {
-      extra: {
-        context: "Post-submission redirect failed",
-      },
-      tags: {
-        type: "redirect",
-        form: "hubspot_contact",
-      },
-    });
     // Fallback to NOT_QUALIFIED if something goes wrong
     window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
   }
