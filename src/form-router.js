@@ -25,7 +25,7 @@ function initializeForm() {
         });
       });
     },
-    onFormSubmit: function ($form) {
+    onFormSubmit: function ($form, data) {
       // Verify config is available before proceeding
       if (!FormRouterConfig) {
         console.error("Form Router - FormRouterConfig not found - ensure form-config.js is loaded");
@@ -33,16 +33,21 @@ function initializeForm() {
       }
 
       console.log("Form Router - Starting submission process");
-      const formData = new FormData($form);
       const formDataObj = {};
-      formData.forEach((value, key) => {
-        // Ensure consistent field value handling
-        if (key === FormRouterConfig.FORM_FIELDS.employeeCount || key === FormRouterConfig.FORM_FIELDS.practiceRunning) {
-          formDataObj[key] = value.toLowerCase().trim();
-        } else {
-          formDataObj[key] = value;
-        }
-      });
+
+      // Use the HubSpot data directly
+      if (data && Array.isArray(data)) {
+        data.forEach((field) => {
+          const value = field.value;
+          const key = field.name;
+          // Ensure consistent field value handling
+          if (key === FormRouterConfig.FORM_FIELDS.employeeCount || key === FormRouterConfig.FORM_FIELDS.practiceRunning) {
+            formDataObj[key] = value.toLowerCase().trim();
+          } else {
+            formDataObj[key] = value;
+          }
+        });
+      }
 
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
