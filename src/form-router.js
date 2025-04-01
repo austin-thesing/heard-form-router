@@ -33,13 +33,19 @@ function initializeForm() {
       }
 
       console.log("Form Router - Starting submission process");
+      console.log("Form Router - Raw HubSpot data:", data);
       const formDataObj = {};
 
       // Use the HubSpot data directly
       if (data && Array.isArray(data)) {
+        console.log(
+          "Form Router - Income field in raw data:",
+          data.find((field) => field.name === FormRouterConfig.FORM_FIELDS.income)
+        );
         data.forEach((field) => {
           const value = field.value;
           const key = field.name;
+          console.log("Form Router - Processing field:", { key, value });
           // Ensure consistent field value handling
           if (key === FormRouterConfig.FORM_FIELDS.employeeCount || key === FormRouterConfig.FORM_FIELDS.practiceRunning) {
             formDataObj[key] = value.toLowerCase().trim();
@@ -47,9 +53,12 @@ function initializeForm() {
             formDataObj[key] = value;
           }
         });
+      } else {
+        console.error("Form Router - No data received from HubSpot or invalid format:", data);
       }
 
       try {
+        console.log("Form Router - Final form data object before storage:", formDataObj);
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
         console.log("Form Router - Stored form data:", formDataObj);
       } catch (error) {
@@ -97,6 +106,55 @@ function handleRedirect() {
   try {
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
     console.log("Form Router - Retrieved form data:", formData);
+    console.log("Form Router - Income field value:", formData.income);
+    console.log("Form Router - Income field type:", typeof formData.income);
+
+    // Log each DQ condition check
+    const multiOwner = (formData[FormRouterConfig.FORM_FIELDS.multiOwner] || "").toLowerCase();
+    const state = (formData[FormRouterConfig.FORM_FIELDS.state] || "").toLowerCase();
+    const practiceSetup = (formData[FormRouterConfig.FORM_FIELDS.practiceSetup] || "").toLowerCase();
+    const income = (formData[FormRouterConfig.FORM_FIELDS.income] || "").toLowerCase();
+    const practiceRunning = (formData[FormRouterConfig.FORM_FIELDS.practiceRunning] || "").toLowerCase();
+    const profession = (formData[FormRouterConfig.FORM_FIELDS.profession] || "").toLowerCase();
+    const employeeCount = (formData[FormRouterConfig.FORM_FIELDS.employeeCount] || "").toLowerCase();
+
+    console.log("Form Router - DQ Condition Checks:", {
+      multiOwner: {
+        value: multiOwner,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.multiOwner.includes(multiOwner),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.multiOwner,
+      },
+      state: {
+        value: state,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.state.includes(state),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.state,
+      },
+      practiceSetup: {
+        value: practiceSetup,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.practiceSetup,
+      },
+      income: {
+        value: income,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.income.includes(income),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.income,
+      },
+      profession: {
+        value: profession,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.profession,
+      },
+      practiceRunning: {
+        value: practiceRunning,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.practiceRunning,
+      },
+      employeeCount: {
+        value: employeeCount,
+        isDQ: FormRouterConfig.DISQUALIFYING_CONDITIONS.employeeCount.includes(employeeCount),
+        dqValues: FormRouterConfig.DISQUALIFYING_CONDITIONS.employeeCount,
+      },
+    });
 
     const route = determineRoute(formData);
     console.log("Form Router - Determined route:", route);
