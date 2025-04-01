@@ -51,6 +51,12 @@ function initializeForm() {
         }
       });
 
+      // ---> Add specific log for income field here <---
+      const incomeFieldName = FormRouterConfig.FORM_FIELDS.income;
+      const incomeValueFromFormData = formData.get(incomeFieldName);
+      console.log(`Form Router - Checking income field directly: Name='${incomeFieldName}', Value='${incomeValueFromFormData}'`);
+      // ---------------------------------------------------
+
       try {
         localStorage.setItem("hubspot_form_data", JSON.stringify(formDataObj));
         console.log("Form Router - Stored form data:", formDataObj);
@@ -118,6 +124,12 @@ function handleRedirect() {
   try {
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
     console.log("Form Router - Retrieved form data:", formData);
+
+    // ---> Add specific log for income field after retrieval <---
+    const incomeFieldName = FormRouterConfig.FORM_FIELDS.income;
+    const incomeValueFromStorage = formData[incomeFieldName];
+    console.log(`Form Router - Checking income field after storage retrieval: Name='${incomeFieldName}', Value='${incomeValueFromStorage}', Type='${typeof incomeValueFromStorage}'`);
+    // ------------------------------------------------------
 
     // Log the exact field names from FormRouterConfig
     console.log("Form Router - Expected field names:", {

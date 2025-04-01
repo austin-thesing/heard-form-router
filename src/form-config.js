@@ -29,7 +29,6 @@ const FormRouterConfig = {
     NOT_QUALIFIED: "/thank-you/success",
   },
 
-  // Qualification criteria
   DISQUALIFYING_CONDITIONS: {
     multiOwner: ["yes"],
     state: ["international"],
