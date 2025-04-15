@@ -58,6 +58,14 @@ function determineCalendarType(formData) {
   return "SOLE_PROP";
 }
 
+// Helper function to get cookie value by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
+
 // Function to create the calendar container
 function createSchedulerModal(calendarType) {
   const calendar = FormRouterConfig.HUBSPOT_CALENDARS[calendarType];
@@ -93,7 +101,14 @@ function createSchedulerModal(calendarType) {
 
   // Create iframe
   const iframe = document.createElement("iframe");
-  iframe.src = calendar.url;
+  let iframeUrl = calendar.url;
+  const hutk = getCookie("hubspotutk");
+  if (hutk) {
+    const separator = iframeUrl.includes("?") ? "&" : "?";
+    iframeUrl += `${separator}hubspotUtk=${encodeURIComponent(hutk)}`;
+    console.log("Appended hubspotUtk to iframe URL:", iframeUrl);
+  }
+  iframe.src = iframeUrl;
   iframe.style.cssText = `
     width: 100%;
     height: calc(100% - 60px);
