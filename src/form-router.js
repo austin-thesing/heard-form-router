@@ -170,19 +170,6 @@ function handleRedirect() {
     let finalUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
     console.log("Form Router - Base URL:", finalUrl);
 
-    // Get the HubSpot User Token (hutk)
-    const hutk = getCookie("hubspotutk");
-    console.log("Form Router - Retrieved hutk:", hutk);
-
-    if (hutk) {
-      // Append hutk to the final URL
-      const separator = finalUrl.includes("?") ? "&" : "?";
-      finalUrl += `${separator}hubspotUtk=${hutk}`;
-      console.log("Form Router - Appended hutk to URL:", finalUrl);
-    } else {
-      console.warn("Form Router - hubspotutk cookie not found. Cannot append to URL.");
-    }
-
     // Ensure window.FormRouterConfig exists
     if (!FormRouterConfig) {
       console.error("Form Router - FormRouterConfig not found - form-config.js may not be loaded");
@@ -197,12 +184,6 @@ function handleRedirect() {
     console.error("Form Router - Redirect failed:", error);
     // Fallback to NOT_QUALIFIED if something goes wrong
     let fallbackUrl = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
-    const hutkFallback = getCookie("hubspotutk"); // Use a different variable name to avoid conflict
-    if (hutkFallback) {
-      const separator = fallbackUrl.includes("?") ? "&" : "?";
-      fallbackUrl += `${separator}hubspotUtk=${hutkFallback}`;
-      console.log("Form Router - Appended hutk to fallback URL:", fallbackUrl);
-    }
     window.location.href = fallbackUrl;
   }
 }

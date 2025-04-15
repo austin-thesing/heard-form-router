@@ -90,18 +90,7 @@ window.addEventListener("message", function (event) {
       let redirectUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
       console.log("MS Form - Base URL:", redirectUrl);
 
-      // Get the HubSpot User Token (hutk)
-      const hutk = getCookie("hubspotutk");
-      console.log("MS Form - Retrieved hutk:", hutk);
-
-      if (hutk) {
-        // Append hutk to the final URL
-        const separator = redirectUrl.includes("?") ? "&" : "?";
-        redirectUrl += `${separator}hubspotUtk=${hutk}`;
-        console.log("MS Form - Appended hutk to URL:", redirectUrl);
-      } else {
-        console.warn("MS Form - hubspotutk cookie not found. Cannot append to URL.");
-      }
+      // No longer appending hubspotutk to the URL
 
       console.log("MS Form - Redirecting to:", redirectUrl);
       setTimeout(() => {
@@ -121,11 +110,7 @@ window.addEventListener("message", function (event) {
           //   },
           // });
           let fallbackUrl = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
-          const hutk = getCookie("hubspotutk");
-          if (hutk) {
-            const separator = fallbackUrl.includes("?") ? "&" : "?";
-            fallbackUrl += `${separator}hubspotUtk=${hutk}`;
-          }
+          // No longer appending hubspotutk to the fallback URL
           window.location.href = fallbackUrl;
         }
       }, 700);

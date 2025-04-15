@@ -108,6 +108,23 @@ function createSchedulerModal(calendarType) {
     iframeUrl += `${separator}hubspotutk=${encodeURIComponent(hutk)}`;
     console.log("Appended hubspotutk to iframe URL:", iframeUrl);
   }
+
+  // Add prefill query params for firstName, lastName, email if available
+  try {
+    const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+    const params = new URLSearchParams();
+    if (formData.firstName) params.append("firstname", formData.firstName);
+    if (formData.lastName) params.append("lastname", formData.lastName);
+    if (formData.email) params.append("email", formData.email);
+    if ([...params].length > 0) {
+      const separator = iframeUrl.includes("?") ? "&" : "?";
+      iframeUrl += `${separator}${params.toString()}`;
+      console.log("Appended prefill params to iframe URL:", iframeUrl);
+    }
+  } catch (e) {
+    console.warn("Could not parse form data for prefill params", e);
+  }
+
   iframe.src = iframeUrl;
   iframe.style.cssText = `
     width: 100%;
