@@ -105,8 +105,8 @@ function createSchedulerModal(calendarType) {
   const hutk = getCookie("hubspotutk");
   if (hutk) {
     const separator = iframeUrl.includes("?") ? "&" : "?";
-    iframeUrl += `${separator}hubspotUtk=${encodeURIComponent(hutk)}`;
-    console.log("Appended hubspotUtk to iframe URL:", iframeUrl);
+    iframeUrl += `${separator}hubspotutk=${encodeURIComponent(hutk)}`;
+    console.log("Appended hubspotutk to iframe URL:", iframeUrl);
   }
   iframe.src = iframeUrl;
   iframe.style.cssText = `

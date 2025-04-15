@@ -11,7 +11,7 @@
     text-align: center;
     color: #226752;
     font-size: 24px;
-  `;let K=document.createElement("iframe"),V=B.url,X=M("hubspotutk");if(X){let J=V.includes("?")?"&":"?";V+=`${J}hubspotUtk=${encodeURIComponent(X)}`,console.log("Appended hubspotUtk to iframe URL:",V)}if(K.src=V,K.style.cssText=`
+  `;let K=document.createElement("iframe"),V=B.url,X=M("hubspotutk");if(X){let J=V.includes("?")?"&":"?";V+=`${J}hubspotutk=${encodeURIComponent(X)}`,console.log("Appended hubspotutk to iframe URL:",V)}if(K.src=V,K.style.cssText=`
     width: 100%;
     height: calc(100% - 60px);
     border: none;
