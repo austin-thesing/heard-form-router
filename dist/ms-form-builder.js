@@ -27,7 +27,33 @@
     min-height: 200px;
     position: relative;
   }
-`;document.head.appendChild(M);var b=100,w=50,k=0;function T(){let G=document.querySelector(".hbspt-form form");if(!G){if(console.warn("HubSpot form not found, retrying..."),k<w)k++,setTimeout(T,b);return}let O=Array.from(G.querySelectorAll(".hs-form-field:not(.hs_submit):not(.hs_recaptcha):not(.hs_error_rollup)")),Q=G.querySelector(".hs-richtext h3");if(Q)Q.remove();let $=G.querySelector(".legal-consent-container"),P=G.querySelector(".hs-richtext:not(:has(h3))");if(P)P.remove();if($)$.remove();G.querySelectorAll(".step-nav, .form-step, .form-navigation, .error-message").forEach((j)=>j.remove());let K=document.createElement("div");K.className="form-header";let L=document.createElement("div");if(L.className="step-nav",[1,2,3,4].forEach((j)=>{let J=document.createElement("span");J.className=j===1?"step-number active":"step-number",J.dataset.step=(j-1).toString(),J.textContent=j.toString(),L.appendChild(J)}),K.appendChild(L),Q){let j=document.createElement("div");j.className="hubspot-title-wrapper",j.appendChild(Q),K.appendChild(j)}G.insertBefore(K,G.firstChild);let y=O.slice(0,2),v=O.slice(2,5),x=O.slice(5,7),E=O.slice(7),z=[{fields:y,num:1},{fields:v,num:2},{fields:x,num:3},{fields:E,num:4}].map(({fields:j,num:J})=>{if(!j.length)return console.warn(`No fields for step ${J}`),null;let q=document.createElement("div");if(q.className=J===1?"form-step active":"form-step",q.dataset.step=J.toString(),j.forEach((Z)=>{if(Z&&Z.parentNode)q.appendChild(Z)}),J===4&&$){let Z=document.createElement("div");if(Z.className="consent-wrapper",$)Z.appendChild($);let H=document.createElement("div");H.className="privacy-text",H.textContent="Heard is committed to protecting and respecting your privacy, and we'll only use your personal information to administer your account and to provide the services you requested from us. By clicking submit on the form below, you consent to allow Heard to send SMS meeting reminders as well as store and process the personal information submitted above to provide you with the content requested.",Z.appendChild(H),q.appendChild(Z)}let U=G.querySelector(".hs_submit");return G.insertBefore(q,U),q});if(z.some((j)=>!j)){console.error("Failed to create all form steps");return}let A=document.createElement("div");A.className="form-navigation",A.innerHTML=`
+
+  .hs-form-field input[type="checkbox"] {
+    vertical-align: middle;
+    accent-color: #226752;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .hs-form-field.hs-fieldtype-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .hs-form-field.hs-fieldtype-checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+`;document.head.appendChild(M);var b=100,w=50,k=0;function T(){let G=document.querySelector(".hbspt-form form");if(!G){if(console.warn("HubSpot form not found, retrying..."),k<w)k++,setTimeout(T,b);return}let O=Array.from(G.querySelectorAll(".hs-form-field:not(.hs_submit):not(.hs_recaptcha):not(.hs_error_rollup)")),Q=G.querySelector(".hs-richtext h3");if(Q)Q.remove();let $=G.querySelector(".legal-consent-container"),P=G.querySelector(".hs-richtext:not(:has(h3))");if(P)P.remove();if($)$.remove();G.querySelectorAll(".step-nav, .form-step, .form-navigation, .error-message").forEach((j)=>j.remove());let K=document.createElement("div");K.className="form-header";let L=document.createElement("div");if(L.className="step-nav",[1,2,3,4].forEach((j)=>{let J=document.createElement("span");J.className=j===1?"step-number active":"step-number",J.dataset.step=(j-1).toString(),J.textContent=j.toString(),L.appendChild(J)}),K.appendChild(L),Q){let j=document.createElement("div");j.className="hubspot-title-wrapper",j.appendChild(Q),K.appendChild(j)}G.insertBefore(K,G.firstChild);let y=O.slice(0,2),v=O.slice(2,5),x=O.slice(5,8),E=O.slice(8),z=[{fields:y,num:1},{fields:v,num:2},{fields:x,num:3},{fields:E,num:4}].map(({fields:j,num:J})=>{if(!j.length)return console.warn(`No fields for step ${J}`),null;let q=document.createElement("div");if(q.className=J===1?"form-step active":"form-step",q.dataset.step=J.toString(),j.forEach((Z)=>{if(Z&&Z.parentNode)q.appendChild(Z)}),J===4&&$){let Z=document.createElement("div");if(Z.className="consent-wrapper",$)Z.appendChild($);let H=document.createElement("div");H.className="privacy-text",H.textContent="Heard is committed to protecting and respecting your privacy, and we'll only use your personal information to administer your account and to provide the services you requested from us. By clicking submit on the form below, you consent to allow Heard to send SMS meeting reminders as well as store and process the personal information submitted above to provide you with the content requested.",Z.appendChild(H),q.appendChild(Z)}let U=G.querySelector(".hs_submit");return G.insertBefore(q,U),q});if(z.some((j)=>!j)){console.error("Failed to create all form steps");return}let A=document.createElement("div");A.className="form-navigation",A.innerHTML=`
     <button type="button" class="previous button-secondary">Previous</button>
     <button type="button" class="next button-primary">Next</button>
     <button type="submit" class="submit button-primary">Submit</button>
