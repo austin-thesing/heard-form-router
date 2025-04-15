@@ -54,6 +54,11 @@ const spinnerCSS = `
     align-items: flex-start;
     margin-bottom: 18px;
   }
+
+  .hs-form-field > label > span {
+    font-weight: bold;
+    line-height: 174%;
+  }
 `;
 
 // Initialize loader
@@ -257,8 +262,22 @@ function initializeMultiStepForm() {
 
     // Validate radio buttons
     currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
-      if (!ul.querySelector('input[type="radio"]:checked')) {
-        isValid = false;
+      if (ul.querySelector('input[type="radio"]')) {
+        if (!ul.querySelector('input[type="radio"]:checked')) {
+          isValid = false;
+        }
+      }
+    });
+
+    // Validate required checkbox groups
+    currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
+      const checkboxes = ul.querySelectorAll('input[type="checkbox"]');
+      // If any checkbox in the group is required
+      if (Array.from(checkboxes).some((cb) => cb.required)) {
+        // At least one must be checked
+        if (!ul.querySelector('input[type="checkbox"]:checked')) {
+          isValid = false;
+        }
       }
     });
 
