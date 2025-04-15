@@ -102,20 +102,22 @@ function createSchedulerModal(calendarType) {
   // Create iframe
   const iframe = document.createElement("iframe");
   let iframeUrl = calendar.url;
-  const hutk = getCookie("hubspotutk");
-  if (hutk) {
-    const separator = iframeUrl.includes("?") ? "&" : "?";
-    iframeUrl += `${separator}hubspotutk=${encodeURIComponent(hutk)}`;
-    console.log("Appended hubspotutk to iframe URL:", iframeUrl);
-  }
 
   // Add prefill query params for firstName, lastName, email if available
   try {
     const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
     const params = new URLSearchParams();
-    if (formData.firstName) params.append("firstname", formData.firstName);
-    if (formData.lastName) params.append("lastname", formData.lastName);
-    if (formData.email) params.append("email", formData.email);
+    // Use config keys for first and last name
+    const firstNameKey = FormRouterConfig.FORM_FIELDS.firstName || "firstName";
+    const lastNameKey = FormRouterConfig.FORM_FIELDS.lastName || "lastName";
+    const emailKey = FormRouterConfig.FORM_FIELDS.email || "email";
+    // Support lowercase keys in localStorage (e.g., 'firstname', 'lastname')
+    const firstNameValue = formData[firstNameKey] || formData["firstname"];
+    const lastNameValue = formData[lastNameKey] || formData["lastname"];
+    const emailValue = formData[emailKey] || formData["email"];
+    if (firstNameValue) params.append("firstName", firstNameValue);
+    if (lastNameValue) params.append("lastName", lastNameValue);
+    if (emailValue) params.append("email", emailValue);
     if ([...params].length > 0) {
       const separator = iframeUrl.includes("?") ? "&" : "?";
       iframeUrl += `${separator}${params.toString()}`;
