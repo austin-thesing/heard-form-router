@@ -58,6 +58,14 @@ function determineCalendarType(formData) {
   return "SOLE_PROP";
 }
 
+// Helper function to get cookie value by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
+
 // Function to create the calendar container
 function createSchedulerModal(calendarType) {
   const calendar = FormRouterConfig.HUBSPOT_CALENDARS[calendarType];
@@ -93,7 +101,33 @@ function createSchedulerModal(calendarType) {
 
   // Create iframe
   const iframe = document.createElement("iframe");
-  iframe.src = calendar.url;
+  let iframeUrl = calendar.url;
+
+  // Add prefill query params for firstName, lastName, email if available
+  try {
+    const formData = JSON.parse(localStorage.getItem("hubspot_form_data") || "{}");
+    const params = new URLSearchParams();
+    // Use config keys for first and last name
+    const firstNameKey = FormRouterConfig.FORM_FIELDS.firstName || "firstName";
+    const lastNameKey = FormRouterConfig.FORM_FIELDS.lastName || "lastName";
+    const emailKey = FormRouterConfig.FORM_FIELDS.email || "email";
+    // Support lowercase keys in localStorage (e.g., 'firstname', 'lastname')
+    const firstNameValue = formData[firstNameKey] || formData["firstname"];
+    const lastNameValue = formData[lastNameKey] || formData["lastname"];
+    const emailValue = formData[emailKey] || formData["email"];
+    if (firstNameValue) params.append("firstName", firstNameValue);
+    if (lastNameValue) params.append("lastName", lastNameValue);
+    if (emailValue) params.append("email", emailValue);
+    if ([...params].length > 0) {
+      const separator = iframeUrl.includes("?") ? "&" : "?";
+      iframeUrl += `${separator}${params.toString()}`;
+      console.log("Appended prefill params to iframe URL:", iframeUrl);
+    }
+  } catch (e) {
+    console.warn("Could not parse form data for prefill params", e);
+  }
+
+  iframe.src = iframeUrl;
   iframe.style.cssText = `
     width: 100%;
     height: calc(100% - 60px);

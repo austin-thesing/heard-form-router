@@ -28,6 +28,37 @@ const spinnerCSS = `
     min-height: 200px;
     position: relative;
   }
+
+  .hs-form-field input[type="checkbox"] {
+    vertical-align: middle;
+    accent-color: #226752;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .hs-form-field.hs-fieldtype-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .hs-form-field.hs-fieldtype-checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+
+  .hs-form-field > label > span {
+    font-weight: bold;
+    line-height: 174%;
+  }
 `;
 
 // Initialize loader
@@ -102,8 +133,8 @@ function initializeMultiStepForm() {
   // Create form steps with proper field distribution
   const step1Fields = formFields.slice(0, 2);
   const step2Fields = formFields.slice(2, 5);
-  const step3Fields = formFields.slice(5, 7);
-  const step4Fields = formFields.slice(7);
+  const step3Fields = formFields.slice(5, 8);
+  const step4Fields = formFields.slice(8);
 
   // Create step wrappers
   const steps = [
@@ -231,8 +262,22 @@ function initializeMultiStepForm() {
 
     // Validate radio buttons
     currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
-      if (!ul.querySelector('input[type="radio"]:checked')) {
-        isValid = false;
+      if (ul.querySelector('input[type="radio"]')) {
+        if (!ul.querySelector('input[type="radio"]:checked')) {
+          isValid = false;
+        }
+      }
+    });
+
+    // Validate required checkbox groups
+    currentStep.querySelectorAll("ul.multi-container").forEach((ul) => {
+      const checkboxes = ul.querySelectorAll('input[type="checkbox"]');
+      // If any checkbox in the group is required
+      if (Array.from(checkboxes).some((cb) => cb.required)) {
+        // At least one must be checked
+        if (!ul.querySelector('input[type="checkbox"]:checked')) {
+          isValid = false;
+        }
       }
     });
 

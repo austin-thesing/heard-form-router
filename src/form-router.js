@@ -84,6 +84,14 @@ function initializeForm() {
   });
 }
 
+// Helper function to get cookie value by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null; // Return null if cookie not found
+}
+
 // Form routing logic
 function determineRoute(formData) {
   return FormRouterConfig.determineRoute(formData);
@@ -159,8 +167,8 @@ function handleRedirect() {
     const route = determineRoute(formData);
     console.log("Form Router - Determined route:", route);
 
-    const finalUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
-    console.log("Form Router - Final URL:", finalUrl);
+    let finalUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    console.log("Form Router - Base URL:", finalUrl);
 
     // Ensure window.FormRouterConfig exists
     if (!FormRouterConfig) {
@@ -175,6 +183,7 @@ function handleRedirect() {
   } catch (error) {
     console.error("Form Router - Redirect failed:", error);
     // Fallback to NOT_QUALIFIED if something goes wrong
-    window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    let fallbackUrl = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+    window.location.href = fallbackUrl;
   }
 }

@@ -29,6 +29,14 @@ function addFieldTracking() {
   trackingInitialized = true;
 }
 
+// Helper function to get cookie value by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null; // Return null if cookie not found
+}
+
 // Initialize form handling
 window.addEventListener("message", function (event) {
   if (event.data.type === "hsFormCallback") {
@@ -79,11 +87,14 @@ window.addEventListener("message", function (event) {
 
       const route = FormRouterConfig.determineRoute(formData);
       console.log("MS Form - Determined route:", route);
+      let redirectUrl = FormRouterConfig.LANDING_PAGES[route] || FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+      console.log("MS Form - Base URL:", redirectUrl);
 
+      // No longer appending hubspotutk to the URL
+
+      console.log("MS Form - Redirecting to:", redirectUrl);
       setTimeout(() => {
         try {
-          const redirectUrl = FormRouterConfig.LANDING_PAGES[route];
-          console.log("MS Form - Redirecting to:", redirectUrl);
           window.location.href = redirectUrl;
         } catch (error) {
           console.error("MS Form - Redirect failed:", error);
@@ -98,7 +109,9 @@ window.addEventListener("message", function (event) {
           //     form: "ms_hubspot_contact",
           //   },
           // });
-          window.location.href = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+          let fallbackUrl = FormRouterConfig.LANDING_PAGES.NOT_QUALIFIED;
+          // No longer appending hubspotutk to the fallback URL
+          window.location.href = fallbackUrl;
         }
       }, 700);
     }
