@@ -1,7 +1,7 @@
 import { watch } from "node:fs";
 
 const config = {
-  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/ms-form-builder-email.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
+  entrypoints: ["./src/form-router.js", "./src/ms-form-builder.js", "./src/email-cap/ms-form-builder.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
   outdir: "./dist",
   minify: true,
   target: "browser",
@@ -10,15 +10,21 @@ const config = {
 // Define dependencies for smarter rebuilds
 const dependencies = {
   "form-config.js": ["./src/form-router.js", "./src/ms-form-router.js", "./src/scheduler-bundle.js"],
-  "ms-form-builder.js": ["./src/ms-form-builder-email.js"], // Email version depends on the main version
+  "ms-form-builder.js": ["./src/email-cap/form-builder.js"],
 };
 
 async function buildFile(entrypoint) {
   console.log(`Building ${entrypoint}...`);
 
+  // Determine output directory based on file path
+  let outdir = config.outdir;
+  if (entrypoint.includes("/email-cap/")) {
+    outdir = `${config.outdir}/email-cap`;
+  }
+
   const result = await Bun.build({
     entrypoints: [entrypoint],
-    outdir: config.outdir,
+    outdir: outdir,
     minify: true,
     target: "browser",
     format: "esm", // Bun will handle the IIFE wrapping
