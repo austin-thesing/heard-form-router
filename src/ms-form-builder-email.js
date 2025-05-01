@@ -86,6 +86,7 @@ function initializeMultiStepForm() {
 
   let hasSubmittedMainForm = false;
   let partialEmail = null;
+  let hasSubmittedPartialEmail = false;
 
   // Add email field tracking
   const emailField = hubspotForm.querySelector('input[type="email"]');
@@ -108,15 +109,29 @@ function initializeMultiStepForm() {
     hasSubmittedMainForm = true;
   });
 
-  // Add page exit handling
-  window.addEventListener("beforeunload", function (e) {
-    if (!hasSubmittedMainForm && partialEmail) {
+  // Function to submit partial email
+  function submitPartialEmail() {
+    if (!hasSubmittedMainForm && !hasSubmittedPartialEmail && partialEmail) {
       // Find and submit the hidden Webflow form
       const webflowForm = document.querySelector(".hidden-form");
       if (webflowForm) {
         webflowForm.dispatchEvent(new Event("submit", { bubbles: true }));
+        hasSubmittedPartialEmail = true;
+        console.log("Submitted partial email:", partialEmail);
       }
     }
+  }
+
+  // Handle tab visibility change
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      submitPartialEmail();
+    }
+  });
+
+  // Handle page unload/close
+  window.addEventListener("beforeunload", function () {
+    submitPartialEmail();
   });
 
   // Get all form fields using HubSpot's specific class structure
