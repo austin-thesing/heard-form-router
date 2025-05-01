@@ -112,12 +112,30 @@ function initializeMultiStepForm() {
   // Function to submit partial email
   function submitPartialEmail() {
     if (!hasSubmittedMainForm && !hasSubmittedPartialEmail && partialEmail) {
-      // Find and submit the hidden Webflow form
+      // Find the hidden Webflow form
       const webflowForm = document.querySelector(".hidden-form");
       if (webflowForm) {
-        webflowForm.dispatchEvent(new Event("submit", { bubbles: true }));
-        hasSubmittedPartialEmail = true;
-        console.log("Submitted partial email:", partialEmail);
+        // Prevent default form submission
+        const formData = new FormData(webflowForm);
+        const action = webflowForm.getAttribute("action");
+
+        // Use fetch to submit the form data
+        fetch(action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              hasSubmittedPartialEmail = true;
+              console.log("Submitted partial email:", partialEmail);
+            }
+          })
+          .catch((error) => {
+            console.error("Error submitting partial email:", error);
+          });
       }
     }
   }
