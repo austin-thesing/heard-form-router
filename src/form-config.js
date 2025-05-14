@@ -35,7 +35,7 @@ const FormRouterConfig = {
     state: ["international"],
     practiceSetup: ["c corp"],
     income: ["none", "less than $20,000"],
-    profession: ["dietician", "nutritionist", "massage therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
+    // profession: ["dietician", "nutritionist", "massage therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
     practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
     // practiceRunning: ["no"],
     employeeCount: ["yes (more than 10 employees)"],
@@ -72,7 +72,6 @@ const FormRouterConfig = {
       this.DISQUALIFYING_CONDITIONS.state.includes(state) ||
       this.DISQUALIFYING_CONDITIONS.practiceSetup.includes(practiceSetup) ||
       this.DISQUALIFYING_CONDITIONS.income.includes(income) ||
-      this.DISQUALIFYING_CONDITIONS.profession.some((p) => profession.includes(p)) ||
       this.DISQUALIFYING_CONDITIONS.practiceRunning.includes(practiceRunning) ||
       this.DISQUALIFYING_CONDITIONS.employeeCount.includes(employeeCount);
     console.log("isDQ", isDQ);
