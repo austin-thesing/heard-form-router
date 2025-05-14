@@ -35,6 +35,7 @@ const FormRouterConfig = {
     state: ["international"],
     practiceSetup: ["c corp"],
     income: ["none", "less than $20,000"],
+    profession: [],
     // profession: ["dietician", "nutritionist", "massage therapist", "dietician or nutritionist", "dietetics or nutrition counseling"],
     practiceRunning: ["opening practice in 1+ month", "opening in 1+ months"],
     // practiceRunning: ["no"],
